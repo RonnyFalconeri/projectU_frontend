@@ -3,7 +3,7 @@
 }
 
 .taskbar {
-  background-color: rgba(58, 58, 58, 0.61);
+  background-color: var(--color-taskbar);
   position: fixed;
   top: 0;
   width: 100%;
@@ -42,6 +42,7 @@
   }
 }
 
+// remove when tiles are added
 .project-tile {
   height: 150px;
   border: 1px solid black;

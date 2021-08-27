@@ -1,5 +1,7 @@
+@import './shared/styles/variable';
+
 body {
   margin: 0;
-  background: #69a5a6;
+  background-color: var(--color-background);
   font-family: sans-serif;
 }
