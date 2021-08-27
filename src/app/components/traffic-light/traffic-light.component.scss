@@ -16,7 +16,7 @@ $indicator-size: 30px;
   }
 }
 
-.traffic-light.small{
+.traffic-light.small {
   width: $traffic-light-width*0.6;
   height: $traffic-light-height*0.6;
 
@@ -26,7 +26,7 @@ $indicator-size: 30px;
   }
 }
 
-.traffic-light.medium{
+.traffic-light.default {
   width: $traffic-light-width;
   height: $traffic-light-height;
 
@@ -36,7 +36,7 @@ $indicator-size: 30px;
   }
 }
 
-.traffic-light.big{
+.traffic-light.big {
   width: $traffic-light-width*1.2;
   height: $traffic-light-height*1.2;
 
@@ -50,7 +50,7 @@ $indicator-size: 30px;
   transform: rotate(90deg);
 }
 
-.traffic-light.easy{
+.traffic-light.easy {
 
   .indicator.green {
     background-color: var(--color-complexity-easy);
@@ -65,7 +65,7 @@ $indicator-size: 30px;
   }
 }
 
-.traffic-light.medium{
+.traffic-light.medium {
 
   .indicator.green {
     background-color: var(--color-complexity-empty);
@@ -80,7 +80,7 @@ $indicator-size: 30px;
   }
 }
 
-.traffic-light.difficult{
+.traffic-light.difficult {
 
   .indicator.green {
     background-color: var(--color-complexity-empty);

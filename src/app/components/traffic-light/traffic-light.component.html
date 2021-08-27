@@ -1,4 +1,6 @@
-<div class="traffic-light big" [ngClass]="complexity" [class.horizontal]="horizontal">
+<div class="traffic-light"
+[ngClass]="[getComplexity(), getSize()]"
+[class.horizontal]="horizontal">
   <div class="indicator red"></div>
   <div class="indicator yellow"></div>
   <div class="indicator green"></div>

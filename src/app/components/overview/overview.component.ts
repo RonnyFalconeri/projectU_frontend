@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Complexity } from 'src/app/model/Complexity';
+import { Size } from 'src/app/model/Size';
 
 @Component({
   selector: 'app-overview',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverviewComponent implements OnInit {
 
-  constructor() { }
+  complexity: Complexity = Complexity.EASY;
+  size: Size = Size.SMALL;
+  horizontal: boolean = false;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 
 }
