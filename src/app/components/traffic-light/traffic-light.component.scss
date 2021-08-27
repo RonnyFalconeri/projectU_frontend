@@ -1,0 +1,62 @@
+.traffic-light {
+  background-color: var(--color-font-secondary);
+  border-radius: 500px;
+  width: 100px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .indicator {
+    background-color: var(--color-complexity-empty);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+}
+
+.traffic-light.easy{
+
+  .indicator.green {
+    background-color: var(--color-complexity-easy);
+  }
+
+  .indicator.yellow {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.red {
+    background-color: var(--color-complexity-empty);
+  }
+}
+
+.traffic-light.medium{
+
+  .indicator.green {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.yellow {
+    background-color: var(--color-complexity-medium);
+  }
+
+  .indicator.red {
+    background-color: var(--color-complexity-empty);
+  }
+}
+
+.traffic-light.difficult{
+
+  .indicator.green {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.yellow {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.red {
+    background-color: var(--color-complexity-difficult);
+  }
+}

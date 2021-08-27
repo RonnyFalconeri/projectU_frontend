@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-traffic-light',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrafficLightComponent implements OnInit {
 
-  constructor() { }
+  // TODO: use enum instead of string for complexity
+  @Input() complexity: string;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 
 }
