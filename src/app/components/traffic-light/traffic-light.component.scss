@@ -1,8 +1,10 @@
+$traffic-light-width: 50px;
+$traffic-light-height: 125px;
+$indicator-size: 30px;
+
 .traffic-light {
   background-color: var(--color-font-secondary);
   border-radius: 500px;
-  width: 100px;
-  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,10 +12,42 @@
 
   .indicator {
     background-color: var(--color-complexity-empty);
-    width: 60px;
-    height: 60px;
     border-radius: 50%;
   }
+}
+
+.traffic-light.small{
+  width: $traffic-light-width*0.6;
+  height: $traffic-light-height*0.6;
+
+  .indicator {
+    width: $indicator-size*0.6;
+    height: $indicator-size*0.6;
+  }
+}
+
+.traffic-light.medium{
+  width: $traffic-light-width;
+  height: $traffic-light-height;
+
+  .indicator {
+    width: $indicator-size;
+    height: $indicator-size;
+  }
+}
+
+.traffic-light.big{
+  width: $traffic-light-width*1.2;
+  height: $traffic-light-height*1.2;
+
+  .indicator {
+    width: $indicator-size*1.2;
+    height: $indicator-size*1.2;
+  }
+}
+
+.traffic-light.horizontal {
+  transform: rotate(90deg);
 }
 
 .traffic-light.easy{
