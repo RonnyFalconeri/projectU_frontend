@@ -9,12 +9,9 @@ import { Size } from 'src/app/model/Size';
 })
 export class TrafficLightComponent implements OnInit {
 
-  complexityEnum: Complexity;
-  sizeEnum: Size;
-
   @Input() complexity: Complexity;
   @Input() size: Size;
-  @Input() horizontal: boolean = false;
+  @Input() horizontal: boolean;
 
   constructor() {}
 
