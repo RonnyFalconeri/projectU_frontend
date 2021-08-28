@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Complexity } from 'src/app/model/Complexity';
 import { Size } from 'src/app/model/Size';
-import { ProjectService } from 'src/app/shared/services/project-service.service';
+import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
   selector: 'app-overview',
