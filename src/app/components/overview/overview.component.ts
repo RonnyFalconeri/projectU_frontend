@@ -11,10 +11,7 @@ import { ProjectService } from 'src/app/shared/services/project.service';
 export class OverviewComponent implements OnInit {
 
   projectService: ProjectService;
-
-  complexity: Complexity = Complexity.EASY;
-  size: Size = Size.SMALL;
-  horizontal: boolean = false;
+  sizeEnum = Size;
 
   constructor(projectService: ProjectService) {
     this.projectService = projectService;
