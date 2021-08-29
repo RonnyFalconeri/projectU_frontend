@@ -95,6 +95,7 @@ export class ProjectService {
 
   getAllProjects(): Project[] {
     // TODO: implement real call to API
+    // TODO: use observable
     return this.mockProjects;
   }
 }
