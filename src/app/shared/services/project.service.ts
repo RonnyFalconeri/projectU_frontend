@@ -16,7 +16,25 @@ export class ProjectService {
       tasks: [
         {
           id: '1',
-          title: 'A subtask',
+          title: 'A subtask 1',
+          description: 'This is a subtask for the project.',
+          state: State.IN_PROGRESS,
+          complexity: Complexity.MEDIUM,
+          estimatedDurationInHours: 13,
+          result: 'More knowledge'
+        },
+        {
+          id: '2',
+          title: 'A subtask 2',
+          description: 'This is a subtask for the project.',
+          state: State.IN_PROGRESS,
+          complexity: Complexity.MEDIUM,
+          estimatedDurationInHours: 13,
+          result: 'More knowledge'
+        },
+        {
+          id: '3',
+          title: 'A subtask 3',
           description: 'This is a subtask for the project.',
           state: State.IN_PROGRESS,
           complexity: Complexity.MEDIUM,
@@ -93,9 +111,13 @@ export class ProjectService {
 
   constructor() {}
 
+  getProjectById(id: string): Project {
+    // TODO: implement real call to API
+    return this.mockProjects[0];
+  }
+
   getAllProjects(): Project[] {
     // TODO: implement real call to API
-    // TODO: use observable
     return this.mockProjects;
   }
 }
