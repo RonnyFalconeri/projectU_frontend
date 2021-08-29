@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Complexity } from 'src/app/model/Complexity';
-import { Size } from 'src/app/model/Size';
+import { Size } from 'src/app/shared/models/Size';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({

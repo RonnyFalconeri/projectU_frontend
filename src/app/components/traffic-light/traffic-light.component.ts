@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Complexity } from 'src/app/model/Complexity';
-import { Size } from 'src/app/model/Size';
+import { Complexity } from 'src/app/shared/models/Complexity';
+import { Size } from 'src/app/shared/models/Size';
 
 @Component({
   selector: 'app-traffic-light',
@@ -10,8 +10,8 @@ import { Size } from 'src/app/model/Size';
 export class TrafficLightComponent implements OnInit {
 
   @Input() complexity: Complexity;
-  @Input() size: Size;
   @Input() horizontal: boolean;
+  @Input() size: Size;
 
   constructor() {}
 

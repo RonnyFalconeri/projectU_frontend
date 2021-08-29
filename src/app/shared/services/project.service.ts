@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Complexity } from 'src/app/model/Complexity';
-import { Project } from 'src/app/model/Project';
-import { State } from 'src/app/model/State';
+import { Complexity } from 'src/app/shared/models/Complexity';
+import { Project } from 'src/app/shared/models/Project';
+import { State } from 'src/app/shared/models/State';
 
 @Injectable({
   providedIn: 'root'
