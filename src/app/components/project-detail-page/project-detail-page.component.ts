@@ -14,6 +14,7 @@ export class ProjectDetailPageComponent implements OnInit {
 
   project: Project;
   sizeEnum = Size;
+  stateEnum = State;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
     this.activatedRoute.params.subscribe((params) => {

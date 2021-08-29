@@ -6,14 +6,14 @@
   <div class="general-info row">
     <div class="column">
       <h1>{{project.title}}</h1>
-      <p>{{project.description}}</p>
+      <p class="description">{{project.description}}</p>
       <p class="date">{{project.createdAt}}</p>
     </div>
 
     <div class="row">
-      <div class="column">
-        <p>{{project.estimatedDurationInHours}}h</p>
-        <p>{{project.state}}</p>
+      <div class="secondary-info column">
+        <p class="hours">{{project.estimatedDurationInHours}}h</p>
+        <p class="state">{{getState() | uppercase}}</p>
       </div>
 
       <app-traffic-light
@@ -45,13 +45,16 @@
       <p>{{project.expectedResult}}</p>
     </div>
 
-    <div class="actual">
+    <div class="actual" *ngIf="project.state === stateEnum.FINISHED">
       <h1>Actual Result</h1>
       <p>{{project.actualResult}}</p>
     </div>
   </div>
 
   <div class="period">
-    <p>Von {{project.startedAt}} bis {{project.finishedAt}}</p>
+    <p>Von <span class="time-info">{{project.startedAt}}</span> bis
+      <span class="time-info" *ngIf="project.state === stateEnum.FINISHED">{{project.finishedAt}}</span>
+      <span class="time-info" *ngIf="project.state !== stateEnum.FINISHED">Heute</span>
+    </p>
   </div>
 </div>
