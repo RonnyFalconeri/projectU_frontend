@@ -28,7 +28,7 @@ export class ProjectService {
           title: 'A subtask 2',
           description: 'This is a subtask for the project.',
           state: State.IN_PROGRESS,
-          complexity: Complexity.MEDIUM,
+          complexity: Complexity.EASY,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -37,7 +37,7 @@ export class ProjectService {
           title: 'A subtask 3',
           description: 'This is a subtask for the project.',
           state: State.IN_PROGRESS,
-          complexity: Complexity.MEDIUM,
+          complexity: Complexity.DIFFICULT,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         }
