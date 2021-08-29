@@ -1,20 +1,4 @@
 .overview {
-  margin: 100px 0;
-}
-
-.taskbar {
-  background-color: var(--color-menu-bar);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  min-height: 1.5rem;
-
-  h1 {
-    text-align: center;
-  }
-}
-
-.project-space {
   margin: 0 auto;
   max-width: 1200px;
   display: grid;
@@ -29,7 +13,7 @@
 
 // for medium and tablet screens
 @media (min-width: 700px) and (max-width: 1100px) {
-  .project-space {
+  .overview {
     grid-template-columns: 300px 300px;
     max-width: 900px;
   }
@@ -37,7 +21,7 @@
 
 // for mobile screens
 @media (max-width: 700px) {
-  .project-space {
+  .overview {
     grid-template-columns: 350px;
   }
 }

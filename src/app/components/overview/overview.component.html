@@ -1,23 +1,17 @@
 <div class="overview">
-  <div class="taskbar">
-    <h1>projectU</h1>
-  </div>
+  <div class="project-tile" *ngFor="let project of projectService.getAllProjects()">
 
-  <div class="project-space">
-    <div class="project-tile" *ngFor="let project of projectService.getAllProjects()">
+    {{project.title}},
+    {{project.description}},
+    {{project.state}},
+    {{project.estimatedDurationInHours}},
+    {{project.tasks.length}}
 
-      {{project.title}},
-      {{project.description}},
-      {{project.state}},
-      {{project.estimatedDurationInHours}},
-      {{project.tasks.length}}
+    <app-traffic-light
+      [complexity]="project.complexity"
+      [size]="sizeEnum.SMALL"
+      [horizontal]="false"
+    ></app-traffic-light>
 
-      <app-traffic-light
-        [complexity]="project.complexity"
-        [size]="sizeEnum.SMALL"
-        [horizontal]="false"
-      ></app-traffic-light>
-
-    </div>
   </div>
 </div>
