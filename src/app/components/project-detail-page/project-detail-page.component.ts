@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/shared/models/Project';
 import { Size } from 'src/app/shared/models/Size';
+import { State } from 'src/app/shared/models/State';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
@@ -20,7 +21,19 @@ export class ProjectDetailPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getState() {
+    switch(this.project.state) {
+      case State.IN_PROGRESS:
+        return 'in-progress';
+      case State.HALTED:
+        return 'halted';
+      case State.FINISHED:
+        return 'finished';
+      default:
+        return 'initiated';
+    }
   }
 
 }
