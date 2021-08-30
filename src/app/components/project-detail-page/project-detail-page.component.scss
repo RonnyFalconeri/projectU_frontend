@@ -98,3 +98,40 @@
 .finished {
   background-color: var(--color-state-finished);
 }
+
+// for medium and tablet screens
+@media (min-width: 700px) and (max-width: 1100px) {
+  .project-card {
+    margin: 100px 15px 50px 15px;
+
+    .general-info {
+      margin: 0 30px 10px 30px;
+    }
+
+    .results {
+      margin: 0 30px;
+    }
+  }
+}
+
+// for mobile screens
+@media (max-width: 700px) {
+  .project-card {
+    margin: 100px 15px 50px 15px;
+    padding: 20px;
+
+    .general-info {
+      margin: 0 10px 10px 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .results {
+      margin: 0 10px;
+    }
+
+    .date {
+      align-self: center;
+    }
+  }
+}
