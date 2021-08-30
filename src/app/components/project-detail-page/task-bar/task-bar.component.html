@@ -5,7 +5,7 @@
   </div>
 
   <div class="secondary-info column">
-    <p class="time-info">{{task.estimatedDurationInHours}}h</p>
+    <p class="time-info"><fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h</p>
     <app-traffic-light
       [complexity]="task.complexity"
       [size]="sizeEnum.DEFAULT"

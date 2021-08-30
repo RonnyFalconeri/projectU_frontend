@@ -4,6 +4,7 @@ import { Project } from 'src/app/shared/models/Project';
 import { Size } from 'src/app/shared/models/Size';
 import { State } from 'src/app/shared/models/State';
 import { ProjectService } from 'src/app/shared/services/project.service';
+import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-project-detail-page',
@@ -12,9 +13,11 @@ import { ProjectService } from 'src/app/shared/services/project.service';
 })
 export class ProjectDetailPageComponent implements OnInit {
 
-  project: Project;
   sizeEnum = Size;
   stateEnum = State;
+  faStopwatch = faStopwatch;
+  project: Project;
+
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
     this.activatedRoute.params.subscribe((params) => {
