@@ -49,7 +49,7 @@ $size-big-factor: 1.2;
 }
 
 .traffic-light.horizontal {
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
 .traffic-light.horizontal.small {
