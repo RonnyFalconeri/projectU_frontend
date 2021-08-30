@@ -29,6 +29,7 @@
   .secondary-info {
     display: flex;
     justify-content: center;
+    align-items: center;
 
     .time-info {
       font-size: 2rem;
@@ -36,4 +37,9 @@
       margin: 0;
     }
   }
+}
+
+.task:hover {
+  cursor: pointer;
+  background-color: rgba(102, 102, 102, 0.27);
 }
