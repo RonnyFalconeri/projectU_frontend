@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/shared/models/Project';
-import { Size } from 'src/app/shared/models/Size';
+import { Size } from 'src/app/components/traffic-light/Size';
 import { State } from 'src/app/shared/models/State';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
@@ -13,10 +13,11 @@ import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 })
 export class ProjectDetailPageComponent implements OnInit {
 
+  project: Project;
+
   sizeEnum = Size;
   stateEnum = State;
   faStopwatch = faStopwatch;
-  project: Project;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
     this.activatedRoute.params.subscribe((params) => {
@@ -26,16 +27,4 @@ export class ProjectDetailPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getState() {
-    switch(this.project.state) {
-      case State.IN_PROGRESS:
-        return 'in-progress';
-      case State.HALTED:
-        return 'halted';
-      case State.FINISHED:
-        return 'finished';
-      default:
-        return 'initiated';
-    }
-  }
 }

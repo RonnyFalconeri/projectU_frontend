@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Size } from 'src/app/shared/models/Size';
+import { Size } from 'src/app/components/traffic-light/Size';
 import { Task } from 'src/app/shared/models/Task';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,11 +10,10 @@ import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 })
 export class TaskBarComponent implements OnInit {
 
-  sizeEnum = Size;
-  faStopwatch = faStopwatch;
-
   @Input() task: Task;
 
+  sizeEnum = Size;
+  faStopwatch = faStopwatch;
 
   constructor() {}
 

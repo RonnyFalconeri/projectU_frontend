@@ -2,7 +2,12 @@
   <h1>projectU</h1>
 </div>
 
-<div class="project-card" [ngClass]="getState()">
+<div class="project-card" [ngClass]="{
+    'initiated': project.state === stateEnum.INITIATED,
+    'in-progress': project.state === stateEnum.IN_PROGRESS,
+    'halted': project.state === stateEnum.HALTED,
+    'finished': project.state === stateEnum.FINISHED
+}">
   <div class="primary-info row">
 
     <div class="column">
@@ -13,8 +18,13 @@
 
     <div class="row">
       <div class="secondary-info column">
-        <p class="hours"><fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h</p>
-        <p class="state">{{getState() | uppercase}}</p>
+        <p class="hours">
+          <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
+        </p>
+        <p class="state" *ngIf="project.state === stateEnum.INITIATED">INITIATED</p>
+        <p class="state" *ngIf="project.state === stateEnum.IN_PROGRESS">IN PROGRESS</p>
+        <p class="state" *ngIf="project.state === stateEnum.HALTED">HALTED</p>
+        <p class="state" *ngIf="project.state === stateEnum.FINISHED">FINISHED</p>
       </div>
 
       <app-traffic-light

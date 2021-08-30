@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Size } from 'src/app/shared/models/Size';
+import { Size } from 'src/app/components/traffic-light/Size';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
