@@ -2,12 +2,13 @@
   <h1>projectU</h1>
 </div>
 
-<div class="project-card" [ngClass]="{
+<div class="project-card"
+  [ngClass]="{
     'initiated': project.state === stateEnum.INITIATED,
     'in-progress': project.state === stateEnum.IN_PROGRESS,
     'halted': project.state === stateEnum.HALTED,
-    'finished': project.state === stateEnum.FINISHED
-}">
+    'finished': project.state === stateEnum.FINISHED}"
+>
   <div class="primary-info row">
 
     <div class="column">
