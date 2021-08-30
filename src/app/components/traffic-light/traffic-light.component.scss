@@ -49,7 +49,22 @@ $size-big-factor: 1.2;
 }
 
 .traffic-light.horizontal {
-  transform: rotate(90deg);
+  flex-direction: row;
+}
+
+.traffic-light.horizontal.small {
+  width: $traffic-light-height*$size-small-factor;
+  height: $traffic-light-width*$size-small-factor;
+}
+
+.traffic-light.horizontal.default {
+  width: $traffic-light-height;
+  height: $traffic-light-width;
+}
+
+.traffic-light.horizontal.big {
+  width: $traffic-light-height*$size-big-factor;
+  height: $traffic-light-width*$size-big-factor;
 }
 
 .traffic-light.easy {
