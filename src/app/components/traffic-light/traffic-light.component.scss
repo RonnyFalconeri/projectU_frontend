@@ -1,6 +1,8 @@
 $traffic-light-width: 50px;
 $traffic-light-height: 125px;
 $indicator-size: 30px;
+$size-small-factor: 0.6;
+$size-big-factor: 1.2;
 
 .traffic-light {
   background-color: var(--color-font-secondary);
@@ -17,12 +19,12 @@ $indicator-size: 30px;
 }
 
 .traffic-light.small {
-  width: $traffic-light-width*0.6;
-  height: $traffic-light-height*0.6;
+  width: $traffic-light-width*$size-small-factor;
+  height: $traffic-light-height*$size-small-factor;
 
   .indicator {
-    width: $indicator-size*0.6;
-    height: $indicator-size*0.6;
+    width: $indicator-size*$size-small-factor;
+    height: $indicator-size*$size-small-factor;
   }
 }
 
@@ -37,12 +39,12 @@ $indicator-size: 30px;
 }
 
 .traffic-light.big {
-  width: $traffic-light-width*1.2;
-  height: $traffic-light-height*1.2;
+  width: $traffic-light-width*$size-big-factor;
+  height: $traffic-light-height*$size-big-factor;
 
   .indicator {
-    width: $indicator-size*1.2;
-    height: $indicator-size*1.2;
+    width: $indicator-size*$size-big-factor;
+    height: $indicator-size*$size-big-factor;
   }
 }
 

@@ -3,19 +3,24 @@
   align-content: flex-end;
   justify-content: space-between;
   align-items: center;
+  height: 160px;
   background-color: rgba(0, 0, 0, 0.27);
   border-radius: 40px;
   margin: 20px 0;
-  padding: 0 60px;
+  padding: 10px 60px;
 
   .general-info {
     display: flex;
     align-items: center;
 
+    h1 {
+      max-width: 300px;
+    }
+
     .description {
-      max-width: 550px;
+      max-width: 430px;
       margin: 0 15px;
-      white-space: nowrap;
+      white-space: pre;
       overflow: hidden;
       text-overflow: ellipsis;
     }

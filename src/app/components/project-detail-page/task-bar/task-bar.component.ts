@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Size } from 'src/app/shared/models/Size';
 import { Task } from 'src/app/shared/models/Task';
 
 @Component({
@@ -9,6 +10,7 @@ import { Task } from 'src/app/shared/models/Task';
 export class TaskBarComponent implements OnInit {
 
   @Input() task: Task;
+  sizeEnum = Size;
 
   constructor() {}
 
