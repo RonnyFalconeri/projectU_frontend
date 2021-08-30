@@ -9,7 +9,7 @@
   margin: 20px 0;
   padding: 10px 60px;
 
-  .general-info {
+  .primary-info {
     display: flex;
     align-items: center;
 
@@ -63,7 +63,7 @@
     flex-direction: column;
     height: auto;
 
-    .general-info {
+    .primary-info {
       flex-direction: column;
 
       .description {

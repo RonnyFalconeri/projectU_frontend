@@ -18,7 +18,6 @@ export class ProjectDetailPageComponent implements OnInit {
   faStopwatch = faStopwatch;
   project: Project;
 
-
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
     this.activatedRoute.params.subscribe((params) => {
       this.project = projectService.getProjectById(params.id)
@@ -39,5 +38,4 @@ export class ProjectDetailPageComponent implements OnInit {
         return 'initiated';
     }
   }
-
 }

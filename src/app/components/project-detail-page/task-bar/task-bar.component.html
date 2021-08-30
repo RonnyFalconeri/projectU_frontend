@@ -1,11 +1,13 @@
 <div class="task row">
-  <div class="general-info row">
+  <div class="primary-info row">
     <h1>{{task.title}}</h1>
     <p class="description">{{task.description}}</p>
   </div>
 
   <div class="secondary-info column">
-    <p class="time-info"><fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h</p>
+    <p class="time-info">
+      <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
+    </p>
     <app-traffic-light
       [complexity]="task.complexity"
       [size]="sizeEnum.DEFAULT"

@@ -1,0 +1,21 @@
+.menu-bar {
+  background-color: var(--color-menu-bar);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-height: 1.5rem;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
