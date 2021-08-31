@@ -12,6 +12,10 @@
     text-align: center;
   }
 
+  div {
+    min-width: 40px;
+  }
+
   .logo {
     height: 3rem;
     margin: 10px;
@@ -28,6 +32,9 @@
   }
 
   .menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.8rem;
   }
 
@@ -48,4 +55,19 @@
 .row {
   display: flex;
   flex-direction: row;
+}
+
+// for mobile screens
+@media (max-width: 700px) {
+  .menu-bar {
+    justify-content: space-between;
+
+    .home-link {
+      display: none;
+    }
+
+    .menu-button {
+      margin: 30px 20px 10px 20px;
+    }
+  }
 }
