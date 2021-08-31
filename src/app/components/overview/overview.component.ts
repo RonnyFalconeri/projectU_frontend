@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Size } from 'src/app/components/traffic-light/Size';
+import { Project } from 'src/app/shared/models/Project';
 import { ProjectService } from 'src/app/shared/services/project.service';
 
 @Component({
@@ -9,11 +10,12 @@ import { ProjectService } from 'src/app/shared/services/project.service';
 })
 export class OverviewComponent implements OnInit {
 
-  projectService: ProjectService;
+  projects: Project[];
+
   sizeEnum = Size;
 
   constructor(projectService: ProjectService) {
-    this.projectService = projectService;
+    this.projects = projectService.getAllProjects();
   }
 
   ngOnInit(): void {}

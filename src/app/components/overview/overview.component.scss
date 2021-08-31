@@ -1,4 +1,4 @@
-.overview {
+.project-list {
   margin: 100px auto;
   max-width: 1200px;
   display: grid;
@@ -21,7 +21,7 @@
 
 // for medium and tablet screens
 @media (min-width: 700px) and (max-width: 1100px) {
-  .overview {
+  .project-list {
     grid-template-columns: 300px 300px;
     max-width: 900px;
   }
@@ -29,7 +29,7 @@
 
 // for mobile screens
 @media (max-width: 700px) {
-  .overview {
+  .project-list {
     grid-template-columns: 350px;
   }
 }
