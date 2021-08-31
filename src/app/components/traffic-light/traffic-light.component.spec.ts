@@ -26,87 +26,87 @@ describe('TrafficLightComponent', () => {
   });
 
   it('should have DEFAULT size by default', () => {
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['default']).toBeTruthy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['default']).toBeTruthy();
   });
 
   it('should be small sized', () => {
     component.size = Size.SMALL;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['small']).toBeTruthy();
-    expect(htmlElement.classes['default']).toBeFalsy();
-    expect(htmlElement.classes['big']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['small']).toBeTruthy();
+    expect(trafficLight.classes['default']).toBeFalsy();
+    expect(trafficLight.classes['big']).toBeFalsy();
   });
 
   it('should be default sized', () => {
     component.size = Size.DEFAULT;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['small']).toBeFalsy();
-    expect(htmlElement.classes['default']).toBeTruthy();
-    expect(htmlElement.classes['big']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['small']).toBeFalsy();
+    expect(trafficLight.classes['default']).toBeTruthy();
+    expect(trafficLight.classes['big']).toBeFalsy();
   });
 
   it('should be big sized', () => {
     component.size = Size.BIG;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['small']).toBeFalsy();
-    expect(htmlElement.classes['default']).toBeFalsy();
-    expect(htmlElement.classes['big']).toBeTruthy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['small']).toBeFalsy();
+    expect(trafficLight.classes['default']).toBeFalsy();
+    expect(trafficLight.classes['big']).toBeTruthy();
   });
 
   it('should be vertical by default', () => {
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['horizontal']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['horizontal']).toBeFalsy();
   });
 
   it('should be vertical', () => {
     component.horizontal = false;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['horizontal']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['horizontal']).toBeFalsy();
   });
 
   it('should be horizontal', () => {
     component.horizontal = true;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['horizontal']).toBeTruthy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['horizontal']).toBeTruthy();
   });
 
   it('no complexity should be indicated by default', () => {
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['easy']).toBeFalsy();
-    expect(htmlElement.classes['medium']).toBeFalsy();
-    expect(htmlElement.classes['difficult']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['easy']).toBeFalsy();
+    expect(trafficLight.classes['medium']).toBeFalsy();
+    expect(trafficLight.classes['difficult']).toBeFalsy();
   });
 
   it('should have easy css class when easy', () => {
     component.complexity = Complexity.EASY;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['easy']).toBeTruthy();
-    expect(htmlElement.classes['medium']).toBeFalsy();
-    expect(htmlElement.classes['difficult']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['easy']).toBeTruthy();
+    expect(trafficLight.classes['medium']).toBeFalsy();
+    expect(trafficLight.classes['difficult']).toBeFalsy();
   });
 
   it('should have medium css class when medium', () => {
     component.complexity = Complexity.MEDIUM;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['easy']).toBeFalsy();
-    expect(htmlElement.classes['medium']).toBeTruthy();
-    expect(htmlElement.classes['difficult']).toBeFalsy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['easy']).toBeFalsy();
+    expect(trafficLight.classes['medium']).toBeTruthy();
+    expect(trafficLight.classes['difficult']).toBeFalsy();
   });
 
   it('should have difficult css class difficult', () => {
     component.complexity = Complexity.DIFFICULT;
     fixture.detectChanges();
-    const htmlElement = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(htmlElement.classes['easy']).toBeFalsy();
-    expect(htmlElement.classes['medium']).toBeFalsy();
-    expect(htmlElement.classes['difficult']).toBeTruthy();
+    const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
+    expect(trafficLight.classes['easy']).toBeFalsy();
+    expect(trafficLight.classes['medium']).toBeFalsy();
+    expect(trafficLight.classes['difficult']).toBeTruthy();
   });
 });
