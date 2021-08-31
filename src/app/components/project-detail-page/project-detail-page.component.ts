@@ -5,6 +5,8 @@ import { Size } from 'src/app/components/traffic-light/Size';
 import { State } from 'src/app/shared/models/State';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-project-detail-page',
@@ -18,6 +20,8 @@ export class ProjectDetailPageComponent implements OnInit {
   sizeEnum = Size;
   stateEnum = State;
   faStopwatch = faStopwatch;
+  faEdit = faEdit;
+  faChevronLeft = faChevronLeft;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
     this.activatedRoute.params.subscribe((params) => {

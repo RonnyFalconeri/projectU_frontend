@@ -1,5 +1,13 @@
 <div class="menu-bar">
-  <h1>projectU</h1>
+  <div class="back-button menu-button" routerLink="../../">
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </div>
+  <div class="home-link" [routerLink]="['/']">
+    <img class="logo" src="assets/images/logo-banner.png">
+  </div>
+  <div class="edit-button menu-button">
+    <fa-icon [icon]="faEdit"></fa-icon>
+  </div>
 </div>
 
 <div class="project-card"

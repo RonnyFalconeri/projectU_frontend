@@ -1,12 +1,42 @@
 .menu-bar {
   background-color: var(--color-menu-bar);
   position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   top: 0;
   width: 100%;
   min-height: 1.5rem;
 
   h1 {
     text-align: center;
+  }
+
+  .logo {
+    height: 3rem;
+    margin: 10px;
+  }
+
+  .home-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-link:hover {
+    cursor: pointer;
+  }
+
+  .menu-button {
+    font-size: 1.8rem;
+  }
+
+  .menu-button:hover {
+    cursor: pointer;
+  }
+
+  .menu-button:active {
+    color: rgb(85, 85, 85);
   }
 }
 
