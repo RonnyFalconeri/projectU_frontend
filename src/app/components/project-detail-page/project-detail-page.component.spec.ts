@@ -5,6 +5,7 @@ import { State } from 'src/app/shared/models/State';
 import { By } from '@angular/platform-browser';
 import { ProjectDetailPageComponent } from './project-detail-page.component';
 import { Project } from 'src/app/shared/models/Project';
+import { DebugElement } from '@angular/core';
 
 describe('ProjectDetailPageComponent', () => {
   let component: ProjectDetailPageComponent;
@@ -32,40 +33,28 @@ describe('ProjectDetailPageComponent', () => {
     component.project = getInitiatedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(projectCard.classes['initiated']).toBeTruthy();
-    expect(projectCard.classes['in-progress']).toBeFalsy();
-    expect(projectCard.classes['halted']).toBeFalsy();
-    expect(projectCard.classes['finished']).toBeFalsy();
+    expect(hasOnlyClassOfState(projectCard, State.INITIATED)).toBeTruthy();
   });
 
   it('should have in-progress class', () => {
     component.project = getProgressedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(projectCard.classes['initiated']).toBeFalsy();
-    expect(projectCard.classes['in-progress']).toBeTruthy();
-    expect(projectCard.classes['halted']).toBeFalsy();
-    expect(projectCard.classes['finished']).toBeFalsy();
+    expect(hasOnlyClassOfState(projectCard, State.IN_PROGRESS)).toBeTruthy();
   });
 
   it('should have halted class', () => {
     component.project = getHaltedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(projectCard.classes['initiated']).toBeFalsy();
-    expect(projectCard.classes['in-progress']).toBeFalsy();
-    expect(projectCard.classes['halted']).toBeTruthy();
-    expect(projectCard.classes['finished']).toBeFalsy();
+    expect(hasOnlyClassOfState(projectCard, State.HALTED)).toBeTruthy();
   });
 
   it('should have finished class', () => {
     component.project = getFinishedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(projectCard.classes['initiated']).toBeFalsy();
-    expect(projectCard.classes['in-progress']).toBeFalsy();
-    expect(projectCard.classes['halted']).toBeFalsy();
-    expect(projectCard.classes['finished']).toBeTruthy();
+    expect(hasOnlyClassOfState(projectCard, State.FINISHED)).toBeTruthy();
   });
 
   it('should have 0 task bars', () => {
@@ -169,7 +158,7 @@ function getProjectWith0Tasks(): Project {
   };
 }
 
-function getProjectWith3Tasks() {
+function getProjectWith3Tasks(): Project {
   return {
     id: '1',
     title: 'Test Project 1',
@@ -212,4 +201,71 @@ function getProjectWith3Tasks() {
     finishedAt: '',
     actualResult: ''
   };
+}
+
+function hasOnlyClassOfState(element: DebugElement, state: State): boolean {
+  switch (state) {
+    case State.INITIATED:
+      return hasOnlyClassOfInitiated(element);
+    case State.IN_PROGRESS:
+      return hasOnlyClassOfInProgress(element);
+    case State.HALTED:
+      return hasOnlyClassOfHalted(element);
+    case State.FINISHED:
+      return hasOnlyClassOfFinished(element);
+    default:
+      return false;
+  }
+}
+
+function hasOnlyClassOfInitiated(element: DebugElement): boolean {
+  let initiated: boolean = element.classes['initiated'];
+  let inProgress: boolean = element.classes['in-progress'];
+  let halted: boolean = element.classes['halted'];
+  let finished: boolean = element.classes['finished'];
+
+  if(initiated && !inProgress && !halted && !finished) {
+    return true;
+  }
+
+  return false;
+}
+
+function hasOnlyClassOfInProgress(element: DebugElement): boolean {
+  let initiated: boolean = element.classes['initiated'];
+  let inProgress: boolean = element.classes['in-progress'];
+  let halted: boolean = element.classes['halted'];
+  let finished: boolean = element.classes['finished'];
+
+  if(!initiated && inProgress && !halted && !finished) {
+    return true;
+  }
+
+  return false;
+}
+
+function hasOnlyClassOfHalted(element: DebugElement): boolean {
+  let initiated: boolean = element.classes['initiated'];
+  let inProgress: boolean = element.classes['in-progress'];
+  let halted: boolean = element.classes['halted'];
+  let finished: boolean = element.classes['finished'];
+
+  if(!initiated && !inProgress && halted && !finished) {
+    return true;
+  }
+
+  return false;
+}
+
+function hasOnlyClassOfFinished(element: DebugElement): boolean {
+  let initiated: boolean = element.classes['initiated'];
+  let inProgress: boolean = element.classes['in-progress'];
+  let halted: boolean = element.classes['halted'];
+  let finished: boolean = element.classes['finished'];
+
+  if(!initiated && !inProgress && !halted && finished) {
+    return true;
+  }
+
+  return false;
 }
