@@ -3,11 +3,14 @@
     'in-progress': project.state === stateEnum.IN_PROGRESS,
     'halted': project.state === stateEnum.HALTED,
     'finished': project.state === stateEnum.FINISHED}">
-  <div class="grid-container"><div class="project-information">
-    <h1>{{project.title}}</h1>
-    {{project.description}}
-  </div>
+  <div class="grid-container">
 
+    <div class="project-information">
+      <h1>{{project.title}}</h1>
+      <div class="project-description">
+        {{project.description}}
+      </div>
+    </div>
     <div class="project-status">
       <app-traffic-light
         [complexity]="project.complexity"
@@ -15,10 +18,6 @@
         [horizontal]="false"
       ></app-traffic-light>
       {{project.estimatedDurationInHours}}h
-    </div>
-
-    <div class="project-depth">
-      {{project.tasks.length}}
     </div>
   </div>
 </div>
