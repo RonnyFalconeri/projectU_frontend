@@ -1,0 +1,18 @@
+<div class="project-tile" [ngClass]="{
+    'initiated': project.state === stateEnum.INITIATED,
+    'in-progress': project.state === stateEnum.IN_PROGRESS,
+    'halted': project.state === stateEnum.HALTED,
+    'finished': project.state === stateEnum.FINISHED}">
+
+  {{project.title}},
+  {{project.description}},
+  {{project.state}},
+  {{project.estimatedDurationInHours}},
+  {{project.tasks.length}}
+
+    <app-traffic-light
+      [complexity]="project.complexity"
+      [size]="sizeEnum.SMALL"
+      [horizontal]="false"
+    ></app-traffic-light>
+</div>

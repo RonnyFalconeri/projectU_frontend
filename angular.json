@@ -118,6 +118,7 @@
   },
   "defaultProject": "projectU-frontend",
   "cli": {
+    "analytics": "c7d64668-7d00-460f-bb44-7b2729dc179b",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }
