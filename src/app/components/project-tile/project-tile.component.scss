@@ -14,6 +14,14 @@
   font-size: 12rem;
   font-family: cursive;
 }
+
+.grid-container{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
 .initiated {
   background-color: var(--color-state-initiated);
 }
