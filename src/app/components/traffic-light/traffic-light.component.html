@@ -1,6 +1,13 @@
 <div class="traffic-light"
-[ngClass]="[getComplexity(), getSize()]"
-[class.horizontal]="horizontal">
+  [class.horizontal]="horizontal"
+  [ngClass]="{
+    'easy': complexity === complexityEnum.EASY,
+    'medium': complexity === complexityEnum.MEDIUM,
+    'difficult': complexity === complexityEnum.DIFFICULT,
+    'small': size === sizeEnum.SMALL,
+    'default': size === sizeEnum.DEFAULT,
+    'big': size === sizeEnum.BIG}"
+>
   <div class="indicator red"></div>
   <div class="indicator yellow"></div>
   <div class="indicator green"></div>

@@ -1,23 +1,29 @@
-<div class="overview">
-  <div class="taskbar">
-    <h1>projectU</h1>
+<div class="menu-bar">
+  <div class="sort-button menu-button">
+    <fa-icon [icon]="faThLarge"></fa-icon>
   </div>
+  <div class="home-link" [routerLink]="['/']">
+    <img class="logo" src="assets/images/logo-banner.png">
+  </div>
+  <div class="new-project-button menu-button">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </div>
+</div>
 
-  <div class="project-space">
-    <div class="project-tile" *ngFor="let project of projectService.getAllProjects()">
+<div class="project-list">
+  <div class="project-tile" *ngFor="let project of projects">
 
-      {{project.title}},
-      {{project.description}},
-      {{project.state}},
-      {{project.estimatedDurationInHours}},
-      {{project.tasks.length}}
+    {{project.title}},
+    {{project.description}},
+    {{project.state}},
+    {{project.estimatedDurationInHours}},
+    {{project.tasks.length}}
 
-      <app-traffic-light
-        [complexity]="project.complexity"
-        [size]="sizeEnum.SMALL"
-        [horizontal]="false"
-      ></app-traffic-light>
+    <app-traffic-light
+      [complexity]="project.complexity"
+      [size]="sizeEnum.SMALL"
+      [horizontal]="false"
+    ></app-traffic-light>
 
-    </div>
   </div>
 </div>
