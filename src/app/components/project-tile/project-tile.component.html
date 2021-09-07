@@ -3,7 +3,7 @@
     'in-progress': project.state === stateEnum.IN_PROGRESS,
     'halted': project.state === stateEnum.HALTED,
     'finished': project.state === stateEnum.FINISHED}">
-  <div class="grid-container">
+  <div class="grid-container" [routerLink]="['/project/', project.id]">
 
     <div class="project-information">
       <h1>{{project.title}}</h1>
