@@ -3,6 +3,7 @@
   border: 2px solid black;
   background-color: #b09e99;
   margin: 20px;
+  border-radius: 10px;
 }
 
 .symbol {
@@ -13,6 +14,10 @@
   align-items: center;
   font-size: 12rem;
   font-family: cursive;
+}
+
+.project-status{
+  text-align: center;
 }
 
 .grid-container{
