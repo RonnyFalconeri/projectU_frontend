@@ -1,23 +1,38 @@
+<div class="everything">
 <div class="project-tile" [ngClass]="{
-    'initiated': project.state === stateEnum.INITIATED,
-    'in-progress': project.state === stateEnum.IN_PROGRESS,
-    'halted': project.state === stateEnum.HALTED,
-    'finished': project.state === stateEnum.FINISHED}">
-  <div class="grid-container" [routerLink]="['/project/', project.id]">
+  'initiated': project.state === stateEnum.INITIATED,
+  'in-progress': project.state === stateEnum.IN_PROGRESS,
+  'halted': project.state === stateEnum.HALTED,
+  'finished': project.state === stateEnum.FINISHED}">
+
+  <div id="grid-container" [routerLink]="['/project/', project.id]">
 
     <div class="project-information">
-      <h1>{{project.title}}</h1>
-      <div class="project-description">
-        {{project.description}}
-      </div>
+      <h3>{{project.title}}</h3>
     </div>
     <div class="project-status">
       <app-traffic-light
         [complexity]="project.complexity"
         [size]="sizeEnum.SMALL"
-        [horizontal]="false"
+        [horizontal]="true"
       ></app-traffic-light>
-      {{project.estimatedDurationInHours}}h
+      <div id="hours">
+        <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
+      </div>
     </div>
   </div>
+  <div class="project-description">
+    {{project.description}}
+  </div>
+</div>
+<div class="two-tasks" [ngClass]="{
+  'initiated': project.state === stateEnum.INITIATED,
+  'in-progress': project.state === stateEnum.IN_PROGRESS,
+  'halted': project.state === stateEnum.HALTED,
+  'finished': project.state === stateEnum.FINISHED}" *ngIf="project.tasks.length>1"></div>
+  <div class="many-tasks" [ngClass]="{
+  'initiated': project.state === stateEnum.INITIATED,
+  'in-progress': project.state === stateEnum.IN_PROGRESS,
+  'halted': project.state === stateEnum.HALTED,
+  'finished': project.state === stateEnum.FINISHED}" *ngIf="project.tasks.length>2"></div>
 </div>
