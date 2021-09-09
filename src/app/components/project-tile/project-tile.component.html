@@ -11,28 +11,19 @@
       <h3>{{project.title}}</h3>
     </div>
     <div class="project-status">
+
+      <div id="hours">
+        <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
+      </div>
       <app-traffic-light
         [complexity]="project.complexity"
         [size]="sizeEnum.SMALL"
         [horizontal]="true"
       ></app-traffic-light>
-      <div id="hours">
-        <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
-      </div>
     </div>
   </div>
   <div class="project-description">
     {{project.description}}
   </div>
 </div>
-<div class="two-tasks" [ngClass]="{
-  'initiated': project.state === stateEnum.INITIATED,
-  'in-progress': project.state === stateEnum.IN_PROGRESS,
-  'halted': project.state === stateEnum.HALTED,
-  'finished': project.state === stateEnum.FINISHED}" *ngIf="project.tasks.length>1"></div>
-  <div class="many-tasks" [ngClass]="{
-  'initiated': project.state === stateEnum.INITIATED,
-  'in-progress': project.state === stateEnum.IN_PROGRESS,
-  'halted': project.state === stateEnum.HALTED,
-  'finished': project.state === stateEnum.FINISHED}" *ngIf="project.tasks.length>2"></div>
 </div>
