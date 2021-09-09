@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "generate:api": "openapi-generator-cli generate -g typescript-angular -i ./src/assets/openapi/openapi.yaml -o ./build/openapi",
+    "prestart": "npm run generate:api",
     "start": "ng serve",
+    "prebuild": "npm run generate:api",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -22,6 +25,7 @@
     "@fortawesome/angular-fontawesome": "^0.9.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@openapitools/openapi-generator-cli": "^2.4.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

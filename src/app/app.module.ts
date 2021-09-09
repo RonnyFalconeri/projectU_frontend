@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { ApiModule } from 'build/openapi/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OverviewComponent } from './components/overview/overview.component';
@@ -20,7 +20,8 @@ import { TaskBarComponent } from './components/project-detail-page/task-bar/task
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ApiModule
   ],
   providers: [
     Title
