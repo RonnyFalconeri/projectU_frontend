@@ -3,7 +3,7 @@ info:
   title: projectU REST API
   description: A REST API for the application projectU
   version: 1.0.0
-  
+
 paths:
   /projects:
     get:
@@ -137,6 +137,13 @@ components:
   schemas:
     Project:
       type: object
+      required:
+        - id
+        - title
+        - tasks
+        - state
+        - complexity
+        - createdAt
       properties:
         id:
           type: string
@@ -187,6 +194,11 @@ components:
 
     Task:
       type: object
+      required:
+        - id
+        - title
+        - state
+        - complexity
       properties:
         id:
           type: string
@@ -213,6 +225,7 @@ components:
 
     State:
       type: string
+      nullable: false
       enum:
         - INITIATED
         - IN_PROGRESS
@@ -221,11 +234,12 @@ components:
 
     Complexity:
       type: string
+      nullable: false
       enum:
         - EASY
         - MEDIUM
         - DIFFICULT
-  
+
 tags:
   - name: project
     description: An operation including projects
