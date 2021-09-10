@@ -1,8 +1,8 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Complexity } from 'src/app/shared/models/Complexity';
-import { Size } from './Size';
+import { Complexity } from 'build/openapi/model/complexity';
+import { Size } from '../../shared/models/Size';
 import { TrafficLightComponent } from './traffic-light.component';
 
 describe('TrafficLightComponent', () => {
@@ -77,24 +77,24 @@ describe('TrafficLightComponent', () => {
   });
 
   it('should have easy css class when easy', () => {
-    component.complexity = Complexity.EASY;
+    component.complexity = Complexity.Easy;
     fixture.detectChanges();
     const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(hasOnlyClassOfComplexity(trafficLight, Complexity.EASY)).toBeTruthy();
+    expect(hasOnlyClassOfComplexity(trafficLight, Complexity.Easy)).toBeTruthy();
   });
 
   it('should have medium css class when medium', () => {
-    component.complexity = Complexity.MEDIUM;
+    component.complexity = Complexity.Medium;
     fixture.detectChanges();
     const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(hasOnlyClassOfComplexity(trafficLight, Complexity.MEDIUM)).toBeTruthy();
+    expect(hasOnlyClassOfComplexity(trafficLight, Complexity.Medium)).toBeTruthy();
   });
 
   it('should have difficult css class difficult', () => {
-    component.complexity = Complexity.DIFFICULT;
+    component.complexity = Complexity.Difficult;
     fixture.detectChanges();
     const trafficLight = fixture.debugElement.query(By.css('.traffic-light'));
-    expect(hasOnlyClassOfComplexity(trafficLight, Complexity.DIFFICULT)).toBeTruthy();
+    expect(hasOnlyClassOfComplexity(trafficLight, Complexity.Difficult)).toBeTruthy();
   });
 });
 
@@ -149,11 +149,11 @@ function hasOnlyClassOfBig(element: DebugElement): boolean {
 
 function hasOnlyClassOfComplexity(element: DebugElement, complexity: Complexity): boolean {
   switch (complexity) {
-    case Complexity.EASY:
+    case Complexity.Easy:
       return hasOnlyClassOfEasy(element);
-    case Complexity.MEDIUM:
+    case Complexity.Medium:
       return hasOnlyClassOfMedium(element);
-    case Complexity.DIFFICULT:
+    case Complexity.Difficult:
       return hasOnlyClassOfDifficult(element);
     default:
       return false;

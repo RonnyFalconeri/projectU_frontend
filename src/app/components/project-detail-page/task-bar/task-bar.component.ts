@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Size } from 'src/app/components/traffic-light/Size';
-import { Task } from 'src/app/shared/models/Task';
+import { Size } from 'src/app/shared/models/Size';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { Task } from 'build/openapi/model/task';
 
 @Component({
   selector: 'app-task-bar',
