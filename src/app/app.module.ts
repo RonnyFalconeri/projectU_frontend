@@ -8,6 +8,7 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { TrafficLightComponent } from './components/traffic-light/traffic-light.component';
 import { ProjectDetailPageComponent } from './components/project-detail-page/project-detail-page.component';
 import { TaskBarComponent } from './components/project-detail-page/task-bar/task-bar.component';
+import { ProjectEditComponent } from './components/project-edit/project-edit.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TaskBarComponent } from './components/project-detail-page/task-bar/task
     OverviewComponent,
     TrafficLightComponent,
     ProjectDetailPageComponent,
-    TaskBarComponent
+    TaskBarComponent,
+    ProjectEditComponent
   ],
   imports: [
     BrowserModule,
