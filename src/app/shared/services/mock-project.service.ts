@@ -6,7 +6,7 @@ import { State } from 'build/openapi/model/state';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class MockProjectService {
 
   private mockProjects: Project[] = [
     {
