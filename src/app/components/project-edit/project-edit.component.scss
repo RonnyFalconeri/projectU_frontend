@@ -1,0 +1,129 @@
+.edit-button {
+  font-size: 1.4rem;
+}
+
+.project-card {
+  max-width: 1000px;
+  margin: 150px auto;
+  padding: 40px;
+  border-radius: 40px;
+  box-shadow: 0px 0px 20px 0px #0000008c;
+
+  .primary-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0 60px 30px 60px;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .description {
+      margin-top: 8px;
+      max-width: 600px;
+    }
+
+    .date {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--color-font-secondary);
+    }
+  }
+
+  .secondary-info {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    padding: 10px;
+    font-weight: bold;
+    color: var(--color-font-secondary);
+
+    .hours {
+      font-size: 3rem;
+
+      fa-icon {
+        margin: 0 5px;
+        font-size: 2.5rem;
+      }
+    }
+
+    .state {
+      font-size: 1.5rem;
+    }
+
+    p { margin: 0;}
+  }
+
+  .results {
+    margin: 0 60px;
+  }
+
+  .period {
+    display: flex;
+    justify-content: center;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .time-info {
+      font-weight: bold;
+      color: var(--color-font-secondary);
+    }
+  }
+}
+
+.initiated {
+  background-color: var(--color-state-initiated);
+}
+
+.in-progress {
+  background-color: var(--color-state-in-progress);
+}
+
+.halted {
+  background-color: var(--color-state-halted);
+}
+
+.finished {
+  background-color: var(--color-state-finished);
+}
+
+// for medium and tablet screens
+@media (min-width: 700px) and (max-width: 1100px) {
+  .project-card {
+    margin: 100px 15px 50px 15px;
+
+    .primary-info {
+      margin: 0 30px 10px 30px;
+    }
+
+    .results {
+      margin: 0 30px;
+    }
+  }
+}
+
+// for mobile screens
+@media (max-width: 700px) {
+  .project-card {
+    margin: 100px 15px 50px 15px;
+    padding: 20px;
+
+    .primary-info {
+      margin: 0 10px 10px 10px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .results {
+      margin: 0 10px;
+    }
+
+    .date {
+      align-self: center;
+    }
+  }
+}
