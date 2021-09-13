@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './components/overview/overview.component';
 import { ProjectDetailPageComponent } from './components/project-detail-page/project-detail-page.component';
 import { ProjectEditComponent } from './components/project-edit/project-edit.component';
-import { Project } from './shared/models/Project';
 
 const routes: Routes = [
   {
@@ -15,14 +14,10 @@ const routes: Routes = [
     component: ProjectDetailPageComponent
   },
   {
-    path: 'project/:id',
+    path: 'edit',
     children: [
       {
-        path: '',
-        component: ProjectDetailPageComponent
-      },
-      {
-        path: 'edit',
+        path: 'project/:id',
         component: ProjectEditComponent
       }
     ]

@@ -16,11 +16,25 @@ export class ProjectEditComponent implements OnInit {
   project: Project;
 
   public projectForm = this.fb.group({
-    title: ['', Validators.required],
+    title: [
+      '',
+      // default value for title does not work if required
+      //Validators.required,
+      Validators.maxLength(100),
+    ],
     description: [''],
-    estimatedDurationInHours: [''],
-    state: ['', Validators.required],
-    complexity: ['', Validators.required]
+    estimatedDurationInHours: [
+      '',
+      Validators.min(0)
+    ],
+    state: [
+      '',
+      Validators.required
+    ],
+    complexity: [
+      '',
+      Validators.required
+    ]
   });
 
   keys = Object.keys;
@@ -35,15 +49,49 @@ export class ProjectEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      this.project = this.projectService.getProjectById(params.id)
+      if(params.id) {
+        // if parameter in routes exist -> edit project
+        this.project = this.projectService.getProjectById(params.id);
+      } else {
+        // if no parameter exists -> new project
+        // setup new project
+        this.project = this.setupNewProject();
+      }
     });
+    this.setInitialValues();
+  }
+
+  setupNewProject(): Project {
+    let newProject: Project = {
+        id: '',
+        title: '',
+        description: '',
+        tasks: [],
+        state: State.INITIATED,
+        complexity: Complexity.EASY,
+        estimatedDurationInHours: 0,
+        createdAt: '',
+        expectedResult: '',
+        startedAt: '',
+        finishedAt: '',
+        actualResult: ''
+      }
+    return newProject;
+  }
+
+  setInitialValues() {
+    this.projectForm.get('title')?.setValue(this.project.title);
+    this.projectForm.get('description')?.setValue(this.project.description);
+    this.projectForm.get('estimatedDurationInHours')?.setValue(this.project.estimatedDurationInHours);
   }
 
   save(): void {
+    // TODO: use project service to store values
     console.log(this.projectForm.value);
   }
 
   deleteProject(): void {
+    // TODO: use project service to delete project
     console.log('deleting project...');
     this.router.navigate(['/']);
   }

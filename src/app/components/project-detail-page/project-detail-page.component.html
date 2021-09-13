@@ -5,7 +5,7 @@
   <div class="home-link" [routerLink]="['/']">
     <img class="logo" src="assets/images/logo-banner.png">
   </div>
-  <div class="edit-button menu-button" [routerLink]="['edit', project]">
+  <div class="edit-button menu-button" [routerLink]="['/edit/project', project.id]">
     <fa-icon [icon]="faEdit"></fa-icon>
   </div>
 </div>
