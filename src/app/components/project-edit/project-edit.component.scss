@@ -28,12 +28,29 @@
   input {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 7px;
-    height: 2rem;
+    font-size: 2rem;
     border: 2px solid rgba(0, 0, 0, 0);
     padding-left: 10px;
   }
 
+  input[type="number"] {
+    width: 100px;
+  }
+
   input:focus-visible {
+    outline: none;
+    border-color: grey;
+  }
+
+  select {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+    font-size: 2rem;
+    border: 2px solid rgba(0, 0, 0, 0);
+    padding-left: 10px;
+  }
+
+  select:focus-visible {
     outline: none;
     border-color: grey;
   }
@@ -43,6 +60,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.unit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .unit-indicator {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-left: 5px;
+  }
 }
 
 .bottom {

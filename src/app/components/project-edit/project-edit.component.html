@@ -21,9 +21,12 @@
         <input id="title" formControlName="title" type="text" class="form-control">
       </div>
 
-      <div class="form-group">
+      <div class="form-group estimatedDuration">
         <label for="estimatedDurationInHours">Est. duration</label>
-        <input id="estimatedDurationInHours" formControlName="estimatedDurationInHours" type="number" class="form-control">
+        <div class="unit">
+          <input id="estimatedDurationInHours" formControlName="estimatedDurationInHours" type="number" class="form-control">
+          <span class="unit-indicator">h</span>
+        </div>
       </div>
     </div>
 
