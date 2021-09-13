@@ -58,12 +58,14 @@
 
 .controls {
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
   margin: 20px 0;
 
   button {
     min-width: 170px;
     padding: 10px 20px;
+    margin: 20px 10px;
     border-radius: 7px;
     font-size: 1.7rem;
     border: none;
@@ -140,6 +142,14 @@
   .project-card {
     margin: 100px 15px 50px 15px;
   }
+
+  .top {
+    flex-direction: column;
+  }
+
+  .controls {
+    flex-direction: column-reverse;
+  }
 }
 
 // for mobile screens
@@ -147,5 +157,17 @@
   .project-card {
     margin: 100px 15px 50px 15px;
     padding: 20px;
+  }
+
+  .top {
+    flex-direction: column;
+  }
+
+  .bottom {
+    flex-direction: column;
+  }
+
+  .controls {
+    flex-direction: column-reverse;
   }
 }
