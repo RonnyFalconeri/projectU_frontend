@@ -9,6 +9,7 @@ import { TrafficLightComponent } from './components/traffic-light/traffic-light.
 import { ProjectDetailPageComponent } from './components/project-detail-page/project-detail-page.component';
 import { TaskBarComponent } from './components/project-detail-page/task-bar/task-bar.component';
 import { ProjectEditComponent } from './components/project-edit/project-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProjectEditComponent } from './components/project-edit/project-edit.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [
     Title
