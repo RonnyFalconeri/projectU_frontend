@@ -58,9 +58,9 @@
     </div>
 
     <div class="controls">
-      <button type="button" (click)="deleteProject()">{{ 'delete' | uppercase }}</button>
-      <button type="button" [routerLink]="['/project', project.id]">{{ 'cancel' | uppercase }}</button>
-      <button type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
+      <button class="delete" type="button" (click)="deleteProject()">{{ 'delete' | uppercase }}</button>
+      <button class="cancel" type="button" [routerLink]="['/project', project.id]">{{ 'cancel' | uppercase }}</button>
+      <button class="save" type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
     </div>
   </form>
 
