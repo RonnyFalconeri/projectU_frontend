@@ -25,7 +25,7 @@
     color: rgb(56, 56, 56);
   }
 
-  input {
+  input, textarea {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 7px;
     font-size: 2rem;
@@ -33,11 +33,15 @@
     padding-left: 10px;
   }
 
+  textarea {
+    font-size: 1.7rem;
+  }
+
   input[type="number"] {
     width: 100px;
   }
 
-  input:focus-visible {
+  input:focus-visible, textarea:focus-visible {
     outline: none;
     border-color: grey;
   }
@@ -48,6 +52,7 @@
     font-size: 2rem;
     border: 2px solid rgba(0, 0, 0, 0);
     padding-left: 10px;
+    min-width: 270px;
   }
 
   select:focus-visible {
@@ -143,6 +148,10 @@
     margin: 100px 15px 50px 15px;
   }
 
+  .projectForm {
+    width: 90%;
+  }
+
   .top {
     flex-direction: column;
   }
@@ -157,6 +166,10 @@
   .project-card {
     margin: 100px 15px 50px 15px;
     padding: 20px;
+  }
+
+  .projectForm {
+    width: 95%;
   }
 
   .top {
