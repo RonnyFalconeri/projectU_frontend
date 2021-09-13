@@ -14,7 +14,7 @@
     'finished': project.state === stateEnum.FINISHED}"
 >
 
-  <form [formGroup]="projectForm">
+  <form [formGroup]="projectForm" (ngSubmit)='save()'>
     <div class="row">
       <div class="form-group">
         <label for="title">Title</label>
@@ -37,27 +37,27 @@
     <div class="row">
       <div class="form-group">
         <label for="state">State</label>
-        <select id="state" class="form-control">
-          <option value="initiated">INITIATED</option>
-          <option value="in-progress">IN_PROGRESS</option>
-          <option value="halted">HALTED</option>
-          <option value="finished">FINISHED</option>
+        <select id="state" class="form-control" (change)="changeState($event)">
+          <option *ngFor="let s of keys(stateEnum); index as i" [ngValue]="s" [selected]="i === 0">
+            {{s | uppercase}}
+          </option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="complexity">Complexity</label>
-        <select id="complexity" class="form-control">
-          <option value="easy">EASY</option>
-          <option value="medium">MEDIUM</option>
-          <option value="difficult">DIFFICULT</option>
+        <select id="complexity" class="form-control" (change)="changeComplexity($event)">
+          <option *ngFor="let c of keys(complexityEnum); index as i" [ngValue]="c" [selected]="i === 0">
+            {{c | uppercase}}
+          </option>
         </select>
       </div>
     </div>
 
     <div class="row">
-      <button type="button" [routerLink]="['/project', project.id]">Cancel</button>
-      <button type="submit" [disabled]="!projectForm.valid">Save</button>
+      <button type="button" (click)="deleteProject()">{{ 'delete' | uppercase }}</button>
+      <button type="button" [routerLink]="['/project', project.id]">{{ 'cancel' | uppercase }}</button>
+      <button type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
     </div>
   </form>
 

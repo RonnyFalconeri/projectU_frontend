@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/shared/models/Project';
 import { State } from 'src/app/shared/models/State';
-import { Size } from '../traffic-light/Size';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'src/app/shared/services/project.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Complexity } from 'src/app/shared/models/Complexity';
 
 @Component({
   selector: 'app-project-edit',
@@ -17,26 +16,44 @@ export class ProjectEditComponent implements OnInit {
   project: Project;
 
   public projectForm = this.fb.group({
-    title: [''],
+    title: ['', Validators.required],
     description: [''],
     estimatedDurationInHours: [''],
-    state: [''],
-    complexity: ['']
+    state: ['', Validators.required],
+    complexity: ['', Validators.required]
   });
 
-  sizeEnum = Size;
+  keys = Object.keys;
   stateEnum = State;
-  faChevronLeft = faChevronLeft;
+  complexityEnum = Complexity;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-    private readonly fb: FormBuilder) {}
+    private readonly fb: FormBuilder,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.project = this.projectService.getProjectById(params.id)
     });
+  }
+
+  save(): void {
+    console.log(this.projectForm.value);
+  }
+
+  deleteProject(): void {
+    console.log('deleting project...');
+    this.router.navigate(['/']);
+  }
+
+  changeState($event: any): void {
+    this.projectForm.get('state')?.setValue($event.target.value);
+  }
+
+  changeComplexity($event: any): void {
+    this.projectForm.get('complexity')?.setValue($event.target.value);
   }
 
 }
