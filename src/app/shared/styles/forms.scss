@@ -45,6 +45,37 @@ label {
   color: rgb(56, 56, 56);
 }
 
+.label-container {
+  display: flex;
+  justify-content: center;
+}
+
+.picker {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  padding: 10px;
+  margin-bottom: 40px;
+
+  .item {
+    padding: 10px 20px;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .item:hover {
+    cursor: pointer;
+  }
+
+  .item--active {
+    background-color: black;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+  }
+}
+
 .controls {
   display: flex;
   flex-direction: row;
@@ -96,6 +127,10 @@ label {
 
 // for mobile screens
 @media (max-width: 700px) {
+
+  .picker {
+    flex-direction: column;
+  }
 
   .controls {
     flex-direction: column-reverse;

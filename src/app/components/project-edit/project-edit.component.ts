@@ -13,12 +13,10 @@ import { Complexity } from 'src/app/shared/models/Complexity';
 })
 export class ProjectEditComponent implements OnInit {
 
-  project: Project;
+  project: Project = this.setupNewProject();
   projectForm: FormGroup;
-
-  keys = Object.keys;
+  editMode: boolean;
   stateEnum = State;
-  complexityEnum = Complexity;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -30,12 +28,10 @@ export class ProjectEditComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params) => {
       if(params.id) {
-        // if parameter in routes exist -> edit project
+        this.editMode = true;
         this.project = this.projectService.getProjectById(params.id);
       } else {
-        // if no parameter exists -> new project
-        // setup new project
-        this.project = this.setupNewProject();
+        this.editMode = false;
       }
     });
 
@@ -65,7 +61,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   setupNewProject(): Project {
-    let newProject: Project = {
+    return {
         id: '',
         title: '',
         description: '',
@@ -79,7 +75,6 @@ export class ProjectEditComponent implements OnInit {
         finishedAt: '',
         actualResult: ''
       }
-    return newProject;
   }
 
   save(): void {

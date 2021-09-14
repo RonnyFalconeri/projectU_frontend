@@ -14,7 +14,8 @@
     'finished': project.state === stateEnum.FINISHED}"
 >
 
-  <h1 class="form-headline">Edit Project</h1>
+  <h1 class="form-headline" *ngIf="editMode">Edit Project</h1>
+  <h1 class="form-headline" *ngIf="!editMode">New Project</h1>
 
   <form class="projectForm" [formGroup]="projectForm" (ngSubmit)='save()'>
     <div class="top">
