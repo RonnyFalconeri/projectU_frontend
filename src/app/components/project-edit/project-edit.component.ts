@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/shared/models/Project';
 import { State } from 'src/app/shared/models/State';
 import { ProjectService } from 'src/app/shared/services/project.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Complexity } from 'src/app/shared/models/Complexity';
 
 @Component({
@@ -14,28 +14,7 @@ import { Complexity } from 'src/app/shared/models/Complexity';
 export class ProjectEditComponent implements OnInit {
 
   project: Project;
-
-  public projectForm = this.fb.group({
-    title: [
-      '',
-      // default value for title does not work if required
-      //Validators.required,
-      Validators.maxLength(100),
-    ],
-    description: [''],
-    estimatedDurationInHours: [
-      '',
-      Validators.min(0)
-    ],
-    state: [
-      '',
-      Validators.required
-    ],
-    complexity: [
-      '',
-      Validators.required
-    ]
-  });
+  projectForm: FormGroup;
 
   keys = Object.keys;
   stateEnum = State;
@@ -48,6 +27,7 @@ export class ProjectEditComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
+
     this.activatedRoute.params.subscribe((params) => {
       if(params.id) {
         // if parameter in routes exist -> edit project
@@ -58,7 +38,30 @@ export class ProjectEditComponent implements OnInit {
         this.project = this.setupNewProject();
       }
     });
-    this.setInitialValues();
+
+    this.projectForm = this.fb.group({
+      title: [
+        this.project.title, [
+          Validators.required,
+          Validators.maxLength(100)
+        ]
+      ],
+      description: [
+        this.project.description
+      ],
+      estimatedDurationInHours: [
+        this.project.estimatedDurationInHours,
+        Validators.min(0)
+      ],
+      state: [
+        '',
+        Validators.required
+      ],
+      complexity: [
+        '',
+        Validators.required
+      ]
+    });
   }
 
   setupNewProject(): Project {
@@ -77,12 +80,6 @@ export class ProjectEditComponent implements OnInit {
         actualResult: ''
       }
     return newProject;
-  }
-
-  setInitialValues() {
-    this.projectForm.get('title')?.setValue(this.project.title);
-    this.projectForm.get('description')?.setValue(this.project.description);
-    this.projectForm.get('estimatedDurationInHours')?.setValue(this.project.estimatedDurationInHours);
   }
 
   save(): void {

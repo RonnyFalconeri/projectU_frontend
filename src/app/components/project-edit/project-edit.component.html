@@ -17,11 +17,11 @@
   <form class="projectForm" [formGroup]="projectForm" (ngSubmit)='save()'>
     <div class="top">
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Title*</label>
         <input id="title" formControlName="title" type="text" class="form-control">
       </div>
 
-      <div class="form-group estimatedDuration">
+      <div class="form-group">
         <label for="estimatedDurationInHours">Est. duration</label>
         <div class="unit">
           <input id="estimatedDurationInHours" formControlName="estimatedDurationInHours" type="number" class="form-control">
@@ -39,7 +39,7 @@
 
     <div class="bottom">
       <div class="form-group">
-        <label for="state">State</label>
+        <label for="state">State*</label>
         <select id="state" class="form-control" (change)="changeState($event)">
           <option *ngFor="let s of keys(stateEnum); index as i" [ngValue]="s" [selected]="i === project.state">
             {{s | uppercase}}
@@ -48,8 +48,9 @@
       </div>
 
       <div class="form-group">
-        <label for="complexity">Complexity</label>
+        <label for="complexity">Complexity*</label>
         <select id="complexity" class="form-control" (change)="changeComplexity($event)">
+          <option disabled>Select the complexity</option>
           <option *ngFor="let c of keys(complexityEnum); index as i" [ngValue]="c" [selected]="i === project.complexity">
             {{c | uppercase}}
           </option>
