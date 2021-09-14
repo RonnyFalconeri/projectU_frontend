@@ -122,8 +122,9 @@
 
 .bottom {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .initiated {
@@ -173,10 +174,6 @@
   }
 
   .top {
-    flex-direction: column;
-  }
-
-  .bottom {
     flex-direction: column;
   }
 

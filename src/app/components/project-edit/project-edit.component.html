@@ -37,19 +37,14 @@
       </div>
     </div>
 
+
     <div class="bottom">
-      <div class="form-group">
-        <label for="state">State*</label>
-        <select id="state" class="form-control" (change)="changeState($event)">
-          <option *ngFor="let s of keys(stateEnum); index as i" [ngValue]="s" [selected]="i === project.state">
-            {{s | uppercase}}
-          </option>
-        </select>
-      </div>
+
+      <app-project-state-picker (click)="changeState()" formControlName="state"></app-project-state-picker>
 
       <div class="form-group">
         <label for="complexity">Complexity*</label>
-        <select id="complexity" class="form-control" (change)="changeComplexity($event)">
+        <select id="complexity" class="form-control" formControlName="complexity" (change)="changeComplexity($event)">
           <option disabled>Select the complexity</option>
           <option *ngFor="let c of keys(complexityEnum); index as i" [ngValue]="c" [selected]="i === project.complexity">
             {{c | uppercase}}

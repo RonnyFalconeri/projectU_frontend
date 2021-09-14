@@ -1,0 +1,22 @@
+<div class="picker">
+  <div class="item"
+      (click)="changeSize(stateEnum.INITIATED)"
+      [ngClass]="{'item--active': state === stateEnum.INITIATED}">
+    INITIATED
+  </div>
+  <div class="item"
+      (click)="changeSize(stateEnum.IN_PROGRESS)"
+      [ngClass]="{'item--active': state === stateEnum.IN_PROGRESS}">
+    IN PROGRESS
+  </div>
+  <div class="item"
+      (click)="changeSize(stateEnum.HALTED)"
+      [ngClass]="{'item--active': state === stateEnum.HALTED}">
+    HALTED
+  </div>
+  <div class="item"
+      (click)="changeSize(stateEnum.FINISHED)"
+      [ngClass]="{'item--active': state === stateEnum.FINISHED}">
+    FINISHED
+  </div>
+</div>

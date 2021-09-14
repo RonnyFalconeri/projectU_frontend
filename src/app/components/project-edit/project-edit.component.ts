@@ -54,11 +54,11 @@ export class ProjectEditComponent implements OnInit {
         Validators.min(0)
       ],
       state: [
-        '',
+        this.project.state,
         Validators.required
       ],
       complexity: [
-        '',
+        this.project.complexity,
         Validators.required
       ]
     });
@@ -93,8 +93,8 @@ export class ProjectEditComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  changeState($event: any): void {
-    this.projectForm.get('state')?.setValue($event.target.value);
+  changeState(): void {
+    this.project.state = this.projectForm.get('state')?.value;
   }
 
   changeComplexity($event: any): void {

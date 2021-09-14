@@ -10,6 +10,7 @@ import { ProjectDetailPageComponent } from './components/project-detail-page/pro
 import { TaskBarComponent } from './components/project-detail-page/task-bar/task-bar.component';
 import { ProjectEditComponent } from './components/project-edit/project-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProjectStatePickerComponent } from './components/project-edit/project-state-picker/project-state-picker.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TrafficLightComponent,
     ProjectDetailPageComponent,
     TaskBarComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectStatePickerComponent
   ],
   imports: [
     BrowserModule,

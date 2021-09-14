@@ -1,0 +1,21 @@
+.picker {
+  display: flex;
+  flex-direction: row;
+
+  .item {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    width: 120px;
+    text-align: center;
+  }
+
+  .item:hover {
+    cursor: pointer;
+  }
+
+  .item--active {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+  }
+}
