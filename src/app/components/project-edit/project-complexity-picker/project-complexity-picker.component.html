@@ -1,0 +1,20 @@
+<div class="label-container">
+  <label>Complexity*</label>
+</div>
+<div class="picker">
+  <div class="item"
+      (click)="changeComplexity(complexityEnum.EASY)"
+      [ngClass]="{'item--active': complexity === complexityEnum.EASY}">
+    EASY
+  </div>
+  <div class="item"
+      (click)="changeComplexity(complexityEnum.MEDIUM)"
+      [ngClass]="{'item--active': complexity === complexityEnum.MEDIUM}">
+    MEDIUM
+  </div>
+  <div class="item"
+      (click)="changeComplexity(complexityEnum.DIFFICULT)"
+      [ngClass]="{'item--active': complexity === complexityEnum.DIFFICULT}">
+    DIFFICULT
+  </div>
+</div>

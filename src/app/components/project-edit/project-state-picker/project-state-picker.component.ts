@@ -21,7 +21,7 @@ export class ProjectStatePickerComponent implements ControlValueAccessor  {
 
   constructor() {}
 
-  changeSize(state: State) {
+  changeState(state: State) {
     this.state = state;
     this.propagateChange(state);
   }

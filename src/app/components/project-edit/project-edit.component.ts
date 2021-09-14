@@ -97,8 +97,8 @@ export class ProjectEditComponent implements OnInit {
     this.project.state = this.projectForm.get('state')?.value;
   }
 
-  changeComplexity($event: any): void {
-    this.projectForm.get('complexity')?.setValue($event.target.value);
+  changeComplexity(): void {
+    this.project.complexity = this.projectForm.get('complexity')?.value;
   }
 
 }
