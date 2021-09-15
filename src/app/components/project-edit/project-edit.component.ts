@@ -87,8 +87,10 @@ export class ProjectEditComponent implements OnInit {
 
   deleteProject(): void {
     // TODO: use project service to delete project
-    console.log('deleting project...');
-    this.router.navigate(['/']);
+    if(confirm("Do you want to delete the project?")) {
+      console.log('deleting project...');
+      this.router.navigate(['/']);
+    }
   }
 
   changeState(): void {
