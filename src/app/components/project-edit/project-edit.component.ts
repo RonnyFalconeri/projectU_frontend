@@ -99,4 +99,8 @@ export class ProjectEditComponent implements OnInit {
     this.project.complexity = this.projectForm.get('complexity')?.value;
   }
 
+  get title() {
+    return this.projectForm.get('title');
+  }
+
 }

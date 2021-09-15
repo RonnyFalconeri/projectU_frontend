@@ -25,6 +25,10 @@
     border-color: grey;
   }
 
+  input.ng-dirty.ng-touched.ng-invalid {
+    border-color: #9e0000;;
+  }
+
   select {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 7px;
@@ -37,6 +41,12 @@
   select:focus-visible {
     outline: none;
     border-color: grey;
+  }
+
+  p.error-msg {
+    margin: 5px 0;
+    font-size: 0.8rem;
+    color: #9e0000;
   }
 }
 
