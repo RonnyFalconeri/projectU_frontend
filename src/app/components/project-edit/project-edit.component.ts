@@ -13,9 +13,9 @@ import { Complexity } from 'src/app/shared/models/Complexity';
 })
 export class ProjectEditComponent implements OnInit {
 
-  project: Project = this.setupNewProject();
   projectForm: FormGroup;
-  editMode: boolean;
+  editExistingProject: boolean = false;
+  project: Project = this.setupNewProject();
   stateEnum = State;
 
   constructor(
@@ -25,16 +25,37 @@ export class ProjectEditComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
+    this.determineEditMode();
+    this.setupProjectForm();
+  }
 
+  private determineEditMode(): void {
     this.activatedRoute.params.subscribe((params) => {
       if(params.id) {
-        this.editMode = true;
+        this.editExistingProject = true;
         this.project = this.projectService.getProjectById(params.id);
-      } else {
-        this.editMode = false;
       }
     });
+  }
 
+  private setupNewProject(): Project {
+    return {
+        id: '',
+        title: '',
+        description: '',
+        tasks: [],
+        state: State.INITIATED,
+        complexity: Complexity.EASY,
+        estimatedDurationInHours: 0,
+        createdAt: '',
+        expectedResult: '',
+        startedAt: '',
+        finishedAt: '',
+        actualResult: ''
+      }
+  }
+
+  private setupProjectForm(): void {
     this.projectForm = this.fb.group({
       title: [
         this.project.title, [
@@ -52,7 +73,7 @@ export class ProjectEditComponent implements OnInit {
       state: [
         {
           value: this.project.state,
-          disabled: !this.editMode
+          disabled: !this.editExistingProject
         },
         Validators.required
       ],
@@ -61,23 +82,6 @@ export class ProjectEditComponent implements OnInit {
         Validators.required
       ]
     });
-  }
-
-  setupNewProject(): Project {
-    return {
-        id: '',
-        title: '',
-        description: '',
-        tasks: [],
-        state: State.INITIATED,
-        complexity: Complexity.EASY,
-        estimatedDurationInHours: 0,
-        createdAt: '',
-        expectedResult: '',
-        startedAt: '',
-        finishedAt: '',
-        actualResult: ''
-      }
   }
 
   save(): void {

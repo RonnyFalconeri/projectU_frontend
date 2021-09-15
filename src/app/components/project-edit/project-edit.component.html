@@ -14,8 +14,8 @@
     'finished': project.state === stateEnum.FINISHED}"
 >
 
-  <h1 class="form-headline" *ngIf="editMode">Edit Project</h1>
-  <h1 class="form-headline" *ngIf="!editMode">New Project</h1>
+  <h1 class="form-headline" *ngIf="editExistingProject">Edit Project</h1>
+  <h1 class="form-headline" *ngIf="!editExistingProject">New Project</h1>
 
   <form class="projectForm" [formGroup]="projectForm" (ngSubmit)='save()'>
     <div class="top">
@@ -64,13 +64,13 @@
       ></app-project-complexity-picker>
     </div>
 
-    <div class="controls" *ngIf="editMode">
+    <div class="controls" *ngIf="editExistingProject">
       <button class="delete" type="button" (click)="deleteProject()">{{ 'delete' | uppercase }}</button>
       <button class="cancel" type="button" [routerLink]="['/project', project.id]">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
     </div>
 
-    <div class="controls" *ngIf="!editMode">
+    <div class="controls" *ngIf="!editExistingProject">
       <button class="cancel" type="button" [routerLink]="['/']">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
     </div>
