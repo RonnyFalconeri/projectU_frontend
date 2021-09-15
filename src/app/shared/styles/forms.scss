@@ -74,6 +74,10 @@ label {
     color: white;
     font-weight: bold;
   }
+
+  .item.item--active.disabled {
+    background-color: rgba(82, 82, 82, 0.678);
+  }
 }
 
 .controls {

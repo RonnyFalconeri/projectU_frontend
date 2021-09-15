@@ -50,7 +50,10 @@ export class ProjectEditComponent implements OnInit {
         Validators.min(0)
       ],
       state: [
-        this.project.state,
+        {
+          value: this.project.state,
+          disabled: !this.editMode
+        },
         Validators.required
       ],
       complexity: [

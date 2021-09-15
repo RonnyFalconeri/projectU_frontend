@@ -53,9 +53,14 @@
       ></app-project-complexity-picker>
     </div>
 
-    <div class="controls">
+    <div class="controls" *ngIf="editMode">
       <button class="delete" type="button" (click)="deleteProject()">{{ 'delete' | uppercase }}</button>
       <button class="cancel" type="button" [routerLink]="['/project', project.id]">{{ 'cancel' | uppercase }}</button>
+      <button class="save" type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
+    </div>
+
+    <div class="controls" *ngIf="!editMode">
+      <button class="cancel" type="button" [routerLink]="['/']">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!projectForm.valid">{{ 'save' | uppercase }}</button>
     </div>
   </form>
