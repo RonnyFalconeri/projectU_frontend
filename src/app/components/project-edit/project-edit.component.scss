@@ -13,8 +13,12 @@
 .form-headline {
   text-align: center;
   margin-top: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--color-font-secondary);
   padding-bottom: 30px;
+
+  fa-icon {
+    color: var(--color-font-secondary);
+  }
 }
 
 .projectForm {
@@ -26,6 +30,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.duration {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  fa-icon {
+    margin: 0 5px;
+    font-size: 2.5rem;
+    color: var(--color-font-secondary);
+  }
 }
 
 .unit {
@@ -45,6 +61,10 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.controls {
+  border-top: 1px solid var(--color-font-secondary);
 }
 
 .initiated {

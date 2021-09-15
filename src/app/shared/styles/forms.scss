@@ -14,6 +14,8 @@
 
   textarea {
     font-size: 1.7rem;
+    font-family: sans-serif;
+    resize: vertical;
   }
 
   input[type="number"] {
@@ -52,7 +54,7 @@
 
 label {
   font-size: 0.8rem;
-  color: rgb(56, 56, 56);
+  color: var(--color-font-secondary);
 }
 
 .label-container {

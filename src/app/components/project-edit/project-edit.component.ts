@@ -5,6 +5,9 @@ import { State } from 'src/app/shared/models/State';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Complexity } from 'src/app/shared/models/Complexity';
+import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-project-edit',
@@ -17,6 +20,9 @@ export class ProjectEditComponent implements OnInit {
   editExistingProject: boolean = false;
   project: Project = this.setupNewProject();
   stateEnum = State;
+  faStopwatch = faStopwatch;
+  faPlusSquare = faPlusSquare;
+  faPen = faPen;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
