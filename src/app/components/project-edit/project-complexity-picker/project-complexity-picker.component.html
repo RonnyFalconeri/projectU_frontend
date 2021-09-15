@@ -1,6 +1,12 @@
 <div class="label-container">
   <label>Complexity*</label>
 </div>
+<div class="complexity-indicator">
+  <app-traffic-light
+    [complexity]="complexity"
+    [horizontal]="true"
+  ></app-traffic-light>
+</div>
 <div class="picker">
   <div class="item"
       (click)="changeComplexity(complexityEnum.EASY)"
