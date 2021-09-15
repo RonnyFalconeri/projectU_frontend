@@ -40,7 +40,7 @@ export class ProjectEditComponent implements OnInit {
 
   private setupNewProject(): Project {
     return {
-        id: '',
+        id: undefined,
         title: '',
         description: '',
         tasks: [],
@@ -84,15 +84,19 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
-  save(): void {
+  saveProject(): void {
     // TODO: use project service to store values
-    console.log(this.projectForm.value);
+    if(this.editExistingProject) {
+      this.projectService.updateProject(this.project);
+    } else {
+      this.projectService.createProject(this.project);
+    }
   }
 
   deleteProject(): void {
     // TODO: use project service to delete project
     if(confirm("Do you want to delete the project?")) {
-      console.log('deleting project...');
+      this.projectService.deleteProject(this.project.id);
       this.router.navigate(['/']);
     }
   }

@@ -17,7 +17,7 @@
   <h1 class="form-headline" *ngIf="editExistingProject">Edit Project</h1>
   <h1 class="form-headline" *ngIf="!editExistingProject">New Project</h1>
 
-  <form class="projectForm" [formGroup]="projectForm" (ngSubmit)='save()'>
+  <form class="projectForm" [formGroup]="projectForm" (ngSubmit)='saveProject()'>
     <div class="top">
       <div class="form-group">
         <label for="title">Title*</label>

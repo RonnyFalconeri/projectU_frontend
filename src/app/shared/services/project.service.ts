@@ -120,4 +120,18 @@ export class ProjectService {
     // TODO: implement real call to API
     return this.mockProjects;
   }
+
+  updateProject(project: Project): void {
+    console.log('updating project ' + project.id);
+    console.log(project);
+  }
+
+  createProject(project: Project): void {
+    console.log('create project');
+    console.log(project);
+  }
+
+  deleteProject(id?: string): void {
+    console.log('deleting project ' + id);
+  }
 }
