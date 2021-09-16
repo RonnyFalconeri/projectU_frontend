@@ -16,8 +16,9 @@ import { State } from 'src/app/shared/models/State';
 })
 export class ProjectStatePickerComponent implements ControlValueAccessor  {
 
-  isDisabled: boolean = false;
   state: State;
+  isDisabled: boolean = false;
+
   stateEnum = State;
 
   constructor() {}
