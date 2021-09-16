@@ -16,7 +16,8 @@ import { State } from 'src/app/shared/models/State';
 })
 export class ProjectStatePickerComponent implements ControlValueAccessor  {
 
-  state: State;
+  currentState: State;
+  originalState: State;
   isDisabled: boolean = false;
 
   stateEnum = State;
@@ -24,16 +25,25 @@ export class ProjectStatePickerComponent implements ControlValueAccessor  {
   constructor() {}
 
   changeState(state: State) {
-    if(!this.isDisabled) {
-      if(state !== State.INITIATED) {
-        this.state = state;
-        this.propagateChange(state);
-      }
+    if(this.isChangeAllowed(state)) {
+      this.currentState = state;
+      this.propagateChange(state);
     }
   }
 
+  isChangeAllowed(state: State): boolean {
+    if(!this.isDisabled) {
+      if(this.originalState === State.INITIATED ||
+        state !== State.INITIATED) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   writeValue(state: State): void {
-    this.state = state;
+    this.currentState = state;
+    this.originalState = this.currentState;
   }
 
   registerOnChange(fn: any): void {

@@ -5,9 +5,9 @@
   <div class="item"
       (click)="changeState(stateEnum.INITIATED)"
       [ngClass]="{
-        'item--active': state === stateEnum.INITIATED,
+        'item--active': currentState === stateEnum.INITIATED,
         'locked': isDisabled,
-        'non-clickable': !isDisabled
+        'non-clickable': !isChangeAllowed(stateEnum.INITIATED)
       }"
   >
     INITIATED
@@ -15,7 +15,7 @@
   <div class="item"
       (click)="changeState(stateEnum.IN_PROGRESS)"
       [ngClass]="{
-        'item--active': state === stateEnum.IN_PROGRESS,
+        'item--active': currentState === stateEnum.IN_PROGRESS,
         'locked': isDisabled
       }"
   >
@@ -24,7 +24,7 @@
   <div class="item"
       (click)="changeState(stateEnum.HALTED)"
       [ngClass]="{
-        'item--active': state === stateEnum.HALTED,
+        'item--active': currentState === stateEnum.HALTED,
         'locked': isDisabled
       }"
   >
@@ -33,7 +33,7 @@
   <div class="item"
       (click)="changeState(stateEnum.FINISHED)"
       [ngClass]="{
-        'item--active': state === stateEnum.FINISHED,
+        'item--active': currentState === stateEnum.FINISHED,
         'locked': isDisabled
       }"
   >
