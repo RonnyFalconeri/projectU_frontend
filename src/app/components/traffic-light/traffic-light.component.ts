@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Complexity } from 'src/app/shared/models/Complexity';
-import { Size } from 'src/app/components/traffic-light/Size';
+import { Complexity } from 'build/openapi/model/complexity';
+import { Size } from 'src/app/shared/models/Size';
 
 @Component({
   selector: 'app-traffic-light',
