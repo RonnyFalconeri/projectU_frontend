@@ -72,8 +72,13 @@ label {
 
   .item {
     padding: 10px 20px;
-    min-width: 120px;
+    min-width: 130px;
     text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .item.disabled {
+    color: rgba(82, 82, 82, 0.678);
   }
 
   .item:hover {
@@ -87,7 +92,7 @@ label {
     font-weight: bold;
   }
 
-  .item.item--active.disabled {
+  .item.item--active.locked {
     background-color: rgba(82, 82, 82, 0.678);
   }
 }

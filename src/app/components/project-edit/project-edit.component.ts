@@ -19,10 +19,11 @@ export class ProjectEditComponent implements OnInit {
   projectForm: FormGroup;
   editExistingProject: boolean = false;
   project: Project = this.setupNewProject();
+
   stateEnum = State;
+  faPen = faPen;
   faStopwatch = faStopwatch;
   faPlusSquare = faPlusSquare;
-  faPen = faPen;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -42,23 +43,6 @@ export class ProjectEditComponent implements OnInit {
         this.project = this.projectService.getProjectById(params.id);
       }
     });
-  }
-
-  private setupNewProject(): Project {
-    return {
-        id: undefined,
-        title: '',
-        description: '',
-        tasks: [],
-        state: State.INITIATED,
-        complexity: Complexity.EASY,
-        estimatedDurationInHours: 0,
-        createdAt: '',
-        expectedResult: '',
-        startedAt: '',
-        finishedAt: '',
-        actualResult: ''
-      }
   }
 
   private setupProjectForm(): void {
@@ -90,8 +74,24 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
+  private setupNewProject(): Project {
+    return {
+        id: undefined,
+        title: '',
+        description: '',
+        tasks: [],
+        state: State.INITIATED,
+        complexity: Complexity.EASY,
+        estimatedDurationInHours: 0,
+        createdAt: '',
+        expectedResult: '',
+        startedAt: '',
+        finishedAt: '',
+        actualResult: ''
+      }
+  }
+
   saveProject(): void {
-    // TODO: use project service to store values
     if(this.editExistingProject) {
       this.projectService.updateProject(this.project);
     } else {
@@ -100,7 +100,6 @@ export class ProjectEditComponent implements OnInit {
   }
 
   deleteProject(): void {
-    // TODO: use project service to delete project
     if(confirm("Do you want to delete the project?")) {
       this.projectService.deleteProject(this.project.id);
       this.router.navigate(['/']);

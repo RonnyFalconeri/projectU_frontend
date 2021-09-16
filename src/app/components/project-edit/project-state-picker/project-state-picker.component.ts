@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { State } from 'src/app/shared/models/State';
 
@@ -16,21 +16,23 @@ import { State } from 'src/app/shared/models/State';
 })
 export class ProjectStatePickerComponent implements ControlValueAccessor  {
 
-  disabled: boolean;
+  isDisabled: boolean = false;
   state: State;
   stateEnum = State;
 
   constructor() {}
 
   changeState(state: State) {
-    if(!this.disabled) {
-      this.state = state;
-      this.propagateChange(state);
+    if(!this.isDisabled) {
+      if(state !== State.INITIATED) {
+        this.state = state;
+        this.propagateChange(state);
+      }
     }
   }
 
-  writeValue(value: State): void {
-    this.state = value;
+  writeValue(state: State): void {
+    this.state = state;
   }
 
   registerOnChange(fn: any): void {
@@ -40,7 +42,7 @@ export class ProjectStatePickerComponent implements ControlValueAccessor  {
   registerOnTouched(): void {}
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.isDisabled = isDisabled;
   }
 
   propagateChange = (state: State) => {};
