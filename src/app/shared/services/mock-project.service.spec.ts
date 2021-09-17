@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProjectService } from './project.service';
+import { MockProjectService } from './mock-project.service';
 
 describe('ProjectService', () => {
-  let service: ProjectService;
+  let service: MockProjectService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ProjectService);
+    service = TestBed.inject(MockProjectService);
   });
 
   it('should be created', () => {

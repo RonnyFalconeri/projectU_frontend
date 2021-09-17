@@ -12,10 +12,10 @@
 
 <div class="project-card"
   [ngClass]="{
-    'initiated': project.state === stateEnum.INITIATED,
-    'in-progress': project.state === stateEnum.IN_PROGRESS,
-    'halted': project.state === stateEnum.HALTED,
-    'finished': project.state === stateEnum.FINISHED}"
+    'initiated': project.state === stateEnum.Initiated,
+    'in-progress': project.state === stateEnum.InProgress,
+    'halted': project.state === stateEnum.Halted,
+    'finished': project.state === stateEnum.Finished}"
 >
   <div class="primary-info row">
 
@@ -30,10 +30,10 @@
         <p class="hours">
           <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
         </p>
-        <p class="state" *ngIf="project.state === stateEnum.INITIATED">INITIATED</p>
-        <p class="state" *ngIf="project.state === stateEnum.IN_PROGRESS">IN PROGRESS</p>
-        <p class="state" *ngIf="project.state === stateEnum.HALTED">HALTED</p>
-        <p class="state" *ngIf="project.state === stateEnum.FINISHED">FINISHED</p>
+        <p class="state" *ngIf="project.state === stateEnum.Initiated">INITIATED</p>
+        <p class="state" *ngIf="project.state === stateEnum.InProgress">IN PROGRESS</p>
+        <p class="state" *ngIf="project.state === stateEnum.Halted">HALTED</p>
+        <p class="state" *ngIf="project.state === stateEnum.Finished">FINISHED</p>
       </div>
 
       <app-traffic-light
@@ -56,7 +56,7 @@
       <p>{{project.expectedResult}}</p>
     </div>
 
-    <div class="actual" *ngIf="project.state === stateEnum.FINISHED">
+    <div class="actual" *ngIf="project.state === stateEnum.Finished">
       <h1>Actual Result</h1>
       <p>{{project.actualResult}}</p>
     </div>
@@ -64,8 +64,8 @@
 
   <div class="period">
     <p>Von <span class="time-info">{{project.startedAt}}</span> bis
-      <span class="time-info" *ngIf="project.state === stateEnum.FINISHED">{{project.finishedAt}}</span>
-      <span class="time-info" *ngIf="project.state !== stateEnum.FINISHED">Heute</span>
+      <span class="time-info" *ngIf="project.state === stateEnum.Finished">{{project.finishedAt}}</span>
+      <span class="time-info" *ngIf="project.state !== stateEnum.Finished">Heute</span>
     </p>
   </div>
 </div>

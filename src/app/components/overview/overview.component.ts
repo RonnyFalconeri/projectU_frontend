@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Size } from 'src/app/components/traffic-light/Size';
-import { Project } from 'src/app/shared/models/Project';
-import { ProjectService } from 'src/app/shared/services/project.service';
+import { Size } from 'src/app/shared/models/Size';
+import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { faThLarge } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Project } from 'build/openapi/model/project';
 
 @Component({
   selector: 'app-overview',
@@ -18,7 +18,7 @@ export class OverviewComponent implements OnInit {
   faThLarge = faThLarge;
   faPlus = faPlus;
 
-  constructor(projectService: ProjectService) {
+  constructor(projectService: MockProjectService) {
     this.projects = projectService.getAllProjects();
   }
 

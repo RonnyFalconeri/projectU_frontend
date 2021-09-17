@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Complexity } from 'src/app/shared/models/Complexity';
-import { Project } from 'src/app/shared/models/Project';
-import { State } from 'src/app/shared/models/State';
+import { Complexity } from 'build/openapi/model/complexity';
+import { Project } from 'build/openapi/model/project';
+import { State } from 'build/openapi/model/state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class MockProjectService {
 
   private mockProjects: Project[] = [
     {
@@ -18,8 +18,8 @@ export class ProjectService {
           id: '1',
           title: 'A subtask 1',
           description: 'This is a subtask for the project.',
-          state: State.IN_PROGRESS,
-          complexity: Complexity.MEDIUM,
+          state: State.InProgress,
+          complexity: Complexity.Medium,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -27,8 +27,8 @@ export class ProjectService {
           id: '2',
           title: 'A subtask 2',
           description: 'This is a subtask for the project.',
-          state: State.IN_PROGRESS,
-          complexity: Complexity.EASY,
+          state: State.InProgress,
+          complexity: Complexity.Easy,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -36,14 +36,14 @@ export class ProjectService {
           id: '3',
           title: 'A subtask 3',
           description: 'This is a subtask for the project.',
-          state: State.IN_PROGRESS,
-          complexity: Complexity.DIFFICULT,
+          state: State.InProgress,
+          complexity: Complexity.Difficult,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         }
       ],
-      state: State.IN_PROGRESS,
-      complexity: Complexity.MEDIUM,
+      state: State.InProgress,
+      complexity: Complexity.Medium,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
@@ -56,8 +56,8 @@ export class ProjectService {
       title: 'Test Project 2',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.INITIATED,
-      complexity: Complexity.EASY,
+      state: State.Initiated,
+      complexity: Complexity.Easy,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
@@ -70,8 +70,8 @@ export class ProjectService {
       title: 'Test Project 3',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.IN_PROGRESS,
-      complexity: Complexity.DIFFICULT,
+      state: State.InProgress,
+      complexity: Complexity.Difficult,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
@@ -84,8 +84,8 @@ export class ProjectService {
       title: 'Test Project 4',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.HALTED,
-      complexity: Complexity.EASY,
+      state: State.Halted,
+      complexity: Complexity.Easy,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
@@ -98,8 +98,8 @@ export class ProjectService {
       title: 'Test Project 5',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.FINISHED,
-      complexity: Complexity.MEDIUM,
+      state: State.Finished,
+      complexity: Complexity.Medium,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
