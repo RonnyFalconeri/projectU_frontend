@@ -3,37 +3,37 @@
 </div>
 <div class="picker">
   <div class="item"
-      (click)="changeState(stateEnum.INITIATED)"
+      (click)="changeState(stateEnum.Initiated)"
       [ngClass]="{
-        'item--active': currentState === stateEnum.INITIATED,
+        'item--active': currentState === stateEnum.Initiated,
         'locked': isDisabled,
-        'non-clickable': !isChangeAllowed(stateEnum.INITIATED)
+        'non-clickable': !isChangeAllowed(stateEnum.Initiated)
       }"
   >
     INITIATED
   </div>
   <div class="item"
-      (click)="changeState(stateEnum.IN_PROGRESS)"
+      (click)="changeState(stateEnum.InProgress)"
       [ngClass]="{
-        'item--active': currentState === stateEnum.IN_PROGRESS,
+        'item--active': currentState === stateEnum.InProgress,
         'locked': isDisabled
       }"
   >
     IN PROGRESS
   </div>
   <div class="item"
-      (click)="changeState(stateEnum.HALTED)"
+      (click)="changeState(stateEnum.Halted)"
       [ngClass]="{
-        'item--active': currentState === stateEnum.HALTED,
+        'item--active': currentState === stateEnum.Halted,
         'locked': isDisabled
       }"
   >
     HALTED
   </div>
   <div class="item"
-      (click)="changeState(stateEnum.FINISHED)"
+      (click)="changeState(stateEnum.Finished)"
       [ngClass]="{
-        'item--active': currentState === stateEnum.FINISHED,
+        'item--active': currentState === stateEnum.Finished,
         'locked': isDisabled
       }"
   >

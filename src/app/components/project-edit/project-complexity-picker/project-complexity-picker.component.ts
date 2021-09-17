@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Complexity } from 'src/app/shared/models/Complexity';
+import { Complexity } from 'build/openapi/model/complexity';
 
 @Component({
   selector: 'app-project-complexity-picker',

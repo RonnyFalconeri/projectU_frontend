@@ -8,10 +8,10 @@
 
 <div class="project-card"
   [ngClass]="{
-    'initiated': project.state === stateEnum.INITIATED,
-    'in-progress': project.state === stateEnum.IN_PROGRESS,
-    'halted': project.state === stateEnum.HALTED,
-    'finished': project.state === stateEnum.FINISHED}"
+    'initiated': project.state === stateEnum.Initiated,
+    'in-progress': project.state === stateEnum.InProgress,
+    'halted': project.state === stateEnum.Halted,
+    'finished': project.state === stateEnum.Finished}"
 >
 
   <form class="projectForm" [formGroup]="projectForm" (ngSubmit)='saveProject()'>

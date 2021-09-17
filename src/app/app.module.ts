@@ -29,7 +29,7 @@ import { ProjectComplexityPickerComponent } from './components/project-edit/proj
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     HttpClientModule,
     ApiModule
   ],

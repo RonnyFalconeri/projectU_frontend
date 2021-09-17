@@ -1,6 +1,6 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { State } from 'src/app/shared/models/State';
+import { State } from 'build/openapi/model/state';
 
 @Component({
   selector: 'app-project-state-picker',
@@ -33,8 +33,8 @@ export class ProjectStatePickerComponent implements ControlValueAccessor  {
 
   isChangeAllowed(state: State): boolean {
     if(!this.isDisabled) {
-      if(this.originalState === State.INITIATED ||
-        state !== State.INITIATED) {
+      if(this.originalState === State.Initiated ||
+        state !== State.Initiated) {
         return true;
       }
     }
