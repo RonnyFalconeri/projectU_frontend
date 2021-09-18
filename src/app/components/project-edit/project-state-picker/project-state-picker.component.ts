@@ -57,5 +57,4 @@ export class ProjectStatePickerComponent implements ControlValueAccessor  {
   }
 
   propagateChange = (state: State) => {};
-
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
 import { MockProjectService } from 'src/app/shared/services/mock-project.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Complexity } from 'build/openapi/model/complexity';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
@@ -27,7 +27,7 @@ export class ProjectEditComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private projectService: MockProjectService,
+    private readonly projectService: MockProjectService,
     private readonly fb: FormBuilder,
     private router: Router) {}
 
@@ -64,8 +64,10 @@ export class ProjectEditComponent implements OnInit {
         {
           value: this.project.state,
           disabled: !this.editExistingProject
-        },
-        Validators.required
+        }, [
+          Validators.required,
+          this.validateState(this.editExistingProject, this.project.state)
+        ]
       ],
       complexity: [
         this.project.complexity,
@@ -116,6 +118,24 @@ export class ProjectEditComponent implements OnInit {
 
   get title() {
     return this.projectForm.get('title');
+  }
+
+  get state() {
+    return this.projectForm.get('state');
+  }
+
+  validateState(editExistingProject: boolean, originalState: State) {
+
+    return (control: AbstractControl):{[key: string]: boolean} | null => {
+
+      if(editExistingProject &&
+        originalState !== State.Initiated &&
+        control.value === State.Initiated) {
+        return {'validateState': true}
+      }
+
+      return null;
+    };
   }
 
 }

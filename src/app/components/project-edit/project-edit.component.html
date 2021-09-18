@@ -63,6 +63,12 @@
         (click)="changeState()"
       ></app-project-state-picker>
 
+      <p class="error-msg" *ngIf="state!.invalid && (state!.dirty || state!.touched)">
+        <span *ngIf="state!.errors?.validateState">
+          You cannot go back to INITIATED.
+        </span>
+      </p>
+
       <app-project-complexity-picker
         formControlName="complexity"
         (click)="changeComplexity()"
