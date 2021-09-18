@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { ProjectComplexityPickerComponent } from './project-complexity-picker/project-complexity-picker.component';
 import { ProjectEditComponent } from './project-edit.component';
+import { ProjectStatePickerComponent } from './project-state-picker/project-state-picker.component';
 
 describe('ProjectEditComponent', () => {
   let component: ProjectEditComponent;
@@ -8,7 +11,15 @@ describe('ProjectEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProjectEditComponent ]
+      imports: [
+        RouterModule.forRoot([]),
+        ReactiveFormsModule
+      ],
+      declarations: [
+        ProjectEditComponent,
+        ProjectStatePickerComponent,
+        ProjectComplexityPickerComponent
+      ]
     })
     .compileComponents();
   });
