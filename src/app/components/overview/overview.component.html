@@ -11,19 +11,7 @@
 </div>
 
 <div class="project-list">
-  <div class="project-tile" *ngFor="let project of projects">
-
-    {{project.title}},
-    {{project.description}},
-    {{project.state}},
-    {{project.estimatedDurationInHours}},
-    {{project.tasks.length}}
-
-    <app-traffic-light
-      [complexity]="project.complexity"
-      [size]="sizeEnum.SMALL"
-      [horizontal]="false"
-    ></app-traffic-light>
-
-  </div>
+  <app-project-tile *ngFor="let project of projects"
+    [project]="project"
+  ></app-project-tile>
 </div>
