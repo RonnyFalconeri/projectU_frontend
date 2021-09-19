@@ -1,0 +1,98 @@
+.everything {
+  height: 150px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.everything:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.tile {
+  height: 150px;
+  border-radius: 13px;
+  padding: 10px;
+  box-shadow: 0px 0px 20px 0px #0000008c;
+  position: relative;
+  z-index: 1;
+}
+
+.multiple-tasks-indicator {
+  height: 150px;
+  width: 90%;
+  border-radius: 13px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px 0px #0000008c;
+  position: relative;
+  top: -146px;
+
+  .additional-indicator {
+    background-color: inherit;
+    height: 150px;
+    width: 90%;
+    border-radius: 13px;
+    margin: 0 auto;
+    box-shadow: inherit;
+    position: relative;
+    z-index: -1;
+    top: 4px;
+  }
+}
+
+.info {
+  display: flex;
+  height: 70px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.5rem;
+  width: 170px;
+}
+
+.description {
+  background-color:rgba(0, 0, 0, 0.15);
+  padding: 5px;
+  margin: 1px;
+  border-radius: 5px;
+  max-height: 68px;
+  overflow: hidden;
+}
+
+.status {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hours {
+  color: var(--color-font-secondary);
+  font-weight: bold;
+
+  fa-icon {
+    margin-right: 3px;
+  }
+}
+
+.initiated {
+  background-color: var(--color-state-initiated);
+}
+
+.in-progress {
+  background-color: var(--color-state-in-progress);
+}
+
+.halted {
+  background-color: var(--color-state-halted);
+}
+
+.finished {
+  background-color: var(--color-state-finished);
+}

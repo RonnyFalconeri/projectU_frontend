@@ -3,6 +3,7 @@
 .menu-bar {
   background-color: var(--color-menu-bar);
   position: fixed;
+  z-index: 10;
   display: flex;
   justify-content: space-around;
   align-items: center;

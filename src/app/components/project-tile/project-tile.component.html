@@ -1,0 +1,42 @@
+<div class="everything">
+  <div class="tile"
+    [routerLink]="['/project/', project.id]"
+    [ngClass]="{
+    'initiated': project.state === stateEnum.Initiated,
+    'in-progress': project.state === stateEnum.InProgress,
+    'halted': project.state === stateEnum.Halted,
+    'finished': project.state === stateEnum.Finished}"
+  >
+
+    <div class="info">
+      <h1 class="title">{{project.title}}</h1>
+
+      <div class="status">
+        <div class="hours">
+          <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
+        </div>
+
+        <app-traffic-light
+          [complexity]="project.complexity"
+          [size]="sizeEnum.SMALL"
+          [horizontal]="true"
+        ></app-traffic-light>
+      </div>
+    </div>
+
+    <div class="description">
+      {{project.description}}
+    </div>
+  </div>
+
+  <div class="multiple-tasks-indicator"
+    *ngIf="project.tasks.length > 1"
+    [ngClass]="{
+      'initiated': project.state === stateEnum.Initiated,
+      'in-progress': project.state === stateEnum.InProgress,
+      'halted': project.state === stateEnum.Halted,
+      'finished': project.state === stateEnum.Finished}"
+  >
+    <div class="additional-indicator"></div>
+  </div>
+</div>

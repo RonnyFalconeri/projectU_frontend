@@ -13,6 +13,7 @@ import { ProjectEditComponent } from './components/project-edit/project-edit.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectStatePickerComponent } from './components/project-edit/project-state-picker/project-state-picker.component';
 import { ProjectComplexityPickerComponent } from './components/project-edit/project-complexity-picker/project-complexity-picker.component';
+import { ProjectTileComponent } from './components/project-tile/project-tile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProjectComplexityPickerComponent } from './components/project-edit/proj
     TaskBarComponent,
     ProjectEditComponent,
     ProjectStatePickerComponent,
-    ProjectComplexityPickerComponent
+    ProjectComplexityPickerComponent,
+    ProjectTileComponent
   ],
   imports: [
     BrowserModule,
