@@ -19,9 +19,7 @@ export class ProjectTileComponent implements OnInit {
   stateEnum = State;
   sizeEnum = Size;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

@@ -1,5 +1,4 @@
 <div class="everything">
-
   <div class="tile"
     [routerLink]="['/project/', project.id]"
     [ngClass]="{
@@ -28,5 +27,16 @@
     <div class="description">
       {{project.description}}
     </div>
+  </div>
+
+  <div class="multiple-tasks-indicator"
+    *ngIf="project.tasks.length > 1"
+    [ngClass]="{
+      'initiated': project.state === stateEnum.INITIATED,
+      'in-progress': project.state === stateEnum.IN_PROGRESS,
+      'halted': project.state === stateEnum.HALTED,
+      'finished': project.state === stateEnum.FINISHED}"
+  >
+    <div class="additional-indicator"></div>
   </div>
 </div>

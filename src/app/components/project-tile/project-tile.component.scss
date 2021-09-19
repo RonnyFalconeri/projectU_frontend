@@ -1,33 +1,3 @@
-.tile {
-  height: 150px;
-  border-radius: 15px;
-  padding: 10px;
-  box-shadow: 0px 0px 20px 0px #0000008c;
-  z-index: 3;
-}
-
-.two-tasks {
-  position: relative;
-  height: 150px;
-  padding: 10px;
-  bottom: -5px;
-  left: 4px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px 0px #0000008c;
-  z-index: 2;
-}
-
-.many-tasks {
-  position: relative;
-  height: 150px;
-  padding: 10px;
-  bottom: 160px;
-  left: 13px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px 0px #0000008c;
-  z-index: 1;
-}
-
 .everything {
   height: 150px;
   margin: 20px;
@@ -37,6 +7,37 @@
 .everything:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.tile {
+  height: 150px;
+  border-radius: 13px;
+  padding: 10px;
+  box-shadow: 0px 0px 20px 0px #0000008c;
+  position: relative;
+  z-index: 1;
+}
+
+.multiple-tasks-indicator {
+  height: 150px;
+  width: 90%;
+  border-radius: 13px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px 0px #0000008c;
+  position: relative;
+  top: -146px;
+
+  .additional-indicator {
+    background-color: inherit;
+    height: 150px;
+    width: 90%;
+    border-radius: 13px;
+    margin: 0 auto;
+    box-shadow: inherit;
+    position: relative;
+    z-index: -1;
+    top: 4px;
+  }
 }
 
 .info {
