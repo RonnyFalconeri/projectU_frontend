@@ -78,19 +78,19 @@ export class ProjectEditComponent implements OnInit {
 
   private setupNewProject(): Project {
     return {
-        id: '',
-        title: '',
-        description: '',
-        tasks: [],
-        state: State.Initiated,
-        complexity: Complexity.Easy,
-        estimatedDurationInHours: 0,
-        createdAt: '',
-        expectedResult: '',
-        startedAt: '',
-        finishedAt: '',
-        actualResult: ''
-      }
+      id: '',
+      title: '',
+      description: '',
+      tasks: [],
+      state: State.Initiated,
+      complexity: Complexity.Easy,
+      estimatedDurationInHours: 0,
+      createdAt: '',
+      expectedResult: '',
+      startedAt: '',
+      finishedAt: '',
+      actualResult: ''
+    }
   }
 
   saveProject(): void {
