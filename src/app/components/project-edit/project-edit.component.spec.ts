@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Complexity, State } from 'build/openapi';
+import { Complexity, Project, State } from 'build/openapi';
 import { ProjectComplexityPickerComponent } from './project-complexity-picker/project-complexity-picker.component';
 import { ProjectEditComponent } from './project-edit.component';
 import { ProjectStatePickerComponent } from './project-state-picker/project-state-picker.component';
@@ -55,20 +55,20 @@ describe('ProjectEditComponent', () => {
   });
 
   it('should not be valid to change state when creating new project', () => {
-    /*
-    component.editExistingProject = false;
-    getValidForm(component.projectForm);
+    component.editExistingProject = true;
+    getValidForm2(component.projectForm);
+    //component.projectForm.get('state')?.setValue(State.Halted);
     fixture.detectChanges();
-    component.projectForm.get('state')?.setValue(State.Halted);
-    fixture.detectChanges();
-    console.log(component.projectForm.value);
+
+    console.log(component.projectForm);
+    console.log(component.projectForm.get('state')?.value);
+
     expect(component.projectForm.valid).toBeFalsy();
-    */
   });
 
-  it('should not be able to change state back to INITIATED when project is already in progress', () => {});
+  it('should not be valid to change state to INITIATED of a project already in progress', () => {
 
-  it('should be able to change to every state when INITIATED', () => {});
+  });
 });
 
 function getFormWithEmptyTitle(form: FormGroup): void {
@@ -87,11 +87,28 @@ function getFormWithLongTitle(form: FormGroup): void {
   form.get('complexity')?.setValue(Complexity.Medium);
 }
 
-function getValidForm(form: FormGroup): void {
-  form.get('title')?.setValue('qwer');
+function getValidForm2(form: FormGroup): void {
+  form.get('title')?.setValue('validform');
   form.get('description')?.setValue('qwer');
   form.get('estimatedDurationInHours')?.setValue(0);
-  form.get('state')?.setValue(State.Initiated);
+  form.get('state')?.setValue(State.Halted);
   form.get('complexity')?.setValue(Complexity.Medium);
+}
+
+function getValidForm(): Project {
+  return {
+    id: '',
+    title: 'validform',
+    description: 'description',
+    tasks: [],
+    state: State.Initiated,
+    complexity: Complexity.Easy,
+    estimatedDurationInHours: 0,
+    createdAt: '',
+    expectedResult: '',
+    startedAt: '',
+    finishedAt: '',
+    actualResult: ''
+  }
 }
 

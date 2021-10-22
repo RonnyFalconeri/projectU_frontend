@@ -66,7 +66,7 @@ export class ProjectEditComponent implements OnInit {
           disabled: !this.editExistingProject
         }, [
           Validators.required,
-          this.validateState(this.editExistingProject, this.project.state)
+          this.validateState(this.project.state)
         ]
       ],
       complexity: [
@@ -124,14 +124,19 @@ export class ProjectEditComponent implements OnInit {
     return this.projectForm.get('state');
   }
 
-  validateState(editExistingProject: boolean, originalState: State) {
+  validateState(originalState: State) {
 
     return (control: AbstractControl):{[key: string]: boolean} | null => {
 
-      if(editExistingProject &&
+      if(this.editExistingProject &&
         originalState !== State.Initiated &&
         control.value === State.Initiated) {
-        return {'validateState': true}
+        return {'Cannot go back to initiated when editing a project': true}
+      }
+
+      if(!this.editExistingProject &&
+        control.value !== State.Initiated) {
+        return {'Cannot change state when creating new project': true}
       }
 
       return null;
