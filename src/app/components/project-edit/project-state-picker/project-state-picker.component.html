@@ -1,0 +1,42 @@
+<div class="label-container">
+  <label>State*</label>
+</div>
+<div class="picker">
+  <div class="item"
+      (click)="changeState(stateEnum.Initiated)"
+      [ngClass]="{
+        'item--active': currentState === stateEnum.Initiated,
+        'locked': isDisabled,
+        'non-clickable': !isChangeAllowed(stateEnum.Initiated)
+      }"
+  >
+    INITIATED
+  </div>
+  <div class="item"
+      (click)="changeState(stateEnum.InProgress)"
+      [ngClass]="{
+        'item--active': currentState === stateEnum.InProgress,
+        'locked': isDisabled
+      }"
+  >
+    IN PROGRESS
+  </div>
+  <div class="item"
+      (click)="changeState(stateEnum.Halted)"
+      [ngClass]="{
+        'item--active': currentState === stateEnum.Halted,
+        'locked': isDisabled
+      }"
+  >
+    HALTED
+  </div>
+  <div class="item"
+      (click)="changeState(stateEnum.Finished)"
+      [ngClass]="{
+        'item--active': currentState === stateEnum.Finished,
+        'locked': isDisabled
+      }"
+  >
+    FINISHED
+  </div>
+</div>

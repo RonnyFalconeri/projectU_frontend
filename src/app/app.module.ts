@@ -9,6 +9,10 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { TrafficLightComponent } from './components/traffic-light/traffic-light.component';
 import { ProjectDetailPageComponent } from './components/project-detail-page/project-detail-page.component';
 import { TaskBarComponent } from './components/project-detail-page/task-bar/task-bar.component';
+import { ProjectEditComponent } from './components/project-edit/project-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProjectStatePickerComponent } from './components/project-edit/project-state-picker/project-state-picker.component';
+import { ProjectComplexityPickerComponent } from './components/project-edit/project-complexity-picker/project-complexity-picker.component';
 import { ProjectTileComponent } from './components/project-tile/project-tile.component';
 
 @NgModule({
@@ -18,12 +22,16 @@ import { ProjectTileComponent } from './components/project-tile/project-tile.com
     TrafficLightComponent,
     ProjectDetailPageComponent,
     TaskBarComponent,
+    ProjectEditComponent,
+    ProjectStatePickerComponent,
+    ProjectComplexityPickerComponent,
     ProjectTileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ApiModule
   ],

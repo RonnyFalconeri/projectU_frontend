@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Complexity } from 'src/app/shared/models/Complexity';
-import { State } from 'src/app/shared/models/State';
+import { Complexity } from 'build/openapi/model/complexity';
+import { State } from 'build/openapi/model/state';
 import { By } from '@angular/platform-browser';
 import { OverviewComponent } from './overview.component';
 
@@ -32,8 +32,8 @@ describe('OverviewComponent', () => {
       title: 'Test Project 2',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.INITIATED,
-      complexity: Complexity.EASY,
+      state: State.Initiated,
+      complexity: Complexity.Easy,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
@@ -46,8 +46,8 @@ describe('OverviewComponent', () => {
       title: 'Test Project 3',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.IN_PROGRESS,
-      complexity: Complexity.DIFFICULT,
+      state: State.InProgress,
+      complexity: Complexity.Difficult,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',
@@ -60,8 +60,8 @@ describe('OverviewComponent', () => {
       title: 'Test Project 4',
       description: 'A simple project just for testing things...',
       tasks: [],
-      state: State.HALTED,
-      complexity: Complexity.EASY,
+      state: State.Halted,
+      complexity: Complexity.Easy,
       estimatedDurationInHours: 25,
       createdAt: '2021-08-12T22:06:50.078Z',
       expectedResult: 'A productive and meaningful event for education.',

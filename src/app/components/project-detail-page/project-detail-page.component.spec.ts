@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { Complexity } from 'src/app/shared/models/Complexity';
-import { State } from 'src/app/shared/models/State';
+import { Complexity } from 'build/openapi/model/complexity';
+import { State } from 'build/openapi/model/state';
 import { By } from '@angular/platform-browser';
 import { ProjectDetailPageComponent } from './project-detail-page.component';
-import { Project } from 'src/app/shared/models/Project';
+import { Project } from 'build/openapi/model/project';
 import { DebugElement } from '@angular/core';
 
 describe('ProjectDetailPageComponent', () => {
@@ -33,28 +33,28 @@ describe('ProjectDetailPageComponent', () => {
     component.project = getInitiatedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(hasOnlyClassOfState(projectCard, State.INITIATED)).toBeTruthy();
+    expect(hasOnlyClassOfState(projectCard, State.Initiated)).toBeTruthy();
   });
 
   it('should have in-progress class', () => {
     component.project = getProgressedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(hasOnlyClassOfState(projectCard, State.IN_PROGRESS)).toBeTruthy();
+    expect(hasOnlyClassOfState(projectCard, State.InProgress)).toBeTruthy();
   });
 
   it('should have halted class', () => {
     component.project = getHaltedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(hasOnlyClassOfState(projectCard, State.HALTED)).toBeTruthy();
+    expect(hasOnlyClassOfState(projectCard, State.Halted)).toBeTruthy();
   });
 
   it('should have finished class', () => {
     component.project = getFinishedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
-    expect(hasOnlyClassOfState(projectCard, State.FINISHED)).toBeTruthy();
+    expect(hasOnlyClassOfState(projectCard, State.Finished)).toBeTruthy();
   });
 
   it('should have 0 task bars', () => {
@@ -79,8 +79,8 @@ function getInitiatedProject(): Project {
     title: 'Test Project 2',
     description: 'A simple project just for testing things...',
     tasks: [],
-    state: State.INITIATED,
-    complexity: Complexity.EASY,
+    state: State.Initiated,
+    complexity: Complexity.Easy,
     estimatedDurationInHours: 25,
     createdAt: '2021-08-12T22:06:50.078Z',
     expectedResult: 'A productive and meaningful event for education.',
@@ -96,8 +96,8 @@ function getProgressedProject(): Project {
     title: 'Test Project 2',
     description: 'A simple project just for testing things...',
     tasks: [],
-    state: State.IN_PROGRESS,
-    complexity: Complexity.EASY,
+    state: State.InProgress,
+    complexity: Complexity.Easy,
     estimatedDurationInHours: 25,
     createdAt: '2021-08-12T22:06:50.078Z',
     expectedResult: 'A productive and meaningful event for education.',
@@ -113,8 +113,8 @@ function getHaltedProject(): Project {
     title: 'Test Project 2',
     description: 'A simple project just for testing things...',
     tasks: [],
-    state: State.HALTED,
-    complexity: Complexity.EASY,
+    state: State.Halted,
+    complexity: Complexity.Easy,
     estimatedDurationInHours: 25,
     createdAt: '2021-08-12T22:06:50.078Z',
     expectedResult: 'A productive and meaningful event for education.',
@@ -130,8 +130,8 @@ function getFinishedProject(): Project {
     title: 'Test Project 2',
     description: 'A simple project just for testing things...',
     tasks: [],
-    state: State.FINISHED,
-    complexity: Complexity.EASY,
+    state: State.Finished,
+    complexity: Complexity.Easy,
     estimatedDurationInHours: 25,
     createdAt: '2021-08-12T22:06:50.078Z',
     expectedResult: 'A productive and meaningful event for education.',
@@ -147,8 +147,8 @@ function getProjectWith0Tasks(): Project {
     title: 'Test Project 2',
     description: 'A simple project just for testing things...',
     tasks: [],
-    state: State.FINISHED,
-    complexity: Complexity.EASY,
+    state: State.Finished,
+    complexity: Complexity.Easy,
     estimatedDurationInHours: 25,
     createdAt: '2021-08-12T22:06:50.078Z',
     expectedResult: 'A productive and meaningful event for education.',
@@ -168,8 +168,8 @@ function getProjectWith3Tasks(): Project {
         id: '1',
         title: 'A subtask 1',
         description: 'This is a subtask for the project.',
-        state: State.IN_PROGRESS,
-        complexity: Complexity.MEDIUM,
+        state: State.InProgress,
+        complexity: Complexity.Medium,
         estimatedDurationInHours: 13,
         result: 'More knowledge'
       },
@@ -177,8 +177,8 @@ function getProjectWith3Tasks(): Project {
         id: '2',
         title: 'A subtask 2',
         description: 'This is a subtask for the project.',
-        state: State.IN_PROGRESS,
-        complexity: Complexity.EASY,
+        state: State.InProgress,
+        complexity: Complexity.Easy,
         estimatedDurationInHours: 13,
         result: 'More knowledge'
       },
@@ -186,14 +186,14 @@ function getProjectWith3Tasks(): Project {
         id: '3',
         title: 'A subtask 3',
         description: 'This is a subtask for the project.',
-        state: State.IN_PROGRESS,
-        complexity: Complexity.DIFFICULT,
+        state: State.InProgress,
+        complexity: Complexity.Difficult,
         estimatedDurationInHours: 13,
         result: 'More knowledge'
       }
     ],
-    state: State.IN_PROGRESS,
-    complexity: Complexity.MEDIUM,
+    state: State.InProgress,
+    complexity: Complexity.Medium,
     estimatedDurationInHours: 25,
     createdAt: '2021-08-12T22:06:50.078Z',
     expectedResult: 'A productive and meaningful event for education.',
@@ -205,13 +205,13 @@ function getProjectWith3Tasks(): Project {
 
 function hasOnlyClassOfState(element: DebugElement, state: State): boolean {
   switch (state) {
-    case State.INITIATED:
+    case State.Initiated:
       return hasOnlyClassOfInitiated(element);
-    case State.IN_PROGRESS:
+    case State.InProgress:
       return hasOnlyClassOfInProgress(element);
-    case State.HALTED:
+    case State.Halted:
       return hasOnlyClassOfHalted(element);
-    case State.FINISHED:
+    case State.Finished:
       return hasOnlyClassOfFinished(element);
     default:
       return false;

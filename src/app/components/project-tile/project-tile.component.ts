@@ -1,7 +1,7 @@
-import { Project } from 'src/app/shared/models/Project';
-import {Component, Input, OnInit} from "@angular/core";
-import {Size} from "../traffic-light/Size";
-import { State } from 'src/app/shared/models/State';
+import { Project } from 'build/openapi/model/project';
+import { Component, Input, OnInit } from "@angular/core";
+import { Size } from "src/app/shared/models/Size";
+import { State } from 'build/openapi/model/state';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

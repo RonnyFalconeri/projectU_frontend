@@ -1,3 +1,5 @@
+@import 'forms';
+
 .menu-bar {
   background-color: var(--color-menu-bar);
   position: fixed;
@@ -37,6 +39,7 @@
     justify-content: center;
     align-items: center;
     font-size: 1.8rem;
+    height: 33px;
   }
 
   .menu-button:hover {
