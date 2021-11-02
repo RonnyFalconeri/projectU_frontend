@@ -3,11 +3,6 @@
 }
 
 .project-card {
-  max-width: 1000px;
-  margin: 150px auto;
-  padding: 40px;
-  border-radius: 40px;
-  box-shadow: 0px 0px 20px 0px #0000008c;
 
   .primary-info {
     display: flex;
@@ -73,22 +68,6 @@
       color: var(--color-font-secondary);
     }
   }
-}
-
-.initiated {
-  background-color: var(--color-state-initiated);
-}
-
-.in-progress {
-  background-color: var(--color-state-in-progress);
-}
-
-.halted {
-  background-color: var(--color-state-halted);
-}
-
-.finished {
-  background-color: var(--color-state-finished);
 }
 
 // for medium and tablet screens

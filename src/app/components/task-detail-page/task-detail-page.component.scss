@@ -1,0 +1,25 @@
+.task-card {
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .sub-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    margin: 20px 0;
+    padding: 10px 60px;
+    box-shadow: inset 0px 0px 9px 0px #0000008c;
+  }
+
+  .task-after-teaser {
+    h2 {
+      text-align: center;
+    }
+  }
+
+}

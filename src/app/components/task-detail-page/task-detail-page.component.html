@@ -1,1 +1,49 @@
-<p>task-detail-page works!</p>
+<div class="menu-bar">
+  <div class="back-button menu-button" routerLink="../../">
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </div>
+  <div class="home-link" [routerLink]="['/']">
+    <img class="logo" src="assets/images/logo-banner.png">
+  </div>
+  <div class="edit-button menu-button">
+    <fa-icon [icon]="faEdit"></fa-icon>
+  </div>
+</div>
+
+<div class="card task-card"
+  [ngClass]="{
+    'initiated': project.state === stateEnum.Initiated,
+    'in-progress': project.state === stateEnum.InProgress,
+    'halted': project.state === stateEnum.Halted,
+    'finished': project.state === stateEnum.Finished}"
+>
+    <h1>{{project.title}}</h1>
+
+    <div class="task-info sub-container"
+      [ngClass]="{
+        'initiated': task.state === stateEnum.Initiated,
+        'in-progress': task.state === stateEnum.InProgress,
+        'halted': task.state === stateEnum.Halted,
+        'finished': task.state === stateEnum.Finished}"
+    >
+      <p>task-detail-page works!</p>
+      <p>task-detail-page works!</p>
+      <p>task-detail-page works!</p>
+    </div>
+
+    <div class="task-after-teaser">
+      <h2>Next Task</h2>
+
+      <div class="next-task sub-container"
+        [ngClass]="{
+          'initiated': taskAfter.state === stateEnum.Initiated,
+          'in-progress': taskAfter.state === stateEnum.InProgress,
+          'halted': taskAfter.state === stateEnum.Halted,
+          'finished': taskAfter.state === stateEnum.Finished}"
+      >
+          <span>&nbsp;</span>
+      </div>
+    </div>
+
+</div>
+
