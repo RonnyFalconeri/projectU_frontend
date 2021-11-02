@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectStatePickerComponent } from './components/project-edit/project-state-picker/project-state-picker.component';
 import { ProjectComplexityPickerComponent } from './components/project-edit/project-complexity-picker/project-complexity-picker.component';
 import { ProjectTileComponent } from './components/project-tile/project-tile.component';
+import { TaskDetailPageComponent } from './components/task-detail-page/task-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProjectTileComponent } from './components/project-tile/project-tile.com
     ProjectEditComponent,
     ProjectStatePickerComponent,
     ProjectComplexityPickerComponent,
-    ProjectTileComponent
+    ProjectTileComponent,
+    TaskDetailPageComponent
   ],
   imports: [
     BrowserModule,

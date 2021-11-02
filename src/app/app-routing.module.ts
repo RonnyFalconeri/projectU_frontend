@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './components/overview/overview.component';
 import { ProjectDetailPageComponent } from './components/project-detail-page/project-detail-page.component';
 import { ProjectEditComponent } from './components/project-edit/project-edit.component';
+import { TaskDetailPageComponent } from './components/task-detail-page/task-detail-page.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,16 @@ const routes: Routes = [
   },
   {
     path: 'project/:id',
-    component: ProjectDetailPageComponent
+    children: [
+      {
+        path: '',
+        component: ProjectDetailPageComponent
+      },
+      {
+        path: 'task/:id',
+        component: TaskDetailPageComponent
+      }
+    ]
   },
   {
     path: 'edit',

@@ -1,4 +1,4 @@
-<div class="task row">
+<div class="task row" [routerLink]="['task', task.id]">
   <div class="primary-info row">
     <h1>{{task.title}}</h1>
     <p class="description">{{task.description}}</p>
