@@ -36,7 +36,7 @@
 
     .description {
       margin-top: 8px;
-      max-width: 600px;
+      max-width: 590px;
     }
 
     .date {
@@ -70,6 +70,16 @@
     p { margin: 0;}
   }
 
+  .result {
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
 }
 
 // for medium and tablet screens
@@ -99,6 +109,10 @@
       align-items: center;
 
       h1 {
+        text-align: center;
+      }
+
+      .description {
         text-align: center;
       }
     }
