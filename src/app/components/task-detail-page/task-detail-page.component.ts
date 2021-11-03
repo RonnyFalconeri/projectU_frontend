@@ -3,9 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
 import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
+import { Size } from 'src/app/shared/models/Size';
+
 
 
 @Component({
@@ -19,8 +22,10 @@ export class TaskDetailPageComponent implements OnInit {
   task: Task;
   taskAfter: Task;
 
+  sizeEnum = Size;
   stateEnum = State;
   faEdit = faEdit;
+  faStopwatch = faStopwatch;
   faChevronLeft = faChevronLeft;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {

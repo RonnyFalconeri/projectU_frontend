@@ -17,33 +17,54 @@
     'halted': project.state === stateEnum.Halted,
     'finished': project.state === stateEnum.Finished}"
 >
-    <h1>{{project.title}}</h1>
+  <h1>{{project.title}}</h1>
 
-    <div class="task-info sub-container"
-      [ngClass]="{
-        'initiated': task.state === stateEnum.Initiated,
-        'in-progress': task.state === stateEnum.InProgress,
-        'halted': task.state === stateEnum.Halted,
-        'finished': task.state === stateEnum.Finished}"
-    >
-      <p>task-detail-page works!</p>
-      <p>task-detail-page works!</p>
-      <p>task-detail-page works!</p>
-    </div>
+  <div class="task-info sub-container"
+    [ngClass]="{
+      'initiated': task.state === stateEnum.Initiated,
+      'in-progress': task.state === stateEnum.InProgress,
+      'halted': task.state === stateEnum.Halted,
+      'finished': task.state === stateEnum.Finished}"
+  >
+    <div class="primary-info row">
 
-    <div class="task-after-teaser">
-      <h2>Next Task</h2>
+      <div class="column">
+        <h1>{{task.title}}</h1>
+        <p class="description">{{task.description}}</p>
+      </div>
 
-      <div class="next-task sub-container"
-        [ngClass]="{
-          'initiated': taskAfter.state === stateEnum.Initiated,
-          'in-progress': taskAfter.state === stateEnum.InProgress,
-          'halted': taskAfter.state === stateEnum.Halted,
-          'finished': taskAfter.state === stateEnum.Finished}"
-      >
-          <span>&nbsp;</span>
+      <div class="row">
+        <div class="secondary-info column">
+          <p class="hours">
+            <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
+          </p>
+          <p class="state" *ngIf="task.state === stateEnum.Initiated">INITIATED</p>
+          <p class="state" *ngIf="task.state === stateEnum.InProgress">IN PROGRESS</p>
+          <p class="state" *ngIf="task.state === stateEnum.Halted">HALTED</p>
+          <p class="state" *ngIf="task.state === stateEnum.Finished">FINISHED</p>
+        </div>
+
+        <app-traffic-light
+          [complexity]="task.complexity"
+          [size]="sizeEnum.BIG"
+          [horizontal]="false"
+        ></app-traffic-light>
       </div>
     </div>
-
 </div>
+
+<div class="task-after-teaser">
+  <h2>Next Task</h2>
+
+  <div class="next-task sub-container"
+    [ngClass]="{
+      'initiated': taskAfter.state === stateEnum.Initiated,
+      'in-progress': taskAfter.state === stateEnum.InProgress,
+      'halted': taskAfter.state === stateEnum.Halted,
+      'finished': taskAfter.state === stateEnum.Finished}"
+  >
+      <span>&nbsp;</span>
+  </div>
+</div>
+
 
