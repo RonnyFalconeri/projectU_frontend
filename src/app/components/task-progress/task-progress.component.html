@@ -1,1 +1,5 @@
-<p>task-progress works!</p>
+<div class="container">
+  <p class="label">Done: </p>
+  <div class="progress-indicator" *ngIf="done">X</div>
+  <div class="progress-indicator" *ngIf="!done">O</div>
+</div>

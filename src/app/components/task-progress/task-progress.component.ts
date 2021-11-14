@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-task-progress',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskProgressComponent implements OnInit {
 
-  constructor() { }
+  @Input() done: boolean;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 
 }

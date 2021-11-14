@@ -18,7 +18,7 @@ export class MockProjectService {
           id: '1',
           title: 'A subtask 1',
           description: 'This is a subtask for the project.',
-          done: false,
+          done: true,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },

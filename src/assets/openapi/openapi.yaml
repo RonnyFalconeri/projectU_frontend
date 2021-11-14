@@ -196,8 +196,7 @@ components:
       required:
         - id
         - title
-        - state
-        - complexity
+        - done
       properties:
         id:
           type: string

@@ -32,9 +32,9 @@
           <p class="hours">
             <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
           </p>
-          <p class="state" *ngIf="task.done">DONE</p>
-          <p class="state" *ngIf="!task.done">NOT DONE</p>
-          <app-task-progress></app-task-progress>
+          <app-task-progress
+            [done]="task.done"
+          ></app-task-progress>
         </div>
       </div>
     </div>

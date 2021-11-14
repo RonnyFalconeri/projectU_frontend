@@ -8,6 +8,8 @@
     <p class="time-info">
       <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
     </p>
-    Done: {{task.done}}
+    <app-task-progress
+      [done]="task.done"
+    ></app-task-progress>
   </div>
 </div>
