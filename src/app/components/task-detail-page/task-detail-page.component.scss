@@ -13,7 +13,7 @@
     border-radius: 40px;
     margin: 20px 0;
     padding: 20px 40px;
-    box-shadow: inset 0px 0px 9px 0px #0000008c;
+    background-color: rgba(0, 0, 0, 0.27);
   }
 
   .task-after-teaser {
@@ -52,7 +52,7 @@
     justify-content: space-evenly;
     padding: 10px;
     font-weight: bold;
-    color: var(--color-font-secondary);
+    color: black;
 
     .hours {
       font-size: 3rem;

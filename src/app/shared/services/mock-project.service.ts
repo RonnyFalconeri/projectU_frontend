@@ -18,8 +18,7 @@ export class MockProjectService {
           id: '1',
           title: 'A subtask 1',
           description: 'This is a subtask for the project.',
-          state: State.Halted,
-          complexity: Complexity.Medium,
+          done: false,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -27,8 +26,7 @@ export class MockProjectService {
           id: '2',
           title: 'A subtask 2',
           description: 'This is a subtask for the project.',
-          state: State.Finished,
-          complexity: Complexity.Easy,
+          done: false,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -36,8 +34,7 @@ export class MockProjectService {
           id: '3',
           title: 'A subtask 3',
           description: 'This is a subtask for the project.',
-          state: State.InProgress,
-          complexity: Complexity.Difficult,
+          done: false,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         }

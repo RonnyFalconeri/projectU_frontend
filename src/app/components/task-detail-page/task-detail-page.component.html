@@ -19,13 +19,7 @@
 >
   <h1>{{project.title}}</h1>
 
-  <div class="task-info sub-container"
-    [ngClass]="{
-      'initiated': task.state === stateEnum.Initiated,
-      'in-progress': task.state === stateEnum.InProgress,
-      'halted': task.state === stateEnum.Halted,
-      'finished': task.state === stateEnum.Finished}"
-  >
+  <div class="task-info sub-container">
     <div class="primary-info row">
 
       <div class="column">
@@ -38,17 +32,9 @@
           <p class="hours">
             <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
           </p>
-          <p class="state" *ngIf="task.state === stateEnum.Initiated">INITIATED</p>
-          <p class="state" *ngIf="task.state === stateEnum.InProgress">IN PROGRESS</p>
-          <p class="state" *ngIf="task.state === stateEnum.Halted">HALTED</p>
-          <p class="state" *ngIf="task.state === stateEnum.Finished">FINISHED</p>
+          <p class="state" *ngIf="task.done">DONE</p>
+          <p class="state" *ngIf="!task.done">NOT DONE</p>
         </div>
-
-        <app-traffic-light
-          [complexity]="task.complexity"
-          [size]="sizeEnum.BIG"
-          [horizontal]="false"
-        ></app-traffic-light>
       </div>
     </div>
 
@@ -61,13 +47,7 @@
 <div class="task-after-teaser">
   <h2>Next Task</h2>
 
-  <div class="next-task sub-container"
-    [ngClass]="{
-      'initiated': taskAfter.state === stateEnum.Initiated,
-      'in-progress': taskAfter.state === stateEnum.InProgress,
-      'halted': taskAfter.state === stateEnum.Halted,
-      'finished': taskAfter.state === stateEnum.Finished}"
-  >
+  <div class="next-task sub-container">
       <span>&nbsp;</span>
   </div>
 </div>

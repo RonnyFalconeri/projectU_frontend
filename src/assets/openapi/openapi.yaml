@@ -179,8 +179,7 @@ components:
           - id: 123
             title: Learn OpenApi
             description: A task for learning the OpenApi specification
-            state: IN_PROGRESS
-            complexity: EASY
+            done: false
             estimatedDurationInHours: 12
             result: More knowledge about OpenApi
         state: IN_PROGRESS
@@ -206,10 +205,8 @@ components:
           type: string
         description:
           type: string
-        state:
-          $ref: '#/components/schemas/State'
-        complexity:
-          $ref: '#/components/schemas/Complexity'
+        done:
+          type: boolean
         estimatedDurationInHours:
           type: integer
         result:
@@ -218,8 +215,7 @@ components:
         id: 123
         title: Learn OpenApi
         description: A task for learning the OpenApi specification
-        state: IN_PROGRESS
-        complexity: EASY
+        done: false
         estimatedDurationInHours: 12
         result: More knowledge about OpenApi
 
