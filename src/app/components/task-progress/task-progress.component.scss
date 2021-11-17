@@ -1,0 +1,22 @@
+.container {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 10px;
+
+  .label {
+    font-weight: bold;
+  }
+
+  .progress-indicator {
+    width: 30px;
+    height: 30px;
+    border: 3px solid black;
+    border-radius: 7px;
+  }
+
+  .progress-indicator.done {
+    background-color: var(--color-state-finished);
+  }
+}
