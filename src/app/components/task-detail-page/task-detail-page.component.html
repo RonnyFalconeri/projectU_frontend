@@ -28,12 +28,13 @@
       </div>
 
       <div class="row">
-        <div class="secondary-info column">
+        <div class="secondary-info row">
           <p class="hours">
             <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
           </p>
           <app-task-progress
             [done]="task.done"
+            [size]="sizeEnum.DEFAULT"
           ></app-task-progress>
         </div>
       </div>

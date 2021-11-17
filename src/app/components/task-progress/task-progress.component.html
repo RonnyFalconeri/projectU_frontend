@@ -1,3 +1,9 @@
 <div class="container">
-  <div class="progress-indicator" [class.done] = "done"></div>
+  <div class="progress-indicator"
+    [class.done]="done"
+    [ngClass]="{
+      'small': size === sizeEnum.SMALL,
+      'default': size === sizeEnum.DEFAULT,
+      'big': size === sizeEnum.BIG}"
+  ></div>
 </div>

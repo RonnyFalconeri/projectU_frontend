@@ -1,5 +1,11 @@
-.container {
+$indicator-width: 45px;
+$indicator-height: 45px;
+$border-radius: 12px;
+$size-small-factor: 0.6;
+$size-big-factor: 1.5;
 
+
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,10 +16,25 @@
   }
 
   .progress-indicator {
-    width: 30px;
-    height: 30px;
     border: 3px solid black;
-    border-radius: 7px;
+  }
+
+  .progress-indicator.small {
+    border-radius: $border-radius*$size-small-factor;
+    width: $indicator-width*$size-small-factor;
+    height: $indicator-height*$size-small-factor;
+  }
+
+  .progress-indicator.default {
+    border-radius: $border-radius;
+    width: $indicator-width;
+    height: $indicator-height;
+  }
+
+  .progress-indicator.big {
+    border-radius: $border-radius*$size-big-factor;
+    width: $indicator-width*$size-big-factor;
+    height: $indicator-height*$size-big-factor;
   }
 
   .progress-indicator.done {
