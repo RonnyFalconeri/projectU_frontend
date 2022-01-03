@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faChevronLeft, faChevronDown, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronDown, faChevronUp, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
 import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
@@ -26,6 +26,7 @@ export class TaskDetailPageComponent implements OnInit {
   faStopwatch = faStopwatch;
   faChevronLeft = faChevronLeft;
   faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {
     this.activatedRoute.params.subscribe((params) => {

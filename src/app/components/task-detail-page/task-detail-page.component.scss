@@ -16,7 +16,11 @@
     background-color: rgba(0, 0, 0, 0.27);
   }
 
-  .task-after-teaser {
+  .task-teaser {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
     h2 {
       text-align: center;
@@ -35,8 +39,8 @@
       justify-content: center;
       border: 1px solid black;
       border-radius: 50px;
-      width: 180px;
-      margin: 10px auto;
+      width: 230px;
+      margin: 5px 10px;
     }
 
     .next-task {
