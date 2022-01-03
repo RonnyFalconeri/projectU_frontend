@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronDown, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
 import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
@@ -20,19 +19,23 @@ export class TaskDetailPageComponent implements OnInit {
 
   project: Project;
   task: Task;
-  taskAfter: Task;
 
   sizeEnum = Size;
   stateEnum = State;
   faEdit = faEdit;
   faStopwatch = faStopwatch;
   faChevronLeft = faChevronLeft;
+  faChevronDown = faChevronDown;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {
     this.activatedRoute.params.subscribe((params) => {
-      this.project = projectService.getProjectById(params.id);
+
+      // TODO: get task.id and project.id from routes
+      let projectId: string = params.id;
+      this.project = projectService.getProjectById(projectId);
+
+      // TODO: get task by id -> write method for it
       this.task = this.project.tasks[0];
-      this.taskAfter = this.project.tasks[1];
     });
   }
 
