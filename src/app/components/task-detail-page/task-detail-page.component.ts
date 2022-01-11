@@ -4,10 +4,10 @@ import { MockProjectService } from 'src/app/shared/services/mock-project.service
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft, faChevronDown, faChevronUp, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
+import { Router } from '@angular/router';
 import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
 import { Size } from 'src/app/shared/models/Size';
-
 
 
 @Component({
@@ -30,22 +30,23 @@ export class TaskDetailPageComponent implements OnInit {
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {
+  constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService, private router: Router) {
     this.activatedRoute.params.subscribe((params) => {
-
       // TODO: get task.id and project.id from routes
       let projectId: string = params.id;
       this.project = projectService.getProjectById(projectId);
-
-      // TODO: determine currentTaskPosition
-      this.currentTaskPosition = 0;
-
-      // TODO: get task by id -> write method for it
+      this.currentTaskPosition = this.getIndexOfTaskById(params.id);
       this.task = this.project.tasks[this.currentTaskPosition];
     });
   }
 
   ngOnInit(): void {}
+
+  getIndexOfTaskById(id: string): number {
+    return this.project.tasks.map(function(task) {
+      return task.id
+    }).indexOf(id);
+  }
 
   isTherePreviousTask(): boolean {
     let previousTaskPosition: number = this.currentTaskPosition-1;
@@ -70,6 +71,7 @@ export class TaskDetailPageComponent implements OnInit {
     if(this.isTherePreviousTask()) {
       this.currentTaskPosition--;
       this.task = this.project.tasks[this.currentTaskPosition];
+      this.changeUrlParamToCurrentTaskId(this.task.id);
     }
   }
 
@@ -77,6 +79,11 @@ export class TaskDetailPageComponent implements OnInit {
     if(this.isThereNextTask()) {
       this.currentTaskPosition++;
       this.task = this.project.tasks[this.currentTaskPosition];
+      this.changeUrlParamToCurrentTaskId(this.task.id);
     }
+  }
+
+  changeUrlParamToCurrentTaskId(taskId: string) {
+    this.router.navigate(['project', this.project.id, 'task', taskId]);
   }
 }
