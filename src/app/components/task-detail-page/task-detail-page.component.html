@@ -47,11 +47,11 @@
   </div>
 
   <div class="task-teaser">
-    <div class="task-button previous">
+    <div *ngIf="isTherePreviousTask()" (click)="changeToPreviousTask()" class="task-button previous">
       <fa-icon [icon]="faChevronUp"></fa-icon>
       <h2>Previous Task</h2>
     </div>
-    <div class="task-button next">
+    <div *ngIf="isThereNextTask()" (click)="changeToNextTask()" class="task-button next">
       <fa-icon [icon]="faChevronDown"></fa-icon>
       <h2>Next Task</h2>
     </div>

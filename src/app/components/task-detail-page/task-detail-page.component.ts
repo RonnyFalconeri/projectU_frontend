@@ -19,9 +19,11 @@ export class TaskDetailPageComponent implements OnInit {
 
   project: Project;
   task: Task;
+  currentTaskPosition: number;
 
   sizeEnum = Size;
   stateEnum = State;
+
   faEdit = faEdit;
   faStopwatch = faStopwatch;
   faChevronLeft = faChevronLeft;
@@ -35,11 +37,46 @@ export class TaskDetailPageComponent implements OnInit {
       let projectId: string = params.id;
       this.project = projectService.getProjectById(projectId);
 
+      // TODO: determine currentTaskPosition
+      this.currentTaskPosition = 0;
+
       // TODO: get task by id -> write method for it
-      this.task = this.project.tasks[0];
+      this.task = this.project.tasks[this.currentTaskPosition];
     });
   }
 
   ngOnInit(): void {}
 
+  isTherePreviousTask(): boolean {
+    let previousTaskPosition: number = this.currentTaskPosition-1;
+
+    if(previousTaskPosition < 0) {
+      return false;
+    }
+    return true;
+  }
+
+  isThereNextTask(): boolean {
+    let nextTaskPosition: number = this.currentTaskPosition+1;
+    let totalTaskCount: number = this.project.tasks.length;
+
+    if(nextTaskPosition < totalTaskCount) {
+      return true;
+    }
+    return false;
+  }
+
+  changeToPreviousTask(): void {
+    if(this.isTherePreviousTask()) {
+      this.currentTaskPosition--;
+      this.task = this.project.tasks[this.currentTaskPosition];
+    }
+  }
+
+  changeToNextTask(): void {
+    if(this.isThereNextTask()) {
+      this.currentTaskPosition++;
+      this.task = this.project.tasks[this.currentTaskPosition];
+    }
+  }
 }
