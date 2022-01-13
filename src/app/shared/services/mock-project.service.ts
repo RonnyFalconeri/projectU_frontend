@@ -131,9 +131,9 @@ export class MockProjectService {
   }
 
   getIndexOfProjectById(id: string): number {
-    return this.mockProjects.map(function(project) {
-      return project.id
-    }).indexOf(id);
+    return this.mockProjects
+      .map(project => { return project.id })
+      .indexOf(id);
   }
 
   getAllProjects(): Project[] {

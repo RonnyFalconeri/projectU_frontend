@@ -24,7 +24,7 @@ export class ProjectDetailPageComponent implements OnInit {
   faChevronLeft = faChevronLeft;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe(params => {
       this.project = projectService.getProjectById(params.projectId)
     });
   }

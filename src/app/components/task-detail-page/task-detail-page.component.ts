@@ -31,7 +31,7 @@ export class TaskDetailPageComponent implements OnInit {
   faChevronUp = faChevronUp;
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService, private router: Router) {
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe(params => {
       let projectId: string = params.projectId;
       let taskId: string = params.taskId;
       this.project = projectService.getProjectById(projectId);
