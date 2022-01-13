@@ -32,10 +32,10 @@ export class TaskDetailPageComponent implements OnInit {
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService, private router: Router) {
     this.activatedRoute.params.subscribe((params) => {
-      // TODO: get task.id and project.id from routes
-      let projectId: string = params.id;
+      let projectId: string = params.projectId;
+      let taskId: string = params.taskId;
       this.project = projectService.getProjectById(projectId);
-      this.currentTaskPosition = this.getIndexOfTaskById(params.id);
+      this.currentTaskPosition = this.getIndexOfTaskById(taskId);
       this.task = this.project.tasks[this.currentTaskPosition];
     });
   }

@@ -11,14 +11,14 @@ const routes: Routes = [
     component: OverviewComponent
   },
   {
-    path: 'project/:id',
+    path: 'project/:projectId',
     children: [
       {
         path: '',
         component: ProjectDetailPageComponent
       },
       {
-        path: 'task/:id',
+        path: 'task/:taskId',
         component: TaskDetailPageComponent
       }
     ]
@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'edit',
     children: [
       {
-        path: 'project/:id',
+        path: 'project/:projectId',
         component: ProjectEditComponent
       }
     ]

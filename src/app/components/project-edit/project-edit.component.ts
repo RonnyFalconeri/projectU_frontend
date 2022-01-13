@@ -38,9 +38,9 @@ export class ProjectEditComponent implements OnInit {
 
   private determineEditMode(): void {
     this.activatedRoute.params.subscribe((params) => {
-      if(params.id) {
+      if(params.projectId) {
         this.editExistingProject = true;
-        this.project = this.projectService.getProjectById(params.id);
+        this.project = this.projectService.getProjectById(params.projectId);
       }
     });
   }

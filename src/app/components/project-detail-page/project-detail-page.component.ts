@@ -25,7 +25,7 @@ export class ProjectDetailPageComponent implements OnInit {
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {
     this.activatedRoute.params.subscribe((params) => {
-      this.project = projectService.getProjectById(params.id)
+      this.project = projectService.getProjectById(params.projectId)
     });
   }
 

@@ -94,7 +94,24 @@ export class MockProjectService {
       id: '5',
       title: 'Test Project 5',
       description: 'A simple project just for testing things...',
-      tasks: [],
+      tasks: [
+        {
+          id: '1',
+          title: 'A subtask 1',
+          description: 'This is a subtask for the project.',
+          done: true,
+          estimatedDurationInHours: 13,
+          result: 'More knowledge'
+        },
+        {
+          id: '2',
+          title: 'A subtask 2',
+          description: 'This is a subtask for the project.',
+          done: false,
+          estimatedDurationInHours: 13,
+          result: 'More knowledge'
+        }
+      ],
       state: State.Finished,
       complexity: Complexity.Medium,
       estimatedDurationInHours: 25,
@@ -109,8 +126,14 @@ export class MockProjectService {
   constructor() {}
 
   getProjectById(id: string): Project {
-    // TODO: implement real call to API
-    return this.mockProjects[0];
+    let position: number = this.getIndexOfProjectById(id);
+    return this.mockProjects[position];
+  }
+
+  getIndexOfProjectById(id: string): number {
+    return this.mockProjects.map(function(project) {
+      return project.id
+    }).indexOf(id);
   }
 
   getAllProjects(): Project[] {
