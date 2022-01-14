@@ -16,6 +16,8 @@ import { ProjectComplexityPickerComponent } from './components/project-edit/proj
 import { ProjectTileComponent } from './components/project-tile/project-tile.component';
 import { TaskDetailPageComponent } from './components/task-detail-page/task-detail-page.component';
 import { TaskProgressComponent } from './components/task-progress/task-progress.component';
+import { TaskEditComponent } from './components/task-edit/task-edit.component';
+import { TaskStatePickerComponent } from './components/task-edit/task-state-picker/task-state-picker.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { TaskProgressComponent } from './components/task-progress/task-progress.
     ProjectComplexityPickerComponent,
     ProjectTileComponent,
     TaskDetailPageComponent,
-    TaskProgressComponent
+    TaskProgressComponent,
+    TaskEditComponent,
+    TaskStatePickerComponent
   ],
   imports: [
     BrowserModule,

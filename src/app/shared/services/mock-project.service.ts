@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Complexity } from 'build/openapi/model/complexity';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
+import { Task } from 'build/openapi/model/task';
+
 
 @Injectable({
   providedIn: 'root'
@@ -130,10 +132,23 @@ export class MockProjectService {
     return this.mockProjects[position];
   }
 
+  getTaskById(projectId: string, taskId: string): Task {
+    let projectPosition: number = this.getIndexOfProjectById(projectId);
+    let project = this.mockProjects[projectPosition];
+    let taskPosition: number = this.getIndexOfTaskById(project, taskId);
+    return project.tasks[taskPosition];
+  }
+
   getIndexOfProjectById(id: string): number {
     return this.mockProjects
       .map(project => { return project.id })
       .indexOf(id);
+  }
+
+  getIndexOfTaskById(project: Project, taskId: string): number {
+    return project.tasks
+      .map(task => { return task.id })
+      .indexOf(taskId);
   }
 
   getAllProjects(): Project[] {
@@ -151,7 +166,21 @@ export class MockProjectService {
     console.log(project);
   }
 
-  deleteProject(id?: string): void {
+  updateTask(projectId: string, task: Task): void {
+    console.log('updating project ' + task.id);
+    console.log(task);
+  }
+
+  createTask(projectId: string, task: Task): void {
+    console.log('create task');
+    console.log(task);
+  }
+
+  deleteProject(id: string): void {
     console.log('deleting project ' + id);
+  }
+
+  deleteTask(projectId: string, taskId: string): void {
+    console.log('deleting project ' + taskId + ' of project ' + projectId);
   }
 }

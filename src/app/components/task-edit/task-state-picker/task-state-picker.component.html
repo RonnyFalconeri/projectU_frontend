@@ -1,0 +1,21 @@
+<div class="label-container">
+  <label>State*</label>
+</div>
+<div class="picker">
+  <div class="item"
+      (click)="changeIsTaskDone(false)"
+      [ngClass]="{
+        'item--active': !isTaskDone
+      }"
+  >
+    IN PROGRESS
+  </div>
+  <div class="item"
+      (click)="changeIsTaskDone(true)"
+      [ngClass]="{
+        'item--active': isTaskDone
+      }"
+  >
+    FINISHED
+  </div>
+</div>
