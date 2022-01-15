@@ -58,11 +58,8 @@ export class TaskEditComponent implements OnInit {
         Validators.min(0)
       ],
       done: [
-        {
-          value: this.task.done
-        }, [
-          Validators.required
-        ]
+        this.task.done,
+        Validators.required
       ]
     });
   }

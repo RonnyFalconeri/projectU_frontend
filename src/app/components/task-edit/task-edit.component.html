@@ -19,9 +19,9 @@
     <h1 class="form-headline" *ngIf="!editExistingTask">New Task <fa-icon [icon]="faPlusSquare"></fa-icon></h1>
 
     <div class="top">
-
       <div class="form-group">
         <label for="title">Title*</label>
+
         <input id="title" formControlName="title" type="text" class="form-control">
 
         <p class="error-msg" *ngIf="title!.invalid && (title!.dirty || title!.touched)">
@@ -35,23 +35,25 @@
         </p>
       </div>
 
-
       <div class="duration">
         <fa-icon [icon]="faStopwatch"></fa-icon>
+
         <div class="form-group">
           <label for="estimatedDurationInHours">Est. duration</label>
+
           <div class="unit">
             <input id="estimatedDurationInHours" formControlName="estimatedDurationInHours" type="number" class="form-control">
             <span class="unit-indicator">h</span>
           </div>
+
         </div>
       </div>
-
     </div>
 
     <div>
       <div class="form-group">
         <label for="description">Description</label>
+
         <textarea id="description" formControlName="description" rows="4" class="form-control"></textarea>
       </div>
     </div>
@@ -61,7 +63,6 @@
         formControlName="done"
         (click)="changeIsTaskDone()"
       ></app-task-state-picker>
-
     </div>
 
     <div class="controls" *ngIf="editExistingTask">

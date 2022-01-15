@@ -19,7 +19,6 @@ export class TaskStatePickerComponent implements ControlValueAccessor {
   isTaskDone: boolean;
   originalState: boolean;
 
-
   constructor() {}
 
   changeIsTaskDone(isDone: boolean) {
