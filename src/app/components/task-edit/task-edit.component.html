@@ -8,8 +8,10 @@
 
 <div class="card task-card"
   [ngClass]="{
-    'in-progress': !task.done,
-    'finished': task.done
+    'initiated': projectState === stateEnum.Initiated,
+    'in-progress': projectState === stateEnum.InProgress,
+    'halted': projectState === stateEnum.Halted,
+    'finished': projectState === stateEnum.Finished
   }"
 >
 

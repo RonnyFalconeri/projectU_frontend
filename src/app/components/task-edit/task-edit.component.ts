@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { State } from 'build/openapi';
 
 @Component({
   selector: 'app-task-edit',
@@ -17,6 +18,9 @@ export class TaskEditComponent implements OnInit {
   taskForm: FormGroup;
   editExistingTask: boolean = false;
   task: Task = this.setupNewTask();
+  projectState: State = State.InProgress;
+  projectId: string;
+  stateEnum = State;
 
   faPen = faPen;
   faStopwatch = faStopwatch;
@@ -29,17 +33,29 @@ export class TaskEditComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
-    this.determineEditMode();
+    this.initiateAttributes();
+  }
+
+  private initiateAttributes(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.projectId = params.projectId;
+      let taskId: string = params.taskId;
+
+      this.determineProjectState(this.projectId);
+      this.determineEditMode(this.projectId, taskId);
+    });
     this.setupTaskForm();
   }
 
-  private determineEditMode(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if(params.taskId) {
-        this.editExistingTask = true;
-        this.task = this.projectService.getTaskById(params.projectId, params.taskId);
-      }
-    });
+  private determineProjectState(projectId: string): void {
+    this.projectState = this.projectService.getProjectById(projectId).state;
+  }
+
+  private determineEditMode(projectId: string, taskId: string): void {
+    if(taskId) {
+      this.task = this.projectService.getTaskById(projectId, taskId);
+      this.editExistingTask = true;
+    }
   }
 
   private setupTaskForm(): void {
@@ -76,20 +92,16 @@ export class TaskEditComponent implements OnInit {
   }
 
   saveTask(): void {
-    // TODO: determine projectId
-    let projectId: string = '0';
     if(this.editExistingTask) {
-      this.projectService.updateTask(projectId, this.task);
+      this.projectService.updateTask(this.projectId, this.task);
     } else {
-      this.projectService.createTask(projectId, this.task);
+      this.projectService.createTask(this.projectId, this.task);
     }
   }
 
   deleteTask(): void {
     if(confirm("Do you want to delete the project?")) {
-      // TODO: determine projectId
-      let projectId: string = '0';
-      this.projectService.deleteTask(projectId, this.task.id);
+      this.projectService.deleteTask(this.projectId, this.task.id);
       this.router.navigate(['/']);
     }
   }
