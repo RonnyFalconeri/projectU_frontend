@@ -29,11 +29,16 @@ const routes: Routes = [
     children: [
       {
         path: 'project/:projectId',
-        component: ProjectEditComponent
-      },
-      {
-        path: 'task/:taskId',
-        component: TaskEditComponent
+        children: [
+          {
+            path: '',
+            component: ProjectEditComponent
+          },
+          {
+            path: 'task/:taskId',
+            component: TaskEditComponent
+          }
+        ]
       }
     ]
   },
