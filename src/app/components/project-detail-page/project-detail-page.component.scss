@@ -47,6 +47,32 @@
     p { margin: 0;}
   }
 
+  .task-list {
+
+    .add-task-button {
+      background-color: rgba(0, 0, 0, 0.418);
+      width: 180px;
+      color: white;
+      padding: 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      margin-left: 80px;
+
+      fa-icon {
+        margin: 0 10px 0 5px;
+      }
+    }
+
+    .add-task-button:hover {
+      background-color: rgba(0, 0, 0, 0.589);
+      cursor: pointer;
+    }
+
+    .add-task-button:active {
+      background-color: rgba(0, 0, 0, 0.678);
+    }
+  }
+
   .results {
     margin: 0 60px;
   }

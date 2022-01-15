@@ -48,6 +48,13 @@
     <app-task-bar *ngFor="let task of project.tasks"
       [task]="task"
     ></app-task-bar>
+
+    <div class="add-task-button" *ngIf="project.tasks.length == 0"
+      [routerLink]="['/new/project', project.id, 'task']"
+    >
+      <fa-icon [icon]="faPlus"></fa-icon>
+      <span>Add new tasks</span>
+    </div>
   </div>
 
   <div class="results">

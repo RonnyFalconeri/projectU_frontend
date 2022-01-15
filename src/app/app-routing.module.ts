@@ -48,6 +48,19 @@ const routes: Routes = [
       {
         path: 'project',
         component: ProjectEditComponent
+      },
+      {
+        path: 'project/:projectId',
+        children: [
+          {
+            path: '',
+            component: ProjectEditComponent
+          },
+          {
+            path: 'task',
+            component: TaskEditComponent
+          }
+        ]
       }
     ]
   },
