@@ -39,10 +39,8 @@ export class TaskEditComponent implements OnInit {
   private initiateAttributes(): void {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params.projectId;
-      let taskId: string = params.taskId;
-
       this.determineProjectState(this.projectId);
-      this.determineEditMode(this.projectId, taskId);
+      this.determineEditMode(this.projectId, params.taskId);
     });
     this.setupTaskForm();
   }
