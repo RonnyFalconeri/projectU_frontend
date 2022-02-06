@@ -2,13 +2,10 @@ version: '3.7'
 
 services:
 
-  angular:
-    container_name: angular
+  app-frontend:
+    container_name: app-frontend
     build:
       context: .
-      dockerfile: DOCKERFILE
-      args:
-        API_BASE_URL: http://127.0.0.1:8080/
     ports:
       - "8081:80"
     restart: always
