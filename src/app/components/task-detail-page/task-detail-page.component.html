@@ -1,0 +1,60 @@
+<div class="menu-bar">
+  <div class="back-button menu-button" routerLink="../../">
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </div>
+  <div class="home-link" [routerLink]="['/']">
+    <img class="logo" src="assets/images/logo-banner.png">
+  </div>
+  <div class="edit-button menu-button" [routerLink]="['/edit/project', project.id, 'task', task.id]">
+    <fa-icon [icon]="faEdit"></fa-icon>
+  </div>
+</div>
+
+<div class="card task-card"
+  [ngClass]="{
+    'initiated': project.state === stateEnum.Initiated,
+    'in-progress': project.state === stateEnum.InProgress,
+    'halted': project.state === stateEnum.Halted,
+    'finished': project.state === stateEnum.Finished}"
+>
+  <h1>{{project.title}}</h1>
+
+  <div class="task-info sub-container">
+    <div class="primary-info row">
+
+      <div class="column">
+        <h1>{{task.title}}</h1>
+        <p class="description">{{task.description}}</p>
+      </div>
+
+      <div class="row">
+        <div class="secondary-info row">
+          <p class="hours">
+            <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
+          </p>
+          <app-task-progress
+            [done]="task.done"
+            [size]="sizeEnum.DEFAULT"
+          ></app-task-progress>
+        </div>
+      </div>
+    </div>
+
+    <div class="result">
+      <h1>Result</h1>
+      <p>{{task.result}}</p>
+    </div>
+  </div>
+
+  <div class="task-teaser">
+    <div *ngIf="isTherePreviousTask()" (click)="changeToPreviousTask()" class="task-button previous">
+      <fa-icon [icon]="faChevronUp"></fa-icon>
+      <span>Previous Task</span>
+    </div>
+    <div *ngIf="isThereNextTask()" (click)="changeToNextTask()" class="task-button next">
+      <fa-icon [icon]="faChevronDown"></fa-icon>
+      <span>Next Task</span>
+    </div>
+  </div>
+
+</div>

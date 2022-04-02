@@ -1,13 +1,4 @@
-.edit-button {
-  font-size: 1.4rem;
-}
-
 .project-card {
-  max-width: 1000px;
-  margin: 150px auto;
-  padding: 40px;
-  border-radius: 40px;
-  box-shadow: 0px 0px 20px 0px #0000008c;
 
   .primary-info {
     display: flex;
@@ -56,6 +47,32 @@
     p { margin: 0;}
   }
 
+  .task-list {
+
+    .add-task-button {
+      background-color: rgba(0, 0, 0, 0.418);
+      width: 180px;
+      color: white;
+      padding: 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      margin-left: 80px;
+
+      fa-icon {
+        margin: 0 10px 0 5px;
+      }
+    }
+
+    .add-task-button:hover {
+      background-color: rgba(0, 0, 0, 0.589);
+      cursor: pointer;
+    }
+
+    .add-task-button:active {
+      background-color: rgba(0, 0, 0, 0.678);
+    }
+  }
+
   .results {
     margin: 0 60px;
   }
@@ -73,22 +90,6 @@
       color: var(--color-font-secondary);
     }
   }
-}
-
-.initiated {
-  background-color: var(--color-state-initiated);
-}
-
-.in-progress {
-  background-color: var(--color-state-in-progress);
-}
-
-.halted {
-  background-color: var(--color-state-halted);
-}
-
-.finished {
-  background-color: var(--color-state-finished);
 }
 
 // for medium and tablet screens
@@ -116,6 +117,12 @@
       margin: 0 10px 10px 10px;
       flex-direction: column;
       align-items: center;
+    }
+
+    .task-list {
+      .add-task-button {
+        margin: 0 auto;
+      }
     }
 
     .results {

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './components/overview/overview.component';
 import { ProjectDetailPageComponent } from './components/project-detail-page/project-detail-page.component';
 import { ProjectEditComponent } from './components/project-edit/project-edit.component';
+import { TaskDetailPageComponent } from './components/task-detail-page/task-detail-page.component';
+import { TaskEditComponent } from './components/task-edit/task-edit.component';
 
 const routes: Routes = [
   {
@@ -10,15 +12,33 @@ const routes: Routes = [
     component: OverviewComponent
   },
   {
-    path: 'project/:id',
-    component: ProjectDetailPageComponent
+    path: 'project/:projectId',
+    children: [
+      {
+        path: '',
+        component: ProjectDetailPageComponent
+      },
+      {
+        path: 'task/:taskId',
+        component: TaskDetailPageComponent
+      }
+    ]
   },
   {
     path: 'edit',
     children: [
       {
-        path: 'project/:id',
-        component: ProjectEditComponent
+        path: 'project/:projectId',
+        children: [
+          {
+            path: '',
+            component: ProjectEditComponent
+          },
+          {
+            path: 'task/:taskId',
+            component: TaskEditComponent
+          }
+        ]
       }
     ]
   },
@@ -28,6 +48,19 @@ const routes: Routes = [
       {
         path: 'project',
         component: ProjectEditComponent
+      },
+      {
+        path: 'project/:projectId',
+        children: [
+          {
+            path: '',
+            component: ProjectEditComponent
+          },
+          {
+            path: 'task',
+            component: TaskEditComponent
+          }
+        ]
       }
     ]
   },

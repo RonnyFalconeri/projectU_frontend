@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="project-card"
+<div class="card project-card"
   [ngClass]="{
     'initiated': project.state === stateEnum.Initiated,
     'in-progress': project.state === stateEnum.InProgress,
@@ -45,6 +45,11 @@
   </div>
 
   <div class="task-list column">
+    <div class="add-task-button" [routerLink]="['/new/project', project.id, 'task']">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      <span>Add new task</span>
+    </div>
+
     <app-task-bar *ngFor="let task of project.tasks"
       [task]="task"
     ></app-task-bar>

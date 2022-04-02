@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Complexity } from 'build/openapi/model/complexity';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
+import { Task } from 'build/openapi/model/task';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,7 @@ export class MockProjectService {
           id: '1',
           title: 'A subtask 1',
           description: 'This is a subtask for the project.',
-          state: State.InProgress,
-          complexity: Complexity.Medium,
+          done: true,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -27,8 +28,7 @@ export class MockProjectService {
           id: '2',
           title: 'A subtask 2',
           description: 'This is a subtask for the project.',
-          state: State.InProgress,
-          complexity: Complexity.Easy,
+          done: false,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         },
@@ -36,8 +36,7 @@ export class MockProjectService {
           id: '3',
           title: 'A subtask 3',
           description: 'This is a subtask for the project.',
-          state: State.InProgress,
-          complexity: Complexity.Difficult,
+          done: false,
           estimatedDurationInHours: 13,
           result: 'More knowledge'
         }
@@ -97,7 +96,24 @@ export class MockProjectService {
       id: '5',
       title: 'Test Project 5',
       description: 'A simple project just for testing things...',
-      tasks: [],
+      tasks: [
+        {
+          id: '1',
+          title: 'A subtask 1',
+          description: 'This is a subtask for the project.',
+          done: true,
+          estimatedDurationInHours: 13,
+          result: 'More knowledge'
+        },
+        {
+          id: '2',
+          title: 'A subtask 2',
+          description: 'This is a subtask for the project.',
+          done: false,
+          estimatedDurationInHours: 13,
+          result: 'More knowledge'
+        }
+      ],
       state: State.Finished,
       complexity: Complexity.Medium,
       estimatedDurationInHours: 25,
@@ -112,8 +128,27 @@ export class MockProjectService {
   constructor() {}
 
   getProjectById(id: string): Project {
-    // TODO: implement real call to API
-    return this.mockProjects[0];
+    let position: number = this.getIndexOfProjectById(id);
+    return this.mockProjects[position];
+  }
+
+  getTaskById(projectId: string, taskId: string): Task {
+    let projectPosition: number = this.getIndexOfProjectById(projectId);
+    let project = this.mockProjects[projectPosition];
+    let taskPosition: number = this.getIndexOfTaskById(project, taskId);
+    return project.tasks[taskPosition];
+  }
+
+  getIndexOfProjectById(id: string): number {
+    return this.mockProjects
+      .map(project => { return project.id })
+      .indexOf(id);
+  }
+
+  getIndexOfTaskById(project: Project, taskId: string): number {
+    return project.tasks
+      .map(task => { return task.id })
+      .indexOf(taskId);
   }
 
   getAllProjects(): Project[] {
@@ -131,7 +166,21 @@ export class MockProjectService {
     console.log(project);
   }
 
-  deleteProject(id?: string): void {
+  updateTask(projectId: string, task: Task): void {
+    console.log('updating project ' + task.id);
+    console.log(task);
+  }
+
+  createTask(projectId: string, task: Task): void {
+    console.log('create task');
+    console.log(task);
+  }
+
+  deleteProject(id: string): void {
     console.log('deleting project ' + id);
+  }
+
+  deleteTask(projectId: string, taskId: string): void {
+    console.log('deleting project ' + taskId + ' of project ' + projectId);
   }
 }
