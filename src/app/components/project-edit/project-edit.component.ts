@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
-import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Complexity } from 'build/openapi/model/complexity';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { ProjectService } from 'build/openapi';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project-edit',
@@ -18,7 +19,7 @@ export class ProjectEditComponent implements OnInit {
 
   projectForm: FormGroup;
   editExistingProject: boolean = false;
-  project: Project = this.setupNewProject();
+  project: Observable<Project> = this.setupNewProject();
 
   stateEnum = State;
   faPen = faPen;
@@ -27,7 +28,7 @@ export class ProjectEditComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly projectService: MockProjectService,
+    private readonly projectService: ProjectService,
     private readonly fb: FormBuilder,
     private router: Router) {}
 
@@ -85,7 +86,7 @@ export class ProjectEditComponent implements OnInit {
       state: State.Initiated,
       complexity: Complexity.Easy,
       estimatedDurationInHours: 0,
-      createdAt: '',
+      createdAt: 0,
       expectedResult: '',
       startedAt: '',
       finishedAt: '',
@@ -103,7 +104,7 @@ export class ProjectEditComponent implements OnInit {
 
   deleteProject(): void {
     if(confirm("Do you want to delete the project?")) {
-      this.projectService.deleteProject(this.project.id);
+      this.projectService.deleteProject(this.project.id!);
       this.router.navigate(['/']);
     }
   }

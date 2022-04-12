@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft, faChevronDown, faChevronUp, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
@@ -8,6 +7,8 @@ import { Router } from '@angular/router';
 import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
 import { Size } from 'src/app/shared/models/Size';
+import { ProjectService, TaskService } from 'build/openapi';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { Size } from 'src/app/shared/models/Size';
 })
 export class TaskDetailPageComponent implements OnInit {
 
-  project: Project;
+  project: Observable<Project>;
   task: Task;
   currentTaskPosition: number;
 
@@ -30,7 +31,7 @@ export class TaskDetailPageComponent implements OnInit {
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService, private router: Router) {
+  constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService, taskService: TaskService, private router: Router) {
     this.activatedRoute.params.subscribe(params => {
       let projectId: string = params.projectId;
       let taskId: string = params.taskId;

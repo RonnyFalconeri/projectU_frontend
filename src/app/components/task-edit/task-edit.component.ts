@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'build/openapi/model/task';
-import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { State } from 'build/openapi';
+import { Project, ProjectService, State, TaskService } from 'build/openapi';
 
 @Component({
   selector: 'app-task-edit',
@@ -28,7 +27,8 @@ export class TaskEditComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly projectService: MockProjectService,
+    private  projectService: ProjectService,
+    private  taskService: TaskService,
     private readonly formBuilder: FormBuilder,
     private router: Router) {}
 
@@ -40,18 +40,19 @@ export class TaskEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params.projectId;
       this.determineProjectState(this.projectId);
-      this.determineEditMode(this.projectId, params.taskId);
+      this.determineEditMode(params.taskId);
     });
     this.setupTaskForm();
   }
 
   private determineProjectState(projectId: string): void {
-    this.projectState = this.projectService.getProjectById(projectId).state;
+    this.projectService.getProjectById(projectId)
+      .subscribe((project: Project) => this.projectState = project.state);
   }
 
-  private determineEditMode(projectId: string, taskId: string): void {
+  private determineEditMode(taskId: string): void {
     if(taskId) {
-      this.task = this.projectService.getTaskById(projectId, taskId);
+      this.task = this.taskService.getTaskById(taskId);
       this.editExistingTask = true;
     }
   }
@@ -91,15 +92,15 @@ export class TaskEditComponent implements OnInit {
 
   saveTask(): void {
     if(this.editExistingTask) {
-      this.projectService.updateTask(this.projectId, this.task);
+      this.taskService.updateTask(this.projectId, this.task);
     } else {
-      this.projectService.createTask(this.projectId, this.task);
+      this.taskService.createTask(this.projectId, this.task);
     }
   }
 
   deleteTask(): void {
     if(confirm("Do you want to delete the project?")) {
-      this.projectService.deleteTask(this.projectId, this.task.id);
+      this.taskService.deleteTask(this.task.id!);
       this.router.navigate(['/']);
     }
   }

@@ -1,14 +1,18 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Configuration, ProjectServiceInterface } from 'build/openapi';
 import { Complexity } from 'build/openapi/model/complexity';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
 import { Task } from 'build/openapi/model/task';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class MockProjectService {
+export class MockProjectService implements ProjectServiceInterface {
 
   private mockProjects: Project[] = [
     {
@@ -44,7 +48,7 @@ export class MockProjectService {
       state: State.InProgress,
       complexity: Complexity.Medium,
       estimatedDurationInHours: 25,
-      createdAt: '2021-08-12T22:06:50.078Z',
+      createdAt: 1649693507720,
       expectedResult: 'A productive and meaningful event for education.',
       startedAt: '2021-08-12T22:08:50.078Z',
       finishedAt: '',
@@ -58,7 +62,7 @@ export class MockProjectService {
       state: State.Initiated,
       complexity: Complexity.Easy,
       estimatedDurationInHours: 25,
-      createdAt: '2021-08-12T22:06:50.078Z',
+      createdAt: 1649693507720,
       expectedResult: 'A productive and meaningful event for education.',
       startedAt: '2021-08-12T22:08:50.078Z',
       finishedAt: '',
@@ -72,7 +76,7 @@ export class MockProjectService {
       state: State.InProgress,
       complexity: Complexity.Difficult,
       estimatedDurationInHours: 25,
-      createdAt: '2021-08-12T22:06:50.078Z',
+      createdAt: 1649693507720,
       expectedResult: 'A productive and meaningful event for education.',
       startedAt: '2021-08-12T22:08:50.078Z',
       finishedAt: '',
@@ -86,7 +90,7 @@ export class MockProjectService {
       state: State.Halted,
       complexity: Complexity.Easy,
       estimatedDurationInHours: 25,
-      createdAt: '2021-08-12T22:06:50.078Z',
+      createdAt: 1649693507720,
       expectedResult: 'A productive and meaningful event for education.',
       startedAt: '2021-08-12T22:08:50.078Z',
       finishedAt: '',
@@ -117,7 +121,7 @@ export class MockProjectService {
       state: State.Finished,
       complexity: Complexity.Medium,
       estimatedDurationInHours: 25,
-      createdAt: '2021-08-12T22:06:50.078Z',
+      createdAt: 1649693507720,
       expectedResult: 'A productive and meaningful event for education.',
       startedAt: '2021-08-12T22:08:50.078Z',
       finishedAt: '',
@@ -126,44 +130,47 @@ export class MockProjectService {
   ]
 
   constructor() {}
+  defaultHeaders: HttpHeaders;
+  configuration: Configuration;
 
-  getProjectById(id: string): Project {
+  getProjectById(id: string): Observable<Project> {
     let position: number = this.getIndexOfProjectById(id);
-    return this.mockProjects[position];
+    return of(this.mockProjects[position]);
   }
 
   getTaskById(projectId: string, taskId: string): Task {
     let projectPosition: number = this.getIndexOfProjectById(projectId);
     let project = this.mockProjects[projectPosition];
     let taskPosition: number = this.getIndexOfTaskById(project, taskId);
-    return project.tasks[taskPosition];
+    return project.tasks![taskPosition];
   }
 
-  getIndexOfProjectById(id: string): number {
+  private getIndexOfProjectById(id: string): number {
     return this.mockProjects
       .map(project => { return project.id })
       .indexOf(id);
   }
 
-  getIndexOfTaskById(project: Project, taskId: string): number {
-    return project.tasks
+  private getIndexOfTaskById(project: Project, taskId: string): number {
+    return project.tasks!
       .map(task => { return task.id })
       .indexOf(taskId);
   }
 
-  getAllProjects(): Project[] {
-    // TODO: implement real call to API
-    return this.mockProjects;
+  getAllProjects(): Observable<Array<Project>> {
+    return of(this.mockProjects);
   }
 
-  updateProject(project: Project): void {
+  updateProject(id: string, project: Project): Observable<Project> {
     console.log('updating project ' + project.id);
     console.log(project);
+    return of(project);
   }
 
-  createProject(project: Project): void {
+  createProject(project: Project): Observable<Project> {
     console.log('create project');
     console.log(project);
+    return of(project);
   }
 
   updateTask(projectId: string, task: Task): void {
@@ -176,8 +183,9 @@ export class MockProjectService {
     console.log(task);
   }
 
-  deleteProject(id: string): void {
+  deleteProject(id: string): Observable<{}> {
     console.log('deleting project ' + id);
+    return of();
   }
 
   deleteTask(projectId: string, taskId: string): void {
