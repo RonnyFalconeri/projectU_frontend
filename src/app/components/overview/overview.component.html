@@ -1,17 +1,19 @@
-<div class="menu-bar">
-  <div class="sort-button menu-button">
-    <fa-icon [icon]="faThLarge"></fa-icon>
+<ng-container *ngIf="projects$ | async as projects">
+  <div class="menu-bar">
+    <div class="sort-button menu-button">
+      <fa-icon [icon]="faThLarge"></fa-icon>
+    </div>
+    <div class="home-link" [routerLink]="['/']">
+      <img class="logo" src="assets/images/logo-banner.png">
+    </div>
+    <div class="new-project-button menu-button" [routerLink]="['/new/project']">
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </div>
   </div>
-  <div class="home-link" [routerLink]="['/']">
-    <img class="logo" src="assets/images/logo-banner.png">
-  </div>
-  <div class="new-project-button menu-button" [routerLink]="['/new/project']">
-    <fa-icon [icon]="faPlus"></fa-icon>
-  </div>
-</div>
 
-<div class="project-list">
-  <app-project-tile *ngFor="let project of projects"
-    [project]="project"
-  ></app-project-tile>
-</div>
+  <div class="project-list">
+    <app-project-tile *ngFor="let project of projects"
+      [project]="project"
+    ></app-project-tile>
+  </div>
+</ng-container>

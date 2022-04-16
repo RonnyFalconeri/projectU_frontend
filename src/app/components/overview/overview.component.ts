@@ -13,14 +13,14 @@ import { Observable } from 'rxjs';
 })
 export class OverviewComponent implements OnInit {
 
-  projects: Observable<Project[]>;
+  projects$: Observable<Project[]>;
 
   sizeEnum = Size;
   faThLarge = faThLarge;
   faPlus = faPlus;
 
   constructor(projectService: ProjectService) {
-    this.projects = projectService.getAllProjects();
+    this.projects$ = projectService.getAllProjects();
   }
 
   ngOnInit(): void {}

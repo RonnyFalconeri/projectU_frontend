@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 })
 export class TaskDetailPageComponent implements OnInit {
 
-  project: Observable<Project>;
+  project: Project;
   task: Task;
   currentTaskPosition: number;
 
@@ -31,20 +31,23 @@ export class TaskDetailPageComponent implements OnInit {
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService, taskService: TaskService, private router: Router) {
+  constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService, private router: Router) {
     this.activatedRoute.params.subscribe(params => {
       let projectId: string = params.projectId;
       let taskId: string = params.taskId;
-      this.project = projectService.getProjectById(projectId);
+
+      projectService.getProjectById(projectId)
+        .subscribe(project => this.project = project);
+
       this.currentTaskPosition = this.getIndexOfTaskById(taskId);
-      this.task = this.project.tasks[this.currentTaskPosition];
+      this.task = this.project.tasks![this.currentTaskPosition];
     });
   }
 
   ngOnInit(): void {}
 
   getIndexOfTaskById(id: string): number {
-    return this.project.tasks.map(function(task) {
+    return this.project.tasks!.map(function(task) {
       return task.id
     }).indexOf(id);
   }
@@ -60,7 +63,7 @@ export class TaskDetailPageComponent implements OnInit {
 
   isThereNextTask(): boolean {
     let nextTaskPosition: number = this.currentTaskPosition+1;
-    let totalTaskCount: number = this.project.tasks.length;
+    let totalTaskCount: number = this.project.tasks!.length;
 
     if(nextTaskPosition < totalTaskCount) {
       return true;
@@ -71,16 +74,16 @@ export class TaskDetailPageComponent implements OnInit {
   changeToPreviousTask(): void {
     if(this.isTherePreviousTask()) {
       this.currentTaskPosition--;
-      this.task = this.project.tasks[this.currentTaskPosition];
-      this.changeUrlParamToCurrentTaskId(this.task.id);
+      this.task = this.project.tasks![this.currentTaskPosition];
+      this.changeUrlParamToCurrentTaskId(this.task.id!);
     }
   }
 
   changeToNextTask(): void {
     if(this.isThereNextTask()) {
       this.currentTaskPosition++;
-      this.task = this.project.tasks[this.currentTaskPosition];
-      this.changeUrlParamToCurrentTaskId(this.task.id);
+      this.task = this.project.tasks![this.currentTaskPosition];
+      this.changeUrlParamToCurrentTaskId(this.task.id!);
     }
   }
 

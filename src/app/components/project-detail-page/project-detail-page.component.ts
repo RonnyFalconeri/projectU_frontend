@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class ProjectDetailPageComponent implements OnInit {
 
-  project: Observable<Project>;
+  project$: Observable<Project>;
 
   sizeEnum = Size;
   stateEnum = State;
@@ -25,7 +25,7 @@ export class ProjectDetailPageComponent implements OnInit {
 
   constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
     this.activatedRoute.params.subscribe(params => {
-      this.project = projectService.getProjectById(params.projectId)
+      this.project$ = projectService.getProjectById(params.projectId)
     });
   }
 

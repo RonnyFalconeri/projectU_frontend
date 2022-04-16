@@ -19,7 +19,7 @@ export class ProjectEditComponent implements OnInit {
 
   projectForm: FormGroup;
   editExistingProject: boolean = false;
-  project: Observable<Project> = this.setupNewProject();
+  project: Project = this.setupNewProject();
 
   stateEnum = State;
   faPen = faPen;
@@ -41,7 +41,8 @@ export class ProjectEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params.projectId) {
         this.editExistingProject = true;
-        this.project = this.projectService.getProjectById(params.projectId);
+        this.projectService.getProjectById(params.projectId)
+          .subscribe(project => this.project = project);
       }
     });
   }
@@ -96,7 +97,7 @@ export class ProjectEditComponent implements OnInit {
 
   saveProject(): void {
     if(this.editExistingProject) {
-      this.projectService.updateProject(this.project);
+      this.projectService.updateProject(this.project.id!, this.project);
     } else {
       this.projectService.createProject(this.project);
     }

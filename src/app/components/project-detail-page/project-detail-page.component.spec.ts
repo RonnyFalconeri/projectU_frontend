@@ -30,42 +30,42 @@ describe('ProjectDetailPageComponent', () => {
   });
 
   it('should have initiated class', () => {
-    component.project = getInitiatedProject();
+    component.project$ = getInitiatedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
     expect(hasOnlyClassOfState(projectCard, State.Initiated)).toBeTruthy();
   });
 
   it('should have in-progress class', () => {
-    component.project = getProgressedProject();
+    component.project$ = getProgressedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
     expect(hasOnlyClassOfState(projectCard, State.InProgress)).toBeTruthy();
   });
 
   it('should have halted class', () => {
-    component.project = getHaltedProject();
+    component.project$ = getHaltedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
     expect(hasOnlyClassOfState(projectCard, State.Halted)).toBeTruthy();
   });
 
   it('should have finished class', () => {
-    component.project = getFinishedProject();
+    component.project$ = getFinishedProject();
     fixture.detectChanges();
     const projectCard = fixture.debugElement.query(By.css('.project-card'));
     expect(hasOnlyClassOfState(projectCard, State.Finished)).toBeTruthy();
   });
 
   it('should have 0 task bars', () => {
-    component.project = getProjectWith0Tasks();
+    component.project$ = getProjectWith0Tasks();
     fixture.detectChanges();
     const taskList = fixture.debugElement.queryAll(By.css('.task-list app-task-bar'));
     expect(taskList.length).toEqual(0);
   });
 
   it('should have 3 task bars', () => {
-    component.project = getProjectWith3Tasks();
+    component.project$ = getProjectWith3Tasks();
     fixture.detectChanges();
     const taskList = fixture.debugElement.queryAll(By.css('.task-list app-task-bar'));
     expect(taskList.length).toEqual(3);

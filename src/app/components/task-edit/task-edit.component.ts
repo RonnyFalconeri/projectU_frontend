@@ -52,7 +52,7 @@ export class TaskEditComponent implements OnInit {
 
   private determineEditMode(taskId: string): void {
     if(taskId) {
-      this.task = this.taskService.getTaskById(taskId);
+      this.taskService.getTaskById(taskId).subscribe(task => this.task = task);
       this.editExistingTask = true;
     }
   }
