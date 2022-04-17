@@ -4,6 +4,10 @@ info:
   description: A REST API for the application projectU
   version: 1.0.0
 
+servers:
+  - url: http://localhost:8080
+    description: Development Server
+
 paths:
   /projects:
     get:
