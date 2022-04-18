@@ -8,7 +8,6 @@ import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'build/openapi';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project-edit',
@@ -30,22 +29,31 @@ export class ProjectEditComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly projectService: ProjectService,
     private readonly fb: FormBuilder,
-    private router: Router) {}
+    private router: Router) {
+      this.activatedRoute.params.subscribe(params => {
 
-  ngOnInit(): void {
-    this.determineEditMode();
-    this.setupProjectForm();
-  }
+        if(params.projectId) {
+          this.editExistingProject = true;
 
-  private determineEditMode(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if(params.projectId) {
-        this.editExistingProject = true;
-        this.projectService.getProjectById(params.projectId)
-          .subscribe(project => this.project = project);
-      }
-    });
-  }
+          this.projectService.getProjectById(params.projectId).subscribe(project => {
+            this.setupProjectForm();
+            this.initProjectForm(project);
+            this.project.id = project.id;
+
+            this.projectForm.valueChanges.subscribe(p => {
+              this.project.title = p.title;
+              this.project.description = p.description;
+              this.project.estimatedDurationInHours = p.estimatedDurationInHours;
+              this.project.state = p.state;
+              this.project.complexity = p.complexity;
+            });
+
+          });
+        }
+      });
+    }
+
+  ngOnInit(): void {}
 
   private setupProjectForm(): void {
     this.projectForm = this.fb.group({
@@ -78,6 +86,16 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
+  private initProjectForm(project: Project): void {
+    this.projectForm.patchValue({
+      title: project.title,
+      description: project.description,
+      estimatedDurationInHours: project.estimatedDurationInHours,
+      state: project.state,
+      complexity: project.complexity
+    });
+  }
+
   private setupNewProject(): Project {
     return {
       id: '',
@@ -96,10 +114,13 @@ export class ProjectEditComponent implements OnInit {
   }
 
   saveProject(): void {
-    if(this.editExistingProject) {
-      this.projectService.updateProject(this.project.id!, this.project);
-    } else {
-      this.projectService.createProject(this.project);
+    if(confirm("Do you want to save the project?")) {
+      if(this.editExistingProject) {
+        this.projectService.updateProject(this.project.id!, this.project).subscribe();
+      } else {
+        this.projectService.createProject(this.project).subscribe();
+      }
+      this.router.navigate(['/']);
     }
   }
 
