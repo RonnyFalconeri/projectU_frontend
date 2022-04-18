@@ -16,7 +16,7 @@
   }"
 >
 
-  <form class="taskForm" [formGroup]="taskForm" (ngSubmit)='saveTask()'>
+  <form class="taskForm" *ngIf="taskForm" [formGroup]="taskForm" (ngSubmit)='saveTask()'>
 
     <h1 class="form-headline" *ngIf="editExistingTask">Edit Task <fa-icon [icon]="faPen"></fa-icon></h1>
     <h1 class="form-headline" *ngIf="!editExistingTask">New Task <fa-icon [icon]="faPlusSquare"></fa-icon></h1>

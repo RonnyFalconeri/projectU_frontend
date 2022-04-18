@@ -49,6 +49,15 @@ export class ProjectEditComponent implements OnInit {
             });
 
           });
+        } else {
+          this.setupProjectForm();
+          this.projectForm.valueChanges.subscribe(p => {
+            this.project.title = p.title;
+            this.project.description = p.description;
+            this.project.estimatedDurationInHours = p.estimatedDurationInHours;
+            this.project.state = p.state;
+            this.project.complexity = p.complexity;
+          });
         }
       });
     }

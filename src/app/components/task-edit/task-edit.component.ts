@@ -19,42 +19,59 @@ export class TaskEditComponent implements OnInit {
   task: Task = this.setupNewTask();
   projectState: State = State.InProgress;
   projectId: string;
-  stateEnum = State;
 
+  stateEnum = State;
   faPen = faPen;
   faStopwatch = faStopwatch;
   faPlusSquare = faPlusSquare;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private  projectService: ProjectService,
-    private  taskService: TaskService,
+    private readonly projectService: ProjectService,
+    private readonly taskService: TaskService,
     private readonly formBuilder: FormBuilder,
-    private router: Router) {}
+    private router: Router) {
+      this.activatedRoute.params.subscribe(params => {
+        this.projectService.getProjectById(params.projectId).subscribe(project => {
+          this.projectState = project.state;
+          this.projectId = project.id!;
+        });
 
-  ngOnInit(): void {
-    this.initiateAttributes();
-  }
+        if(params.taskId) {
+          this.editExistingTask = true;
+          this.taskService.getTaskById(params.taskId).subscribe(task => {
+            this.setupTaskForm();
+            this.initTaskForm(task);
+            this.task.id = task.id;
 
-  private initiateAttributes(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.projectId = params.projectId;
-      this.determineProjectState(this.projectId);
-      this.determineEditMode(params.taskId);
-    });
-    this.setupTaskForm();
-  }
-
-  private determineProjectState(projectId: string): void {
-    this.projectService.getProjectById(projectId)
-      .subscribe((project: Project) => this.projectState = project.state);
-  }
-
-  private determineEditMode(taskId: string): void {
-    if(taskId) {
-      this.taskService.getTaskById(taskId).subscribe(task => this.task = task);
-      this.editExistingTask = true;
+            this.taskForm.valueChanges.subscribe(t => {
+              this.task.title = t.title;
+              this.task.description = t.description;
+              this.task.estimatedDurationInHours = t.estimatedDurationInHours;
+              this.task.done = t.done;
+            });
+          });
+        } else {
+          this.setupTaskForm();
+          this.taskForm.valueChanges.subscribe(t => {
+            this.task.title = t.title;
+            this.task.description = t.description;
+            this.task.estimatedDurationInHours = t.estimatedDurationInHours;
+            this.task.done = t.done;
+          });
+        }
+      });
     }
+
+  ngOnInit(): void {}
+
+  private initTaskForm(task: Task): void {
+    this.taskForm.patchValue({
+      title: task.title,
+      description: task.description,
+      estimatedDurationInHours: task.estimatedDurationInHours,
+      done: task.done
+    });
   }
 
   private setupTaskForm(): void {
@@ -91,10 +108,13 @@ export class TaskEditComponent implements OnInit {
   }
 
   saveTask(): void {
-    if(this.editExistingTask) {
-      this.taskService.updateTask(this.projectId, this.task);
-    } else {
-      this.taskService.createTask(this.projectId, this.task);
+    if(confirm("Do you want to save the project?")) {
+      if(this.editExistingTask) {
+        this.taskService.updateTask(this.task.id!, this.task).subscribe();
+      } else {
+        this.projectService.createTask(this.projectId, this.task).subscribe();
+      }
+      this.router.navigate(['/']);
     }
   }
 
