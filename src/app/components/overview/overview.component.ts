@@ -5,6 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
 import { ProjectService } from 'build/openapi';
 import { Observable } from 'rxjs';
+import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 
 @Component({
   selector: 'app-overview',

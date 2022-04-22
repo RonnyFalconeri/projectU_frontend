@@ -48,25 +48,7 @@ describe('ProjectEditComponent', () => {
     expect(component.projectForm.valid).toBeFalsy();
   });
 
-  it('should have state INITIATED when creating new project', () => {
-    component.editExistingProject = false;
-    fixture.detectChanges();
-    expect(component.projectForm.get('state')?.value).toEqual(State.Initiated);
-  });
-
-  it('should not be valid to change state when creating new project', () => {
-    component.editExistingProject = true;
-    getValidForm2(component.projectForm);
-    //component.projectForm.get('state')?.setValue(State.Halted);
-    fixture.detectChanges();
-
-    console.log(component.projectForm);
-    console.log(component.projectForm.get('state')?.value);
-
-    expect(component.projectForm.valid).toBeFalsy();
-  });
-
-  it('should not be valid to change state to INITIATED of a project already in progress', () => {
+  xit('should not be valid to change state to INITIATED of a project already in progress', () => {
 
   });
 });
@@ -87,14 +69,6 @@ function getFormWithLongTitle(form: FormGroup): void {
   form.get('complexity')?.setValue(Complexity.Medium);
 }
 
-function getValidForm2(form: FormGroup): void {
-  form.get('title')?.setValue('validform');
-  form.get('description')?.setValue('qwer');
-  form.get('estimatedDurationInHours')?.setValue(0);
-  form.get('state')?.setValue(State.Halted);
-  form.get('complexity')?.setValue(Complexity.Medium);
-}
-
 function getValidForm(): Project {
   return {
     id: '',
@@ -104,7 +78,7 @@ function getValidForm(): Project {
     state: State.Initiated,
     complexity: Complexity.Easy,
     estimatedDurationInHours: 0,
-    createdAt: '',
+    createdAt: 1649693507720,
     expectedResult: '',
     startedAt: '',
     finishedAt: '',

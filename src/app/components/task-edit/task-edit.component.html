@@ -8,18 +8,18 @@
 
 <div class="card task-card"
   [ngClass]="{
-    'initiated': projectState === stateEnum.Initiated,
-    'in-progress': projectState === stateEnum.InProgress,
-    'halted': projectState === stateEnum.Halted,
-    'finished': projectState === stateEnum.Finished,
+    'initiated': project.state === stateEnum.Initiated,
+    'in-progress': project.state === stateEnum.InProgress,
+    'halted': project.state === stateEnum.Halted,
+    'finished': project.state === stateEnum.Finished,
     'task-done': task.done
   }"
 >
 
   <form class="taskForm" *ngIf="taskForm" [formGroup]="taskForm" (ngSubmit)='saveTask()'>
 
-    <h1 class="form-headline" *ngIf="editExistingTask">Edit Task <fa-icon [icon]="faPen"></fa-icon></h1>
-    <h1 class="form-headline" *ngIf="!editExistingTask">New Task <fa-icon [icon]="faPlusSquare"></fa-icon></h1>
+    <h1 class="form-headline" *ngIf="isEditingExistingTask()">Edit Task <fa-icon [icon]="faPen"></fa-icon></h1>
+    <h1 class="form-headline" *ngIf="!isEditingExistingTask()">New Task <fa-icon [icon]="faPlusSquare"></fa-icon></h1>
 
     <div class="top">
       <div class="form-group">
@@ -68,13 +68,13 @@
       ></app-task-state-picker>
     </div>
 
-    <div class="controls" *ngIf="editExistingTask">
+    <div class="controls" *ngIf="isEditingExistingTask()">
       <button class="delete" type="button" (click)="deleteTask()">{{ 'delete' | uppercase }}</button>
       <button class="cancel" type="button" [routerLink]="['/']">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!taskForm.valid">{{ 'save' | uppercase }}</button>
     </div>
 
-    <div class="controls" *ngIf="!editExistingTask">
+    <div class="controls" *ngIf="!isEditingExistingTask()">
       <button class="cancel" type="button" [routerLink]="['/']">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!taskForm.valid">{{ 'save' | uppercase }}</button>
     </div>

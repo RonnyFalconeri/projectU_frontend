@@ -16,12 +16,12 @@ export class MockProjectService implements ProjectServiceInterface {
 
   private mockProjects: Project[] = [
     {
-      id: '1',
+      id: '1b30149a-4bd6-42d3-b9e1-c0b08d37952d',
       title: 'Test Project 1',
       description: 'A simple project just for testing things...',
       tasks: [
         {
-          id: '1',
+          id: '85db54f7-45e2-41af-96ec-5caa8688e131',
           title: 'A subtask 1',
           description: 'This is a subtask for the project.',
           done: true,
@@ -29,7 +29,7 @@ export class MockProjectService implements ProjectServiceInterface {
           result: 'More knowledge'
         },
         {
-          id: '2',
+          id: '0e4c05a5-9cd9-4021-9d78-5c2a6c6df428',
           title: 'A subtask 2',
           description: 'This is a subtask for the project.',
           done: false,
@@ -37,7 +37,7 @@ export class MockProjectService implements ProjectServiceInterface {
           result: 'More knowledge'
         },
         {
-          id: '3',
+          id: 'e488e28a-70f3-43a1-911f-fbcacad93533',
           title: 'A subtask 3',
           description: 'This is a subtask for the project.',
           done: false,
@@ -55,7 +55,7 @@ export class MockProjectService implements ProjectServiceInterface {
       actualResult: ''
     },
     {
-      id: '2',
+      id: '5142c856-3ab3-4c23-973e-63de7e7a61c6',
       title: 'Test Project 2',
       description: 'A simple project just for testing things...',
       tasks: [],
@@ -69,7 +69,7 @@ export class MockProjectService implements ProjectServiceInterface {
       actualResult: ''
     },
     {
-      id: '3',
+      id: '6da7bcf4-2976-43f0-b17f-85be50460873',
       title: 'Test Project 3',
       description: 'A simple project just for testing things...',
       tasks: [],
@@ -83,7 +83,7 @@ export class MockProjectService implements ProjectServiceInterface {
       actualResult: ''
     },
     {
-      id: '4',
+      id: 'f1724747-5cbe-456f-a249-1e22c590c91d',
       title: 'Test Project 4',
       description: 'A simple project just for testing things...',
       tasks: [],
@@ -97,12 +97,12 @@ export class MockProjectService implements ProjectServiceInterface {
       actualResult: ''
     },
     {
-      id: '5',
+      id: '4cd24582-a6a1-4fd6-8c64-03b389da83e1',
       title: 'Test Project 5',
       description: 'A simple project just for testing things...',
       tasks: [
         {
-          id: '1',
+          id: 'a708a291-f29b-4eff-9ef6-5afba283af8e',
           title: 'A subtask 1',
           description: 'This is a subtask for the project.',
           done: true,
@@ -110,7 +110,7 @@ export class MockProjectService implements ProjectServiceInterface {
           result: 'More knowledge'
         },
         {
-          id: '2',
+          id: '095378dd-3827-4b5c-aaec-9a41229d008c',
           title: 'A subtask 2',
           description: 'This is a subtask for the project.',
           done: false,
@@ -178,9 +178,10 @@ export class MockProjectService implements ProjectServiceInterface {
     console.log(task);
   }
 
-  createTask(projectId: string, task: Task): void {
+  createTask(projectId: string, task: Task): Observable<Project> {
     console.log('create task');
     console.log(task);
+    return this.getProjectById(projectId);
   }
 
   deleteProject(id: string): Observable<{}> {

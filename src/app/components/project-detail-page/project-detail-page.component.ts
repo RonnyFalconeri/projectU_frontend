@@ -6,6 +6,7 @@ import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
 import { ProjectService } from 'build/openapi';
 import { Observable } from 'rxjs';
+import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 
 @Component({
   selector: 'app-project-detail-page',
@@ -23,7 +24,8 @@ export class ProjectDetailPageComponent implements OnInit {
   faEdit = faEdit;
   faChevronLeft = faChevronLeft;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService) {
+  constructor(private readonly activatedRoute: ActivatedRoute,
+              readonly projectService: ProjectService) {
     this.activatedRoute.params.subscribe(params => {
       this.project$ = projectService.getProjectById(params.projectId)
     });

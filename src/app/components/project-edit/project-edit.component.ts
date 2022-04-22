@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +17,6 @@ import { ProjectService } from 'build/openapi';
 export class ProjectEditComponent implements OnInit {
 
   projectForm: FormGroup;
-  editExistingProject: boolean = false;
   project: Project = this.setupNewProject();
 
   stateEnum = State;
@@ -25,83 +24,52 @@ export class ProjectEditComponent implements OnInit {
   faStopwatch = faStopwatch;
   faPlusSquare = faPlusSquare;
 
-  constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly projectService: ProjectService,
-    private readonly fb: FormBuilder,
-    private router: Router) {
-      this.activatedRoute.params.subscribe(params => {
-
-        if(params.projectId) {
-          this.editExistingProject = true;
-
-          this.projectService.getProjectById(params.projectId).subscribe(project => {
-            this.setupProjectForm();
-            this.initProjectForm(project);
-            this.project.id = project.id;
-
-            this.projectForm.valueChanges.subscribe(p => {
-              this.project.title = p.title;
-              this.project.description = p.description;
-              this.project.estimatedDurationInHours = p.estimatedDurationInHours;
-              this.project.state = p.state;
-              this.project.complexity = p.complexity;
-            });
-
-          });
-        } else {
-          this.setupProjectForm();
-          this.projectForm.valueChanges.subscribe(p => {
-            this.project.title = p.title;
-            this.project.description = p.description;
-            this.project.estimatedDurationInHours = p.estimatedDurationInHours;
-            this.project.state = p.state;
-            this.project.complexity = p.complexity;
-          });
-        }
-      });
+  constructor(private readonly projectService: ProjectService,
+              private readonly fb: FormBuilder,
+              private router: Router) {
+      if(this.isEditingExistingProject()) {
+        let projectId = router.url.split('/')[3];
+        this.projectService.getProjectById(projectId).subscribe(project => {
+            this.project = project;
+            this.setupProjectForm(this.project);
+            this.subscribeToFormChanges();
+        });
+      } else {
+        this.setupProjectForm(this.project);
+        this.subscribeToFormChanges();
+      }
     }
 
   ngOnInit(): void {}
 
-  private setupProjectForm(): void {
+  private setupProjectForm(project: Project): void {
     this.projectForm = this.fb.group({
       title: [
-        this.project.title, [
+        project.title, [
           Validators.required,
           Validators.maxLength(100)
         ]
       ],
       description: [
-        this.project.description
+        project.description
       ],
       estimatedDurationInHours: [
-        this.project.estimatedDurationInHours,
+        project.estimatedDurationInHours,
         Validators.min(0)
       ],
       state: [
         {
-          value: this.project.state,
-          disabled: !this.editExistingProject
+          value: project.state,
+          disabled: !this.isEditingExistingProject()
         }, [
           Validators.required,
-          this.validateState(this.project.state)
+          this.validateState(project.state)
         ]
       ],
       complexity: [
-        this.project.complexity,
+        project.complexity,
         Validators.required
       ]
-    });
-  }
-
-  private initProjectForm(project: Project): void {
-    this.projectForm.patchValue({
-      title: project.title,
-      description: project.description,
-      estimatedDurationInHours: project.estimatedDurationInHours,
-      state: project.state,
-      complexity: project.complexity
     });
   }
 
@@ -122,9 +90,23 @@ export class ProjectEditComponent implements OnInit {
     }
   }
 
+  private subscribeToFormChanges(): void {
+    this.projectForm.valueChanges.subscribe(p => {
+      this.project.title = p.title;
+      this.project.description = p.description;
+      this.project.estimatedDurationInHours = p.estimatedDurationInHours;
+      this.project.state = p.state;
+      this.project.complexity = p.complexity;
+    });
+  }
+
+  isEditingExistingProject(): boolean {
+    return this.router.url.split('/')[1] === 'edit';
+  }
+
   saveProject(): void {
     if(confirm("Do you want to save the project?")) {
-      if(this.editExistingProject) {
+      if(this.isEditingExistingProject()) {
         this.projectService.updateProject(this.project.id!, this.project).subscribe();
       } else {
         this.projectService.createProject(this.project).subscribe();
@@ -160,13 +142,13 @@ export class ProjectEditComponent implements OnInit {
 
     return (control: AbstractControl):{[key: string]: boolean} | null => {
 
-      if(this.editExistingProject &&
+      if(this.isEditingExistingProject() &&
         originalState !== State.Initiated &&
         control.value === State.Initiated) {
         return {'Cannot go back to initiated when editing a project': true}
       }
 
-      if(!this.editExistingProject &&
+      if(!this.isEditingExistingProject() &&
         control.value !== State.Initiated) {
         return {'Cannot change state when creating new project': true}
       }

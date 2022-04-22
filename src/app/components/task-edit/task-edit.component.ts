@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Task } from 'build/openapi/model/task';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
@@ -15,82 +15,54 @@ import { Project, ProjectService, State, TaskService } from 'build/openapi';
 export class TaskEditComponent implements OnInit {
 
   taskForm: FormGroup;
-  editExistingTask: boolean = false;
   task: Task = this.setupNewTask();
-  projectState: State = State.InProgress;
-  projectId: string;
+  project: Project;
 
   stateEnum = State;
   faPen = faPen;
   faStopwatch = faStopwatch;
   faPlusSquare = faPlusSquare;
 
-  constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly projectService: ProjectService,
-    private readonly taskService: TaskService,
-    private readonly formBuilder: FormBuilder,
-    private router: Router) {
-      this.activatedRoute.params.subscribe(params => {
-        this.projectService.getProjectById(params.projectId).subscribe(project => {
-          this.projectState = project.state;
-          this.projectId = project.id!;
-        });
-
-        if(params.taskId) {
-          this.editExistingTask = true;
-          this.taskService.getTaskById(params.taskId).subscribe(task => {
-            this.setupTaskForm();
-            this.initTaskForm(task);
-            this.task.id = task.id;
-
-            this.taskForm.valueChanges.subscribe(t => {
-              this.task.title = t.title;
-              this.task.description = t.description;
-              this.task.estimatedDurationInHours = t.estimatedDurationInHours;
-              this.task.done = t.done;
-            });
+  constructor(private readonly projectService: ProjectService,
+              private readonly taskService: TaskService,
+              private readonly formBuilder: FormBuilder,
+              private router: Router) {
+      let projectId = router.url.split('/')[3];
+      this.projectService.getProjectById(projectId).subscribe(project => {
+        this.project = project;
+        if(this.isEditingExistingTask()) {
+          let taskId = router.url.split('/')[5];
+          this.taskService.getTaskById(taskId).subscribe(task => {
+            this.task = task;
+            this.setupTaskForm(this.task);
+            this.subscribeToFormChanges();
           });
         } else {
-          this.setupTaskForm();
-          this.taskForm.valueChanges.subscribe(t => {
-            this.task.title = t.title;
-            this.task.description = t.description;
-            this.task.estimatedDurationInHours = t.estimatedDurationInHours;
-            this.task.done = t.done;
-          });
+          this.setupTaskForm(this.task);
+          this.subscribeToFormChanges();
         }
       });
     }
 
   ngOnInit(): void {}
 
-  private initTaskForm(task: Task): void {
-    this.taskForm.patchValue({
-      title: task.title,
-      description: task.description,
-      estimatedDurationInHours: task.estimatedDurationInHours,
-      done: task.done
-    });
-  }
-
-  private setupTaskForm(): void {
+  private setupTaskForm(task: Task): void {
     this.taskForm = this.formBuilder.group({
       title: [
-        this.task.title, [
+        task.title, [
           Validators.required,
           Validators.maxLength(100)
         ]
       ],
       description: [
-        this.task.description
+        task.description
       ],
       estimatedDurationInHours: [
-        this.task.estimatedDurationInHours,
+        task.estimatedDurationInHours,
         Validators.min(0)
       ],
       done: [
-        this.task.done,
+        task.done,
         Validators.required
       ]
     });
@@ -107,12 +79,25 @@ export class TaskEditComponent implements OnInit {
     }
   }
 
+  private subscribeToFormChanges(): void {
+    this.taskForm.valueChanges.subscribe(t => {
+      this.task.title = t.title;
+      this.task.description = t.description;
+      this.task.estimatedDurationInHours = t.estimatedDurationInHours;
+      this.task.done = t.done;
+    });
+  }
+
+  isEditingExistingTask(): boolean {
+    return this.router.url.split('/')[1] === 'edit';
+  }
+
   saveTask(): void {
     if(confirm("Do you want to save the project?")) {
-      if(this.editExistingTask) {
+      if(this.isEditingExistingTask()) {
         this.taskService.updateTask(this.task.id!, this.task).subscribe();
       } else {
-        this.projectService.createTask(this.projectId, this.task).subscribe();
+        this.projectService.createTask(this.project.id!, this.task).subscribe();
       }
       this.router.navigate(['/']);
     }

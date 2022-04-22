@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft, faChevronDown, faChevronUp, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
@@ -7,8 +6,7 @@ import { Router } from '@angular/router';
 import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
 import { Size } from 'src/app/shared/models/Size';
-import { ProjectService, TaskService } from 'build/openapi';
-import { Observable } from 'rxjs';
+import { ProjectService } from 'build/openapi';
 
 
 @Component({
@@ -31,44 +29,34 @@ export class TaskDetailPageComponent implements OnInit {
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, projectService: ProjectService, private router: Router) {
-    this.activatedRoute.params.subscribe(params => {
-      let projectId: string = params.projectId;
-      let taskId: string = params.taskId;
-
-      projectService.getProjectById(projectId)
-        .subscribe(project => this.project = project);
-
-      this.currentTaskPosition = this.getIndexOfTaskById(taskId);
-      this.task = this.project.tasks![this.currentTaskPosition];
-    });
+  constructor(readonly projectService: ProjectService,
+              private router: Router) {
+      let projectId = router.url.split('/')[2];
+      let taskId = router.url.split('/')[4];
+      projectService.getProjectById(projectId).subscribe(project => {
+        this.project = project;
+        this.currentTaskPosition = this.getIndexOfTaskById(taskId);
+        this.task = this.project.tasks![this.currentTaskPosition];
+      });
   }
 
   ngOnInit(): void {}
 
-  getIndexOfTaskById(id: string): number {
+  private getIndexOfTaskById(id: string): number {
     return this.project.tasks!.map(function(task) {
       return task.id
     }).indexOf(id);
   }
 
   isTherePreviousTask(): boolean {
-    let previousTaskPosition: number = this.currentTaskPosition-1;
-
-    if(previousTaskPosition < 0) {
-      return false;
-    }
-    return true;
+    let previousTaskPosition: number = this.currentTaskPosition;
+    return previousTaskPosition > 0;
   }
 
   isThereNextTask(): boolean {
     let nextTaskPosition: number = this.currentTaskPosition+1;
     let totalTaskCount: number = this.project.tasks!.length;
-
-    if(nextTaskPosition < totalTaskCount) {
-      return true;
-    }
-    return false;
+    return nextTaskPosition < totalTaskCount;
   }
 
   changeToPreviousTask(): void {
