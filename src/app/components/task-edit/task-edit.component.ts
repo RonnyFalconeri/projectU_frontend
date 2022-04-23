@@ -6,6 +6,7 @@ import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { Project, ProjectService, State, TaskService } from 'build/openapi';
+import { ProjectUtilService } from 'src/app/shared/services/project-util.service';
 
 @Component({
   selector: 'app-task-edit',
@@ -14,9 +15,9 @@ import { Project, ProjectService, State, TaskService } from 'build/openapi';
 })
 export class TaskEditComponent implements OnInit {
 
+  project: Project = this.projectUtil.setupEmptyProject();
+  task: Task = this.projectUtil.setupEmptyTask();
   taskForm: FormGroup;
-  task: Task = this.setupNewTask();
-  project: Project;
 
   stateEnum = State;
   faPen = faPen;
@@ -24,6 +25,7 @@ export class TaskEditComponent implements OnInit {
   faPlusSquare = faPlusSquare;
 
   constructor(private readonly projectService: ProjectService,
+              private readonly projectUtil: ProjectUtilService,
               private readonly taskService: TaskService,
               private readonly formBuilder: FormBuilder,
               private router: Router) {
@@ -68,17 +70,6 @@ export class TaskEditComponent implements OnInit {
     });
   }
 
-  private setupNewTask(): Task {
-    return {
-      id: '',
-      title: '',
-      description: '',
-      done: false,
-      estimatedDurationInHours: 0,
-      result: ''
-    }
-  }
-
   private subscribeToFormChanges(): void {
     this.taskForm.valueChanges.subscribe(t => {
       this.task.title = t.title;
@@ -99,15 +90,21 @@ export class TaskEditComponent implements OnInit {
       } else {
         this.projectService.createTask(this.project.id!, this.task).subscribe();
       }
-      this.router.navigate(['/']);
+      this.navigateToProjectDetailPage();
     }
   }
 
   deleteTask(): void {
     if(confirm("Do you want to delete the project?")) {
-      this.taskService.deleteTask(this.task.id!);
-      this.router.navigate(['/']);
+      this.taskService.deleteTask(this.task.id!).subscribe();
+      this.navigateToProjectDetailPage();
     }
+  }
+
+  private navigateToProjectDetailPage(): void {
+    this.router.navigate(['project', this.project.id]).then(() => {
+      window.location.reload();
+    });
   }
 
   changeIsTaskDone(): void {

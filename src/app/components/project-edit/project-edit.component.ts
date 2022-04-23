@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Complexity } from 'build/openapi/model/complexity';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ProjectService } from 'build/openapi';
+import { ProjectUtilService } from 'src/app/shared/services/project-util.service';
 
 @Component({
   selector: 'app-project-edit',
@@ -17,7 +17,7 @@ import { ProjectService } from 'build/openapi';
 export class ProjectEditComponent implements OnInit {
 
   projectForm: FormGroup;
-  project: Project = this.setupNewProject();
+  project: Project = this.projectUtil.setupEmptyProject();
 
   stateEnum = State;
   faPen = faPen;
@@ -25,6 +25,7 @@ export class ProjectEditComponent implements OnInit {
   faPlusSquare = faPlusSquare;
 
   constructor(private readonly projectService: ProjectService,
+              private readonly projectUtil: ProjectUtilService,
               private readonly fb: FormBuilder,
               private router: Router) {
       if(this.isEditingExistingProject()) {
@@ -73,23 +74,6 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
-  private setupNewProject(): Project {
-    return {
-      id: '',
-      title: '',
-      description: '',
-      tasks: [],
-      state: State.Initiated,
-      complexity: Complexity.Easy,
-      estimatedDurationInHours: 0,
-      createdAt: 0,
-      expectedResult: '',
-      startedAt: '',
-      finishedAt: '',
-      actualResult: ''
-    }
-  }
-
   private subscribeToFormChanges(): void {
     this.projectForm.valueChanges.subscribe(p => {
       this.project.title = p.title;
@@ -111,15 +95,21 @@ export class ProjectEditComponent implements OnInit {
       } else {
         this.projectService.createProject(this.project).subscribe();
       }
-      this.router.navigate(['/']);
+      this.navigateToOverviewPage();
     }
   }
 
   deleteProject(): void {
     if(confirm("Do you want to delete the project?")) {
-      this.projectService.deleteProject(this.project.id!);
-      this.router.navigate(['/']);
+      this.projectService.deleteProject(this.project.id!).subscribe();
+      this.navigateToOverviewPage();
     }
+  }
+
+  private navigateToOverviewPage(): void {
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 
   changeState(): void {

@@ -7,6 +7,7 @@ import { Task } from 'build/openapi/model/task';
 import { State } from 'build/openapi/model/state';
 import { Size } from 'src/app/shared/models/Size';
 import { ProjectService } from 'build/openapi';
+import { ProjectUtilService } from 'src/app/shared/services/project-util.service';
 
 
 @Component({
@@ -16,8 +17,8 @@ import { ProjectService } from 'build/openapi';
 })
 export class TaskDetailPageComponent implements OnInit {
 
-  project: Project;
-  task: Task;
+  project: Project = this.projectUtil.setupEmptyProject();
+  task: Task = this.projectUtil.setupEmptyTask();
   currentTaskPosition: number;
 
   sizeEnum = Size;
@@ -30,6 +31,7 @@ export class TaskDetailPageComponent implements OnInit {
   faChevronUp = faChevronUp;
 
   constructor(readonly projectService: ProjectService,
+              private readonly projectUtil: ProjectUtilService,
               private router: Router) {
       let projectId = router.url.split('/')[2];
       let taskId = router.url.split('/')[4];
