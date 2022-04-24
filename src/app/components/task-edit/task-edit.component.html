@@ -70,12 +70,12 @@
 
     <div class="controls" *ngIf="isEditingExistingTask()">
       <button class="delete" type="button" (click)="deleteTask()">{{ 'delete' | uppercase }}</button>
-      <button class="cancel" type="button" [routerLink]="['/']">{{ 'cancel' | uppercase }}</button>
+      <button class="cancel" type="button" (click)="navigateToTaskDetailPage()">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!taskForm.valid">{{ 'save' | uppercase }}</button>
     </div>
 
     <div class="controls" *ngIf="!isEditingExistingTask()">
-      <button class="cancel" type="button" [routerLink]="['/']">{{ 'cancel' | uppercase }}</button>
+      <button class="cancel" type="button" (click)="navigateToTaskDetailPage()">{{ 'cancel' | uppercase }}</button>
       <button class="save" type="submit" [disabled]="!taskForm.valid">{{ 'save' | uppercase }}</button>
     </div>
   </form>

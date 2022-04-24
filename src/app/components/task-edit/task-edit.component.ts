@@ -29,22 +29,22 @@ export class TaskEditComponent implements OnInit {
               private readonly taskService: TaskService,
               private readonly formBuilder: FormBuilder,
               private router: Router) {
-      let projectId = router.url.split('/')[3];
-      this.projectService.getProjectById(projectId).subscribe(project => {
-        this.project = project;
-        if(this.isEditingExistingTask()) {
-          let taskId = router.url.split('/')[5];
-          this.taskService.getTaskById(taskId).subscribe(task => {
-            this.task = task;
-            this.setupTaskForm(this.task);
-            this.subscribeToFormChanges();
-          });
-        } else {
+    let projectId = router.url.split('/')[3];
+    this.projectService.getProjectById(projectId).subscribe(project => {
+      this.project = project;
+      if(this.isEditingExistingTask()) {
+        let taskId = router.url.split('/')[5];
+        this.taskService.getTaskById(taskId).subscribe(task => {
+          this.task = task;
           this.setupTaskForm(this.task);
           this.subscribeToFormChanges();
-        }
-      });
-    }
+        });
+      } else {
+        this.setupTaskForm(this.task);
+        this.subscribeToFormChanges();
+      }
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -90,19 +90,19 @@ export class TaskEditComponent implements OnInit {
       } else {
         this.projectService.createTask(this.project.id!, this.task).subscribe();
       }
-      this.navigateToProjectDetailPage();
+      this.navigateToTaskDetailPage();
     }
   }
 
   deleteTask(): void {
     if(confirm("Do you want to delete the project?")) {
       this.taskService.deleteTask(this.task.id!).subscribe();
-      this.navigateToProjectDetailPage();
+      this.navigateToTaskDetailPage();
     }
   }
 
-  private navigateToProjectDetailPage(): void {
-    this.router.navigate(['project', this.project.id]).then(() => {
+  navigateToTaskDetailPage(): void {
+    this.router.navigate(['project', this.project.id, 'task', this.task.id]).then(() => {
       window.location.reload();
     });
   }

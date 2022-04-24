@@ -28,18 +28,18 @@ export class ProjectEditComponent implements OnInit {
               private readonly projectUtil: ProjectUtilService,
               private readonly fb: FormBuilder,
               private router: Router) {
-      if(this.isEditingExistingProject()) {
-        let projectId = router.url.split('/')[3];
-        this.projectService.getProjectById(projectId).subscribe(project => {
-            this.project = project;
-            this.setupProjectForm(this.project);
-            this.subscribeToFormChanges();
-        });
-      } else {
-        this.setupProjectForm(this.project);
-        this.subscribeToFormChanges();
-      }
+    if(this.isEditingExistingProject()) {
+      let projectId = router.url.split('/')[3];
+      this.projectService.getProjectById(projectId).subscribe(project => {
+          this.project = project;
+          this.setupProjectForm(this.project);
+          this.subscribeToFormChanges();
+      });
+    } else {
+      this.setupProjectForm(this.project);
+      this.subscribeToFormChanges();
     }
+  }
 
   ngOnInit(): void {}
 
@@ -95,19 +95,19 @@ export class ProjectEditComponent implements OnInit {
       } else {
         this.projectService.createProject(this.project).subscribe();
       }
-      this.navigateToOverviewPage();
+      this.navigateToProjectDetailPage();
     }
   }
 
   deleteProject(): void {
     if(confirm("Do you want to delete the project?")) {
       this.projectService.deleteProject(this.project.id!).subscribe();
-      this.navigateToOverviewPage();
+      this.navigateToProjectDetailPage();
     }
   }
 
-  private navigateToOverviewPage(): void {
-    this.router.navigate(['/']).then(() => {
+  navigateToProjectDetailPage(): void {
+    this.router.navigate(['project', this.project.id]).then(() => {
       window.location.reload();
     });
   }
@@ -118,14 +118,6 @@ export class ProjectEditComponent implements OnInit {
 
   changeComplexity(): void {
     this.project.complexity = this.projectForm.get('complexity')?.value;
-  }
-
-  get title() {
-    return this.projectForm.get('title');
-  }
-
-  get state() {
-    return this.projectForm.get('state');
   }
 
   validateState(originalState: State) {
@@ -145,6 +137,14 @@ export class ProjectEditComponent implements OnInit {
 
       return null;
     };
+  }
+
+  get title() {
+    return this.projectForm.get('title');
+  }
+
+  get state() {
+    return this.projectForm.get('state');
   }
 
 }
