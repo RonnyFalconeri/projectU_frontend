@@ -28,14 +28,14 @@ A project has the following attributes:
   - Title
   - Description
   - State - possible values:
-    - initiated
-    - in progress
-    - halted
-    - finished
+    - initiated (grey)
+    - in progress (blue)
+    - halted (orange)
+    - finished (green)
   - Complexity - possible values:
-    - easy
-    - medium
-    - difficult
+    - easy (green traffic light)
+    - medium (yellow traffic light)
+    - difficult (red traffic light)
   - Estimated duration (in hours)
   - Expected Result / Goal
   - Actual Result
