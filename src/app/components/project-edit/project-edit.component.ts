@@ -79,8 +79,11 @@ export class ProjectEditComponent implements OnInit {
       this.project.title = p.title;
       this.project.description = p.description;
       this.project.estimatedDurationInHours = p.estimatedDurationInHours;
-      this.project.state = p.state;
       this.project.complexity = p.complexity;
+
+      if(this.isEditingExistingProject()) {
+        this.project.state = p.state;
+      }
     });
   }
 
@@ -92,22 +95,29 @@ export class ProjectEditComponent implements OnInit {
     if(confirm("Do you want to save the project?")) {
       if(this.isEditingExistingProject()) {
         this.projectService.updateProject(this.project.id!, this.project).subscribe();
+        this.navigateToProjectDetailPage();
       } else {
         this.projectService.createProject(this.project).subscribe();
+        this.navigateToOverviewPage();
       }
-      this.navigateToProjectDetailPage();
-    }
-  }
-
-  deleteProject(): void {
-    if(confirm("Do you want to delete the project?")) {
-      this.projectService.deleteProject(this.project.id!).subscribe();
-      this.navigateToProjectDetailPage();
     }
   }
 
   navigateToProjectDetailPage(): void {
     this.router.navigate(['project', this.project.id]).then(() => {
+      window.location.reload();
+    });
+  }
+
+  deleteProject(): void {
+    if(confirm("Do you want to delete the project?")) {
+      this.projectService.deleteProject(this.project.id!).subscribe();
+      this.navigateToOverviewPage();
+    }
+  }
+
+  private navigateToOverviewPage(): void {
+    this.router.navigate(['/']).then(() => {
       window.location.reload();
     });
   }

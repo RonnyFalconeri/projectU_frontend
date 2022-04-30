@@ -94,15 +94,21 @@ export class TaskEditComponent implements OnInit {
     }
   }
 
+  navigateToTaskDetailPage(): void {
+    this.router.navigate(['project', this.project.id, 'task', this.task.id]).then(() => {
+      window.location.reload();
+    });
+  }
+
   deleteTask(): void {
     if(confirm("Do you want to delete the project?")) {
       this.taskService.deleteTask(this.task.id!).subscribe();
-      this.navigateToTaskDetailPage();
+      this.navigateToProjectDetailPage();
     }
   }
 
-  navigateToTaskDetailPage(): void {
-    this.router.navigate(['project', this.project.id, 'task', this.task.id]).then(() => {
+  private navigateToProjectDetailPage(): void {
+    this.router.navigate(['project', this.project.id]).then(() => {
       window.location.reload();
     });
   }
