@@ -1,0 +1,26 @@
+<div class="label-container">
+  <label>Complexity*</label>
+</div>
+<div class="complexity-indicator">
+  <app-traffic-light
+    [complexity]="complexity"
+    [horizontal]="true"
+  ></app-traffic-light>
+</div>
+<div class="picker">
+  <div class="item"
+      (click)="changeComplexity(complexityEnum.Easy)"
+      [ngClass]="{'item--active': complexity === complexityEnum.Easy}">
+    EASY
+  </div>
+  <div class="item"
+      (click)="changeComplexity(complexityEnum.Medium)"
+      [ngClass]="{'item--active': complexity === complexityEnum.Medium}">
+    MEDIUM
+  </div>
+  <div class="item"
+      (click)="changeComplexity(complexityEnum.Difficult)"
+      [ngClass]="{'item--active': complexity === complexityEnum.Difficult}">
+    DIFFICULT
+  </div>
+</div>

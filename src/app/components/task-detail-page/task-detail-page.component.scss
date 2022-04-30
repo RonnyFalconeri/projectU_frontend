@@ -1,0 +1,166 @@
+.task-card {
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .sub-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    margin: 20px 0;
+    padding: 20px 40px;
+    background-color: rgba(0, 0, 0, 0.27);
+  }
+
+  .task-teaser {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .task-button {
+      display: flex;
+      justify-content: space-evenly;
+      background-color: rgba(0, 0, 0, 0.418);
+      color: white;
+      width: 155px;
+      padding: 10px 20px;
+      margin: 5px 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+
+      fa-icon {
+        margin-right: 10px;
+      }
+    }
+
+    .task-button:hover {
+      background-color: rgba(0, 0, 0, 0.589);
+      cursor: pointer;
+    }
+
+    .task-button:active {
+      background-color: rgba(0, 0, 0, 0.678);
+    }
+
+    .next-task {
+      padding: 10px 40px;
+    }
+  }
+
+  .primary-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0 40px 30px 40px;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .description {
+      margin-top: 8px;
+      max-width: 580px;
+    }
+
+    .date {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--color-font-secondary);
+    }
+  }
+
+  .secondary-info {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    padding: 10px;
+    font-weight: bold;
+    color: black;
+
+    .hours {
+      font-size: 3rem;
+
+      fa-icon {
+        margin: 0 5px;
+        font-size: 2.5rem;
+      }
+    }
+
+    .state {
+      font-size: 1.5rem;
+    }
+
+    p { margin: 0;}
+  }
+
+  .result {
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
+}
+
+// for medium and tablet screens
+@media (min-width: 700px) and (max-width: 1100px) {
+  .task-card {
+    margin: 100px 15px 50px 15px;
+
+    .primary-info {
+      margin: 0 30px 10px 30px;
+    }
+
+    .results {
+      margin: 0 30px;
+    }
+  }
+}
+
+// for mobile screens
+@media (max-width: 700px) {
+  .task-card {
+    margin: 100px 15px 50px 15px;
+    padding: 20px;
+
+    .primary-info {
+      margin: 0 10px 10px 10px;
+      flex-direction: column;
+      align-items: center;
+
+      h1 {
+        text-align: center;
+      }
+
+      .description {
+        text-align: center;
+      }
+    }
+
+    .task-teaser {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sub-container {
+      padding: 20px;
+    }
+
+    .results {
+      margin: 0 10px;
+    }
+
+    .date {
+      align-self: center;
+    }
+  }
+}

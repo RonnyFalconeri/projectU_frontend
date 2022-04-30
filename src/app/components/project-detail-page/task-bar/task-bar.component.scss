@@ -1,0 +1,76 @@
+.task {
+  display: flex;
+  align-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  height: 160px;
+  background-color: rgba(0, 0, 0, 0.27);
+  border-radius: 40px;
+  margin: 20px 0;
+  padding: 10px 60px;
+
+  .primary-info {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      max-width: 300px;
+    }
+
+    .description {
+      max-width: 430px;
+      margin: 0 15px;
+      white-space: pre;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .secondary-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .time-info {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+
+      fa-icon {
+        font-size: 1.6rem;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.task:hover {
+  cursor: pointer;
+  background-color: rgba(102, 102, 102, 0.27);
+}
+
+// for medium and tablet screens
+@media (min-width: 700px) and (max-width: 1100px) {
+  .task {
+    padding: 10px 30px;
+  }
+}
+
+// for mobile screens
+@media (max-width: 700px) {
+  .task {
+    padding: 10px 30px;
+    flex-direction: column;
+    height: auto;
+
+    .primary-info {
+      flex-direction: column;
+
+      .description {
+        margin: 10px 10px;
+        white-space: normal;
+        max-height: 300px;
+      }
+    }
+  }
+}

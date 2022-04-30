@@ -1,0 +1,106 @@
+@import 'forms';
+
+.menu-bar {
+  background-color: var(--color-menu-bar);
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  min-height: 1.5rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  div {
+    min-width: 40px;
+  }
+
+  .logo {
+    height: 3rem;
+    margin: 10px;
+  }
+
+  .home-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-link:hover {
+    cursor: pointer;
+  }
+
+  .menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    height: 33px;
+  }
+
+  .menu-button:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.63);
+  }
+
+  .menu-button:active {
+    color: rgb(85, 85, 85);
+  }
+
+  .edit-button {
+    font-size: 1.4rem;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  max-width: 1000px;
+  margin: 150px auto;
+  padding: 40px;
+  border-radius: 40px;
+  box-shadow: 0px 0px 20px 0px #0000008c;
+}
+
+.initiated {
+  background-color: var(--color-state-initiated);
+}
+
+.in-progress {
+  background-color: var(--color-state-in-progress);
+}
+
+.halted {
+  background-color: var(--color-state-halted);
+}
+
+.finished {
+  background-color: var(--color-state-finished);
+}
+
+// for mobile screens
+@media (max-width: 700px) {
+  .menu-bar {
+    justify-content: space-between;
+
+    .home-link {
+      display: none;
+    }
+
+    .menu-button {
+      margin: 30px 20px 10px 20px;
+    }
+  }
+}

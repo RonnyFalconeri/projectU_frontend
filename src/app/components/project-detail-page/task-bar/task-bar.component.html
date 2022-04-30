@@ -1,0 +1,15 @@
+<div class="task row" [routerLink]="['task', task.id]">
+  <div class="primary-info row">
+    <h1>{{task.title}}</h1>
+    <p class="description">{{task.description}}</p>
+  </div>
+
+  <div class="secondary-info row">
+    <p class="time-info">
+      <fa-icon [icon]="faStopwatch"></fa-icon>{{task.estimatedDurationInHours}}h
+    </p>
+    <app-task-progress
+      [done]="task.done"
+    ></app-task-progress>
+  </div>
+</div>

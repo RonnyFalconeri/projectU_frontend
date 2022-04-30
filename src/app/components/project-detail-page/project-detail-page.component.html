@@ -1,0 +1,79 @@
+<ng-container *ngIf="project$ | async as project">
+
+  <div class="menu-bar">
+    <div class="back-button menu-button" routerLink="../../">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+    </div>
+    <div class="home-link" [routerLink]="['/']">
+      <img class="logo" src="assets/images/logo-banner.png">
+    </div>
+    <div class="edit-button menu-button" [routerLink]="['/edit/project', project.id]">
+      <fa-icon [icon]="faEdit"></fa-icon>
+    </div>
+  </div>
+
+  <div class="card project-card"
+    [ngClass]="{
+      'initiated': project.state === stateEnum.Initiated,
+      'in-progress': project.state === stateEnum.InProgress,
+      'halted': project.state === stateEnum.Halted,
+      'finished': project.state === stateEnum.Finished}"
+  >
+    <div class="primary-info row">
+
+      <div class="column">
+        <h1>{{project.title}}</h1>
+        <p class="description">{{project.description}}</p>
+        <p class="date">{{project.createdAt}}</p>
+      </div>
+
+      <div class="row">
+        <div class="secondary-info column">
+          <p class="hours">
+            <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
+          </p>
+          <p class="state" *ngIf="project.state === stateEnum.Initiated">INITIATED</p>
+          <p class="state" *ngIf="project.state === stateEnum.InProgress">IN PROGRESS</p>
+          <p class="state" *ngIf="project.state === stateEnum.Halted">HALTED</p>
+          <p class="state" *ngIf="project.state === stateEnum.Finished">FINISHED</p>
+        </div>
+
+        <app-traffic-light
+          [complexity]="project.complexity"
+          [size]="sizeEnum.BIG"
+          [horizontal]="false"
+        ></app-traffic-light>
+      </div>
+    </div>
+
+    <div class="task-list column">
+      <div class="add-task-button" [routerLink]="['/new/project', project.id, 'task']">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        <span>Add new task</span>
+      </div>
+
+      <app-task-bar *ngFor="let task of project.tasks"
+        [task]="task"
+      ></app-task-bar>
+    </div>
+
+    <div class="results">
+      <div class="expected">
+        <h1>Expected Result</h1>
+        <p>{{project.expectedResult}}</p>
+      </div>
+
+      <div class="actual" *ngIf="project.state === stateEnum.Finished">
+        <h1>Actual Result</h1>
+        <p>{{project.actualResult}}</p>
+      </div>
+    </div>
+
+    <div class="period">
+      <p>Von <span class="time-info">{{project.startedAt}}</span> bis
+        <span class="time-info" *ngIf="project.state === stateEnum.Finished">{{project.finishedAt}}</span>
+        <span class="time-info" *ngIf="project.state !== stateEnum.Finished">Heute</span>
+      </p>
+    </div>
+  </div>
+</ng-container>

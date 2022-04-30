@@ -1,0 +1,43 @@
+$indicator-width: 45px;
+$indicator-height: 45px;
+$border-radius: 12px;
+$size-small-factor: 0.6;
+$size-big-factor: 1.5;
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 10px;
+
+  .label {
+    font-weight: bold;
+  }
+
+  .progress-indicator {
+    border: 3px solid black;
+  }
+
+  .progress-indicator.small {
+    border-radius: $border-radius*$size-small-factor;
+    width: $indicator-width*$size-small-factor;
+    height: $indicator-height*$size-small-factor;
+  }
+
+  .progress-indicator.default {
+    border-radius: $border-radius;
+    width: $indicator-width;
+    height: $indicator-height;
+  }
+
+  .progress-indicator.big {
+    border-radius: $border-radius*$size-big-factor;
+    width: $indicator-width*$size-big-factor;
+    height: $indicator-height*$size-big-factor;
+  }
+
+  .progress-indicator.done {
+    background-color: var(--color-state-finished);
+  }
+}

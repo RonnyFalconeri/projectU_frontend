@@ -1,0 +1,113 @@
+$traffic-light-width: 50px;
+$traffic-light-height: 125px;
+$indicator-size: 30px;
+$size-small-factor: 0.6;
+$size-big-factor: 1.2;
+
+.traffic-light {
+  background-color: var(--color-font-secondary);
+  border-radius: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .indicator {
+    background-color: var(--color-complexity-empty);
+    border-radius: 50%;
+  }
+}
+
+.traffic-light.small {
+  width: $traffic-light-width*$size-small-factor;
+  height: $traffic-light-height*$size-small-factor;
+
+  .indicator {
+    width: $indicator-size*$size-small-factor;
+    height: $indicator-size*$size-small-factor;
+  }
+}
+
+.traffic-light.default {
+  width: $traffic-light-width;
+  height: $traffic-light-height;
+
+  .indicator {
+    width: $indicator-size;
+    height: $indicator-size;
+  }
+}
+
+.traffic-light.big {
+  width: $traffic-light-width*$size-big-factor;
+  height: $traffic-light-height*$size-big-factor;
+
+  .indicator {
+    width: $indicator-size*$size-big-factor;
+    height: $indicator-size*$size-big-factor;
+  }
+}
+
+.traffic-light.horizontal {
+  flex-direction: row-reverse;
+}
+
+.traffic-light.horizontal.small {
+  width: $traffic-light-height*$size-small-factor;
+  height: $traffic-light-width*$size-small-factor;
+}
+
+.traffic-light.horizontal.default {
+  width: $traffic-light-height;
+  height: $traffic-light-width;
+}
+
+.traffic-light.horizontal.big {
+  width: $traffic-light-height*$size-big-factor;
+  height: $traffic-light-width*$size-big-factor;
+}
+
+.traffic-light.easy {
+
+  .indicator.green {
+    background-color: var(--color-complexity-easy);
+  }
+
+  .indicator.yellow {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.red {
+    background-color: var(--color-complexity-empty);
+  }
+}
+
+.traffic-light.medium {
+
+  .indicator.green {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.yellow {
+    background-color: var(--color-complexity-medium);
+  }
+
+  .indicator.red {
+    background-color: var(--color-complexity-empty);
+  }
+}
+
+.traffic-light.difficult {
+
+  .indicator.green {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.yellow {
+    background-color: var(--color-complexity-empty);
+  }
+
+  .indicator.red {
+    background-color: var(--color-complexity-difficult);
+  }
+}

@@ -1,0 +1,20 @@
+:root{
+  --color-background: #424b54;
+  --color-menu-bar: rgba(127, 127, 127, 0.6);
+  --color-task-bar: rgba(0, 0, 0, 0.27);
+
+  // state
+  --color-state-initiated: #b09e99;
+  --color-state-in-progress: #3aaed8;
+  --color-state-halted: #ea9010;
+  --color-state-finished: #74bf28;
+
+  // complexity / traffic light
+  --color-complexity-easy: #41a21f;
+  --color-complexity-medium: #ffcb00;
+  --color-complexity-difficult: #ff4300;
+  --color-complexity-empty: #adadad;
+
+  // font colors
+  --color-font-secondary: #5b5b5b;
+}
