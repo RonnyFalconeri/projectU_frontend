@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Size } from 'src/app/shared/models/Size';
-import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { faPlus, faStopwatch, faEdit, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
+import { ProjectService } from 'build/openapi';
+import { Observable } from 'rxjs';
+import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 
 @Component({
   selector: 'app-project-detail-page',
@@ -13,7 +15,7 @@ import { State } from 'build/openapi/model/state';
 })
 export class ProjectDetailPageComponent implements OnInit {
 
-  project: Project;
+  project$: Observable<Project>;
 
   sizeEnum = Size;
   stateEnum = State;
@@ -22,9 +24,10 @@ export class ProjectDetailPageComponent implements OnInit {
   faEdit = faEdit;
   faChevronLeft = faChevronLeft;
 
-  constructor(private readonly activatedRoute: ActivatedRoute, projectService: MockProjectService) {
+  constructor(private readonly activatedRoute: ActivatedRoute,
+              readonly projectService: ProjectService) {
     this.activatedRoute.params.subscribe(params => {
-      this.project = projectService.getProjectById(params.projectId)
+      this.project$ = projectService.getProjectById(params.projectId)
     });
   }
 

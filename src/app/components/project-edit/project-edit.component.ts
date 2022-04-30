@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Project } from 'build/openapi/model/project';
 import { State } from 'build/openapi/model/state';
-import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Complexity } from 'build/openapi/model/complexity';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { ProjectService } from 'build/openapi';
+import { ProjectUtilService } from 'src/app/shared/services/project-util.service';
 
 @Component({
   selector: 'app-project-edit',
@@ -17,95 +17,109 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 export class ProjectEditComponent implements OnInit {
 
   projectForm: FormGroup;
-  editExistingProject: boolean = false;
-  project: Project = this.setupNewProject();
+  project: Project = this.projectUtil.setupEmptyProject();
 
   stateEnum = State;
   faPen = faPen;
   faStopwatch = faStopwatch;
   faPlusSquare = faPlusSquare;
 
-  constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly projectService: MockProjectService,
-    private readonly fb: FormBuilder,
-    private router: Router) {}
-
-  ngOnInit(): void {
-    this.determineEditMode();
-    this.setupProjectForm();
+  constructor(private readonly projectService: ProjectService,
+              private readonly projectUtil: ProjectUtilService,
+              private readonly fb: FormBuilder,
+              private router: Router) {
+    if(this.isEditingExistingProject()) {
+      let projectId = router.url.split('/')[3];
+      this.projectService.getProjectById(projectId).subscribe(project => {
+          this.project = project;
+          this.setupProjectForm(this.project);
+          this.subscribeToFormChanges();
+      });
+    } else {
+      this.setupProjectForm(this.project);
+      this.subscribeToFormChanges();
+    }
   }
 
-  private determineEditMode(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if(params.projectId) {
-        this.editExistingProject = true;
-        this.project = this.projectService.getProjectById(params.projectId);
-      }
-    });
-  }
+  ngOnInit(): void {}
 
-  private setupProjectForm(): void {
+  private setupProjectForm(project: Project): void {
     this.projectForm = this.fb.group({
       title: [
-        this.project.title, [
+        project.title, [
           Validators.required,
           Validators.maxLength(100)
         ]
       ],
       description: [
-        this.project.description
+        project.description
       ],
       estimatedDurationInHours: [
-        this.project.estimatedDurationInHours,
+        project.estimatedDurationInHours,
         Validators.min(0)
       ],
       state: [
         {
-          value: this.project.state,
-          disabled: !this.editExistingProject
+          value: project.state,
+          disabled: !this.isEditingExistingProject()
         }, [
           Validators.required,
-          this.validateState(this.project.state)
+          this.validateState(project.state)
         ]
       ],
       complexity: [
-        this.project.complexity,
+        project.complexity,
         Validators.required
       ]
     });
   }
 
-  private setupNewProject(): Project {
-    return {
-      id: '',
-      title: '',
-      description: '',
-      tasks: [],
-      state: State.Initiated,
-      complexity: Complexity.Easy,
-      estimatedDurationInHours: 0,
-      createdAt: '',
-      expectedResult: '',
-      startedAt: '',
-      finishedAt: '',
-      actualResult: ''
-    }
+  private subscribeToFormChanges(): void {
+    this.projectForm.valueChanges.subscribe(p => {
+      this.project.title = p.title;
+      this.project.description = p.description;
+      this.project.estimatedDurationInHours = p.estimatedDurationInHours;
+      this.project.complexity = p.complexity;
+
+      if(this.isEditingExistingProject()) {
+        this.project.state = p.state;
+      }
+    });
+  }
+
+  isEditingExistingProject(): boolean {
+    return this.router.url.split('/')[1] === 'edit';
   }
 
   saveProject(): void {
-    if(this.editExistingProject) {
-      this.projectService.updateProject(this.project);
-    } else {
-      this.projectService.createProject(this.project);
+    if(confirm("Do you want to save the project?")) {
+      if(this.isEditingExistingProject()) {
+        this.projectService.updateProject(this.project.id!, this.project).subscribe();
+        this.navigateToProjectDetailPage();
+      } else {
+        this.projectService.createProject(this.project).subscribe();
+        this.navigateToOverviewPage();
+      }
     }
+  }
+
+  navigateToProjectDetailPage(): void {
+    this.router.navigate(['project', this.project.id]).then(() => {
+      window.location.reload();
+    });
   }
 
   deleteProject(): void {
     if(confirm("Do you want to delete the project?")) {
-      this.projectService.deleteProject(this.project.id);
-      this.router.navigate(['/']);
+      this.projectService.deleteProject(this.project.id!).subscribe();
+      this.navigateToOverviewPage();
     }
+  }
+
+  private navigateToOverviewPage(): void {
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 
   changeState(): void {
@@ -116,31 +130,31 @@ export class ProjectEditComponent implements OnInit {
     this.project.complexity = this.projectForm.get('complexity')?.value;
   }
 
-  get title() {
-    return this.projectForm.get('title');
-  }
-
-  get state() {
-    return this.projectForm.get('state');
-  }
-
   validateState(originalState: State) {
 
     return (control: AbstractControl):{[key: string]: boolean} | null => {
 
-      if(this.editExistingProject &&
+      if(this.isEditingExistingProject() &&
         originalState !== State.Initiated &&
         control.value === State.Initiated) {
         return {'Cannot go back to initiated when editing a project': true}
       }
 
-      if(!this.editExistingProject &&
+      if(!this.isEditingExistingProject() &&
         control.value !== State.Initiated) {
         return {'Cannot change state when creating new project': true}
       }
 
       return null;
     };
+  }
+
+  get title() {
+    return this.projectForm.get('title');
+  }
+
+  get state() {
+    return this.projectForm.get('state');
   }
 
 }

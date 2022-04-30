@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Task } from 'build/openapi/model/task';
-import { MockProjectService } from 'src/app/shared/services/mock-project.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { State } from 'build/openapi';
+import { Project, ProjectService, State, TaskService } from 'build/openapi';
+import { ProjectUtilService } from 'src/app/shared/services/project-util.service';
 
 @Component({
   selector: 'app-task-edit',
@@ -15,93 +15,103 @@ import { State } from 'build/openapi';
 })
 export class TaskEditComponent implements OnInit {
 
+  project: Project = this.projectUtil.setupEmptyProject();
+  task: Task = this.projectUtil.setupEmptyTask();
   taskForm: FormGroup;
-  editExistingTask: boolean = false;
-  task: Task = this.setupNewTask();
-  projectState: State = State.InProgress;
-  projectId: string;
-  stateEnum = State;
 
+  stateEnum = State;
   faPen = faPen;
   faStopwatch = faStopwatch;
   faPlusSquare = faPlusSquare;
 
-  constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly projectService: MockProjectService,
-    private readonly formBuilder: FormBuilder,
-    private router: Router) {}
-
-  ngOnInit(): void {
-    this.initiateAttributes();
-  }
-
-  private initiateAttributes(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.projectId = params.projectId;
-      this.determineProjectState(this.projectId);
-      this.determineEditMode(this.projectId, params.taskId);
+  constructor(private readonly projectService: ProjectService,
+              private readonly projectUtil: ProjectUtilService,
+              private readonly taskService: TaskService,
+              private readonly formBuilder: FormBuilder,
+              private router: Router) {
+    let projectId = router.url.split('/')[3];
+    this.projectService.getProjectById(projectId).subscribe(project => {
+      this.project = project;
+      if(this.isEditingExistingTask()) {
+        let taskId = router.url.split('/')[5];
+        this.taskService.getTaskById(taskId).subscribe(task => {
+          this.task = task;
+          this.setupTaskForm(this.task);
+          this.subscribeToFormChanges();
+        });
+      } else {
+        this.setupTaskForm(this.task);
+        this.subscribeToFormChanges();
+      }
     });
-    this.setupTaskForm();
   }
 
-  private determineProjectState(projectId: string): void {
-    this.projectState = this.projectService.getProjectById(projectId).state;
-  }
+  ngOnInit(): void {}
 
-  private determineEditMode(projectId: string, taskId: string): void {
-    if(taskId) {
-      this.task = this.projectService.getTaskById(projectId, taskId);
-      this.editExistingTask = true;
-    }
-  }
-
-  private setupTaskForm(): void {
+  private setupTaskForm(task: Task): void {
     this.taskForm = this.formBuilder.group({
       title: [
-        this.task.title, [
+        task.title, [
           Validators.required,
           Validators.maxLength(100)
         ]
       ],
       description: [
-        this.task.description
+        task.description
       ],
       estimatedDurationInHours: [
-        this.task.estimatedDurationInHours,
+        task.estimatedDurationInHours,
         Validators.min(0)
       ],
       done: [
-        this.task.done,
+        task.done,
         Validators.required
       ]
     });
   }
 
-  private setupNewTask(): Task {
-    return {
-      id: '',
-      title: '',
-      description: '',
-      done: false,
-      estimatedDurationInHours: 0,
-      result: ''
-    }
+  private subscribeToFormChanges(): void {
+    this.taskForm.valueChanges.subscribe(t => {
+      this.task.title = t.title;
+      this.task.description = t.description;
+      this.task.estimatedDurationInHours = t.estimatedDurationInHours;
+      this.task.done = t.done;
+    });
+  }
+
+  isEditingExistingTask(): boolean {
+    return this.router.url.split('/')[1] === 'edit';
   }
 
   saveTask(): void {
-    if(this.editExistingTask) {
-      this.projectService.updateTask(this.projectId, this.task);
-    } else {
-      this.projectService.createTask(this.projectId, this.task);
+    if(confirm("Do you want to save the project?")) {
+      if(this.isEditingExistingTask()) {
+        this.taskService.updateTask(this.task.id!, this.task).subscribe();
+        this.navigateToTaskDetailPage();
+      } else {
+        this.projectService.createTask(this.project.id!, this.task).subscribe();
+        this.navigateToProjectDetailPage();
+      }
     }
+  }
+
+  navigateToTaskDetailPage(): void {
+    this.router.navigate(['project', this.project.id, 'task', this.task.id]).then(() => {
+      window.location.reload();
+    });
   }
 
   deleteTask(): void {
     if(confirm("Do you want to delete the project?")) {
-      this.projectService.deleteTask(this.projectId, this.task.id);
-      this.router.navigate(['/']);
+      this.taskService.deleteTask(this.task.id!).subscribe();
+      this.navigateToProjectDetailPage();
     }
+  }
+
+  private navigateToProjectDetailPage(): void {
+    this.router.navigate(['project', this.project.id]).then(() => {
+      window.location.reload();
+    });
   }
 
   changeIsTaskDone(): void {

@@ -13,7 +13,7 @@ import { ProjectEditComponent } from './components/project-edit/project-edit.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectStatePickerComponent } from './components/project-edit/project-state-picker/project-state-picker.component';
 import { ProjectComplexityPickerComponent } from './components/project-edit/project-complexity-picker/project-complexity-picker.component';
-import { ProjectTileComponent } from './components/project-tile/project-tile.component';
+import { ProjectTileComponent } from './components/overview/project-tile/project-tile.component';
 import { TaskDetailPageComponent } from './components/task-detail-page/task-detail-page.component';
 import { TaskProgressComponent } from './components/task-progress/task-progress.component';
 import { TaskEditComponent } from './components/task-edit/task-edit.component';

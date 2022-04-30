@@ -10,8 +10,10 @@
   </div>
 </div>
 
-<div class="project-list">
-  <app-project-tile *ngFor="let project of projects"
-    [project]="project"
-  ></app-project-tile>
-</div>
+<ng-container *ngIf="projects$ | async as projects">
+  <div class="project-list">
+    <app-project-tile *ngFor="let project of projects"
+      [project]="project"
+    ></app-project-tile>
+  </div>
+</ng-container>

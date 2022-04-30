@@ -30,13 +30,13 @@
   </div>
 
   <div class="multiple-tasks-indicator"
-    *ngIf="project.tasks.length > 1"
+    *ngIf="project.tasks && project.tasks!.length > 0"
     [ngClass]="{
       'initiated': project.state === stateEnum.Initiated,
       'in-progress': project.state === stateEnum.InProgress,
       'halted': project.state === stateEnum.Halted,
       'finished': project.state === stateEnum.Finished}"
   >
-    <div class="additional-indicator"></div>
+    <div class="additional-indicator" *ngIf="project.tasks && project.tasks!.length > 1"></div>
   </div>
 </div>
