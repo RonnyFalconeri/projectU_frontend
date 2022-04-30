@@ -17,6 +17,9 @@ With projectU you can:
 
 Projects and Tasks are the main objects of projectU. Read the following chapters to understand them more properly.
 
+### Screenshots
+<img src="https://user-images.githubusercontent.com/34677325/166102611-d8cac42e-66d2-4450-b5ab-11001ab6ae18.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/34677325/166102615-83753c99-ef3e-4f24-8fa4-6ad6e599528d.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/34677325/166102616-8f80e8a5-3455-436f-bf01-6352d7067452.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/34677325/166102617-9b7b8b14-e353-4ff5-a8df-18debf1fb835.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/34677325/166102618-b3dd0a77-fc1e-4563-b005-288763eb8aa5.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/34677325/166102619-1036217e-1113-4a16-a169-c32df4f1f0b0.png" width="23%"></img> <img src="https://user-images.githubusercontent.com/34677325/166102620-29306132-6add-45ce-949f-25e96759b290.png" width="23%"></img> 
+
 ### What is a Project
 A project is the main object of this application. With it you can store your ideas about a cool future (or current) project. 
 
@@ -41,6 +44,8 @@ A project has the following attributes:
   - Time when the project was finished
   - Tasks (zero or many)
 
+Once a project is not in the state "initiated" anymore it cannot go back to "initiated".
+
 ### What is a Task
 A task is kind of a "small project". A project can have zero or many tasks. They split up the projects process into smaller and maintainable chunks. Tasks resemble a to do list for a project in order to reach its goal.
 
@@ -53,11 +58,6 @@ A task has the following attributes:
     - false
   - Estimated duration (in hours)
   - Expected Result / Goal
-
-
-## Demo
-GIF of screen using application
-Show responsive design
 
 
 ## Technology Used
