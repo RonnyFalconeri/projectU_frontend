@@ -87,10 +87,11 @@ export class TaskEditComponent implements OnInit {
     if(confirm("Do you want to save the project?")) {
       if(this.isEditingExistingTask()) {
         this.taskService.updateTask(this.task.id!, this.task).subscribe();
+        this.navigateToTaskDetailPage();
       } else {
         this.projectService.createTask(this.project.id!, this.task).subscribe();
+        this.navigateToProjectDetailPage();
       }
-      this.navigateToTaskDetailPage();
     }
   }
 

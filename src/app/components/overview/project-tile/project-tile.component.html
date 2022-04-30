@@ -37,6 +37,6 @@
       'halted': project.state === stateEnum.Halted,
       'finished': project.state === stateEnum.Finished}"
   >
-    <div class="additional-indicator"></div>
+    <div class="additional-indicator" *ngIf="project.tasks && project.tasks!.length > 1"></div>
   </div>
 </div>
