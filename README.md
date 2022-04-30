@@ -103,6 +103,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ### Further help
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+<!-- chapter not ready yet
 
 ## Docker
 This application can also be run in a docker container.
@@ -139,7 +140,7 @@ Both the frontend and backend have their own `Dockerfile`. The `docker-compose.y
 The two repositories get downloaded and copied into the docker images and automatically started as containers.
 
 You should now be able to open the application in your browser with http://localhost:8081.
-
+-->
 
 ## Releases
 
