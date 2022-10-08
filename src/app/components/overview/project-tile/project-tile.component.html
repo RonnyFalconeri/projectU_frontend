@@ -1,26 +1,22 @@
 <div class="everything">
-  <div class="tile"
-    [routerLink]="['/project/', project.id]"
-    [ngClass]="{
+  <div class="tile" [routerLink]="['/project/', project.id]" [ngClass]="{
     'initiated': project.state === stateEnum.Initiated,
     'in-progress': project.state === stateEnum.InProgress,
     'halted': project.state === stateEnum.Halted,
-    'finished': project.state === stateEnum.Finished}"
-  >
+    'finished': project.state === stateEnum.Finished}">
 
     <div class="info">
       <h1 class="title">{{project.title}}</h1>
 
       <div class="status">
         <div class="hours">
-          <fa-icon [icon]="faStopwatch"></fa-icon>{{project.estimatedDurationInHours}}h
+          <fa-icon [icon]="faStopwatch"></fa-icon>
+          <ng-container *ngIf="project.estimatedDurationInHours !== 0">{{project.estimatedDurationInHours}}h</ng-container>
+          <ng-container *ngIf="project.estimatedDurationInHours === 0">---</ng-container>
         </div>
 
-        <app-traffic-light
-          [complexity]="project.complexity"
-          [size]="sizeEnum.SMALL"
-          [horizontal]="true"
-        ></app-traffic-light>
+        <app-traffic-light [complexity]="project.complexity" [size]="sizeEnum.SMALL" [horizontal]="true">
+        </app-traffic-light>
       </div>
     </div>
 
@@ -29,14 +25,11 @@
     </div>
   </div>
 
-  <div class="multiple-tasks-indicator"
-    *ngIf="project.tasks && project.tasks!.length > 0"
-    [ngClass]="{
+  <div class="multiple-tasks-indicator" *ngIf="project.tasks && project.tasks!.length > 0" [ngClass]="{
       'initiated': project.state === stateEnum.Initiated,
       'in-progress': project.state === stateEnum.InProgress,
       'halted': project.state === stateEnum.Halted,
-      'finished': project.state === stateEnum.Finished}"
-  >
+      'finished': project.state === stateEnum.Finished}">
     <div class="additional-indicator" *ngIf="project.tasks && project.tasks!.length > 1"></div>
   </div>
 </div>
